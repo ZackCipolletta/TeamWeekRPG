@@ -48,8 +48,6 @@ export function nextMonsterFunc(currentHero) {
   return myMonster;
 }
 
-
-
 // function checkHp(hero, monster) {
 //     console.log('hero stats:' + hero.hp + ". Monster stats: " + monster.hp );
 // }

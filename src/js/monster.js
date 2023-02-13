@@ -5,9 +5,13 @@ export class Monster {
     this.ap = ap;
   }
 }
+export function createSlime() {
+  let slime = new Monster("slime", 5, 5);
+  return slime;
+}
 
 export function createZombie() {
-  let zombie = new Monster("zombie", 15, 5);
+  let zombie = new Monster("zombie", 17, 3);
   return zombie;
 }
 
