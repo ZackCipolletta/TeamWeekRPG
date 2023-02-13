@@ -19,85 +19,89 @@ function itemFunction(hero) {
 };
 
 let weapons = {
-  1: ["dagger", (() => {
-    if (hero.role === 'rogue') {
-      return 10;
-    } else {
-      return 3;
-    }
-  })()],
-  2: ["sword", (() => {
-    if (hero.role === 'warrior') {
-      return 10;
-    } else {
-      return 3;
-    }
-  })()],
-  3: ["staff", (() => {
-    if (hero.role === 'mage') {
-      return 10;
-    } else {
-      return 3;
-    }
-  })()]
+  1: {
+    weapon: ["dagger", (() => {
+      if (hero.role === 'rogue') {
+        return 10;
+      } else {
+        return 3;
+      }
+    })()]
+  },
+  2: {
+    weapon:
+      ["sword", (() => {
+        if (hero.role === 'warrior') {
+          return 10;
+        } else {
+          return 3;
+        }
+      })()]
+  },
+  3: {
+    weapon: ["staff", (() => {
+      if (hero.role === 'mage') {
+        return 10;
+      } else {
+        return 3;
+      }
+    })()]
+  }
 };
+
 
 let potions = {
-  1: ["health", (() => {
-    if (hero.role === 'rogue') {
-      return 10;
-    } else {
-      return 3;
-    }
-  })()],
-  2: ["strength", (() => {
-    if (hero.role === 'warrior') {
-      return 10;
-    } else {
-      return 3;
-    }
-  })()],
-  3: ["magic", (() => {
-    if (hero.role === 'mage') {
-      return 10;
-    } else {
-      return 3;
-    }
-  })()]
+  1: {
+    potion: ["health", (() => {
+      if (hero.role === 'rogue') {
+        return 10;
+      } else {
+        return 3;
+      }
+    })()]
+  },
+  2: {
+    potion: ["strength", (() => {
+      if (hero.role === 'warrior') {
+        return 10;
+      } else {
+        return 3;
+      }
+    })()]
+  },
+  3: {
+    potion: ["magic", (() => {
+      if (hero.role === 'mage') {
+        return 10;
+      } else {
+        return 3;
+      }
+    })()]
+  }
 };
 
-function defineItems(random) {
+function defineItems(randomW, randomP, randomItem) {
   let items = {
-    1: "health potion",
-    2: "strength potion",
-    3: "empty boot",
-    4: "key",
-    5: "food",
-    weapon: randomWeapon(random),
-    // weapon: randomWeapon(Math.round(Math.random() * 2) + 1),
-    6: "luck potion"
+    1: randomPotion(randomP),
+    2: randomWeapon(randomW),
+    3: 'random thing1',
+    4: 'random thing2'
   };
-  return items;
-  }
+  return items[randomItem];
+}
 
-function randomNum() {
-  return Math.floor(Math.random() * 3) + 1
-  }
+function randomNum(numOfVariables) {
+  return Math.floor(Math.random() * numOfVariables) + 1;
+}
 
+function randomPotion(randomN) {
+  return potions[randomN];
+}
 
-// function getItems(hero) {
-//   let items = defineItems(randomNum());
-//     hero.items.push(items['weapon'])
-// }
-  
-
-// items['weapon'];
-
-
-function randomWeapon(randomNum) {
+function randomWeapon(randomN) {
   // let randomWeapon = Math.floor(Math.random() * 2) + 1;
-  return weapons[randomNum];
-  }
+  return weapons[randomN];
+}
 
 function getWeapon(hero, weapon) {
   hero.ap -= hero.weapon[1];
