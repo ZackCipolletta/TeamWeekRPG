@@ -1,5 +1,5 @@
-import { Character, chooseCharacter } from "./character.js";
-import { Monster, createZombie, createOwlBear, createCthulu } from "./monster.js";
+
+import { createZombie, createOwlBear, createCthulu } from "./monster.js";
 
 let myMonster;
 export function heroVsMonster(heroCall, monsterCall) {

@@ -11,8 +11,8 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   devtool: 'eval-source-map',
-  devServer: {               
-    contentBase: './dist'    
+  devServer: {
+    contentBase: './dist'
   },
   plugins: [
     new ESLintPlugin(),
@@ -46,7 +46,13 @@ module.exports = {
         ]
       },
       {
-        test:/\.html$/,
+        test: /\.(woff|woff2|otf|ttf)$/,
+        use: {
+          loader: 'url-loader',
+        },
+      },
+      {
+        test: /\.html$/,
         use: [
           'html-loader'
         ]

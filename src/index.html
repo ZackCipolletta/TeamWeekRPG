@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Shape Tracker</title>
 </head>
 
 <body>
-  <div id="hero-info">
-  <h1>Create Your Character</h1>
-  <br>
-  <h2>Warrior: Base HP: 10 Base AP: 10</h2>
-  <br>
-  <h2>Mage: Base HP: 7 Base AP: 13</h2>
-  <br>
-  <h2>Rogue: Base HP: 5 Base AP: 15</h2>
+  <div class="create-character">
+    <div id="hero-info">
+      <h1>Create Your Character</h1>
+      <div class="classes">
+        <div class="warrior" id="warrior-class">
+          <h3>Warrior</h3>
+          <img src="../src/assets/gifs/warrior-idle.gif" alt="warrior">
+          <p>AP: 8 <br>HP: 10<br> DX: 8</p>
+        </div>
+        <div class="mage">
+          <h3>Mage</h3>
+          <img src="../src/assets/gifs/wizard-idle.gif" alt="wizard">
+          <p>AP: 8 <br>HP: 10<br> DX: 8</p>
+        </div>
+        <div class="rogue">
+          <h3>Rogue</h3>
+          <img src="../src/assets/gifs/rogue-idle.gif" alt="rogue">
+          <p>AP: 8 <br>HP: 10<br> DX: 8</p>
+        </div>
+      </div>
+    </div>
+    <h2 id="log"></h2>
+    <!-- <div id="fight"> <br><br>
+      <button id="fight-monster">Attack</button>
+      <button id="run-from-monster">Run</button>
+    </div> -->
+    <div id="display-div">
 
-  <form id="choose-role">
-    <select id="choose-role-value">
-      <option value="0">-- Choose Your Role --</option>
-      <option value="1">Warrior</option>
-      <option value="2">Mage</option>
-      <option value="3">Rogue</option>
-    </select>
-  <button id="create-character" type="submit">Create Your Character</button>
-</form><br><br>
-</div>
-<h2 id="log"></h2>
-<div id="fight"> <br><br>
-  <button id="fight-monster">Attack</button>
-  <button id="run-from-monster">Run</button>
-</div>
-<div id="display-div">
-
-</div>
+    </div>
+  </div>
+  <div id="choose-role"></div>
 </body>
 
 </html>
