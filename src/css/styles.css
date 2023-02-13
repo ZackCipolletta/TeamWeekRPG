@@ -3,6 +3,9 @@
   src: url(../assets/fonts/backto1982.otf);
 }
 
+.hidden{
+  display: none;
+}
 
 body, html{
   height: 100%;
@@ -17,7 +20,7 @@ body {
     
   }
 
-  .create-character {
+  .choose-character {
     display: flex;
     justify-content: center;
     align-items: center;

@@ -15,19 +15,17 @@ function handleRoleSelection() {
   } else if (role === "3") {
     hero = createRogue();
   }
-  hideExplain(hero);
+  hideChooseChar();
 
   return hero;
 }
 
-function hideExplain(hero) {
-  let heroInfo = document.querySelector("#hero-info");
-  console.log(`<br><br>You have chosen: ${hero.role}`);
-  console.log(`Your total hp: ${hero.hp}`);
-  console.log(`Your total ap: ${hero.ap} <br>`);
-  heroInfo.setAttribute("class", "hidden");
-  document.getElementById("fight").removeAttribute("class")
+//hides choose your character div
+function hideChooseChar() {
+  const chooseCharDiv = document.querySelector("#choose-character-id");
+  chooseCharDiv.setAttribute("class", "hidden");
   let monster = createZombie();
+  let hero = 0;
   callCombatFunc(hero, monster);
 }
 
@@ -75,28 +73,31 @@ function callingNewMonsterFunc(hero) {
   // console.log(`the new monster is: ${monster.name}`);
   callCombatFunc(hero, monster);
 }
-  
+
+
+
 //load and button logic
 window.addEventListener("load", function () {
   document.querySelector("#choose-role").addEventListener("submit", function (e) {
     e.preventDefault();
     handleRoleSelection();
   });
-  console.log(document.querySelector("#warrior-class"));
-  document.querySelector("#warrior-class").addEventListener("click", function(e){
+  document.querySelector("#warrior-class").addEventListener("click", function (e) {
     e.preventDefault();
-    alert("clicked");
+    hideChooseChar();
+    console.log("clicked-war");
+
+  });
+  document.querySelector("#mage-class").addEventListener("click", function (e) {
+    e.preventDefault();
+    hideChooseChar();
+    console.log("clicked-mage");
+
+  });
+  document.querySelector("#rogue-class").addEventListener("click", function (e) {
+    e.preventDefault();
+    console.log("clicked");
+    hideChooseChar();
 
   });
 });
-
-(function () {
-  var logger = document.getElementById('log');
-  console.log = function (message) {
-    if (typeof message == 'object') {
-      logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
-    } else {
-      logger.innerHTML += message + '<br />';
-    }
-  };
-})();
