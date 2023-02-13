@@ -1,9 +1,9 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import { Character, chooseCharacter, createMage, createRogue, createWarrior } from "./js/character.js";
-import { Monster, createZombie, createCthulu } from "./js/monster.js";
-import { heroVsMonster, levelUp, continueCombatFunc, nextMonsterFunc, checkGameState } from "./js/combat.js";
+import { createMage, createRogue, createWarrior } from "./js/character.js";
+import { createZombie, } from "./js/monster.js";
+import { heroVsMonster, levelUp, nextMonsterFunc } from "./js/combat.js";
 
 function handleRoleSelection() {
   let role = document.getElementById("choose-role-value").value;
@@ -75,17 +75,22 @@ function callingNewMonsterFunc(hero) {
   // console.log(`the new monster is: ${monster.name}`);
   callCombatFunc(hero, monster);
 }
-
+  
 //load and button logic
 window.addEventListener("load", function () {
   document.querySelector("#choose-role").addEventListener("submit", function (e) {
     e.preventDefault();
     handleRoleSelection();
   });
+  console.log(document.querySelector("#warrior-class"));
+  document.querySelector("#warrior-class").addEventListener("click", function(e){
+    e.preventDefault();
+    alert("clicked");
+
+  });
 });
 
 (function () {
-  var old = console.log;
   var logger = document.getElementById('log');
   console.log = function (message) {
     if (typeof message == 'object') {
