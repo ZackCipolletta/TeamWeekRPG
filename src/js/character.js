@@ -1,25 +1,28 @@
 export class Character {
-  constructor(role, hp, ap, level, hpCapacity) {
+  constructor(role, hp, ap, dex, level, hpCapacity) {
     this.role = role;
     this.hp = hp;
     this.ap = ap;
-    this.level = 1;
+    this.dex = dex;
+    this.level = level;
     this.hpCapacity = hpCapacity;
+    this.totalAtributes = hpCapacity + ap + dex
+    this.items = [];
   }
 }
 
 export function createWarrior() {
-  let warrior = new Character("warrior", 10, 10, 1, 10);
+  let warrior = new Character("warrior", 10, 10, 10, 1, 10);
   return warrior;
 }
 
 export function createMage() {
-  let mage = new Character("mage", 7, 13, 1, 7);
+  let mage = new Character("mage", 8, 17, 5, 1, 7);
   return mage;
 }
 
 export function createRogue() {
-  let rogue = new Character("rogue", 5, 15, 1, 5);
+  let rogue = new Character("rogue", 7, 10, 13, 1, 7);
   return rogue;
 }
 
@@ -34,3 +37,21 @@ export function chooseCharacter(type) {
     return createRogue();
   }
 }
+
+
+
+
+(() => {
+  if (hero.role === 'rougue') {
+    hero.ap += 10;
+  } else {
+    hero.ap += 3;
+  }
+}) ();
+
+
+  (() => {
+    // some initiation code
+    let firstVariable;
+    let secondVariable;
+  })();
