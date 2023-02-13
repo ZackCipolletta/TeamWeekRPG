@@ -26,7 +26,6 @@ export function createRogue() {
   return rogue;
 }
 
-
 export function chooseCharacter(type) {
   /* istanbul ignore else */
   if (type ===1) {
@@ -38,20 +37,3 @@ export function chooseCharacter(type) {
   }
 }
 
-
-
-
-(() => {
-  if (hero.role === 'rougue') {
-    hero.ap += 10;
-  } else {
-    hero.ap += 3;
-  }
-}) ();
-
-
-  (() => {
-    // some initiation code
-    let firstVariable;
-    let secondVariable;
-  })();
