@@ -5,13 +5,15 @@ let npc = {role:"zombie", health: 8, hp: 8, ap: 8, dx: 7};
 
 
 class Combat {
-  constructor(heroHit, heroCriticalHit, heroDamage, npcHit, npcCriticalHit, npcDamage)
+  constructor(heroHit, heroCriticalHit, heroDamage, heroMessage, npcHit, npcCriticalHit, npcDamage, npcMessage) {
   this.heroHit = false;
   this.heroCriticalHit = false;
   this.heroDamage = 0;
+  this.heroMessage ="";  
   this.npcHit = false;
   this.npcCriticalHit = false;
   this.npcDamage = 0;
+  this.npcMessage ="";
   }
   die1_10() {
     const roll1_10= Math.ceil(Math.random() * 10);
@@ -21,45 +23,52 @@ class Combat {
     const roll1_6= Math.ceil(Math.random() * 6);
     return roll1_6;
   }
-  attackAndDamage(){
-    function heroAttack() {
-      const totalDamage = 0;
-      const roll = die1_10();
-      const attackChance = roll + hero1.dx;
-      if (roll = 10) {
-        //critical hit!
-        totalDamage = hero1.ap * 2;
-        return `Critical hit! ${hero1} does ${damage} points damage.`
-      }
-      else if ((attackChance) >= 16)  {
-        //hit 
-        const damage = die1_10()/10 * hero1.ap;
-        return `Hit for ${damage} points damage.`
-      }
-      else if (attackChance < 15) {
-        //miss
-      }
-      else {
-        console.log("error");
-      } 
-    };
-}
+  heroAttack() {
+    const roll = die1_10();
+    const attackChance = roll + hero1.dx;
+    if (roll = 10) {
+      //critical hit!
+      this.heroCriticalHit = true;
+      this.heroDamage = hero1.ap * 2;
+      this.heroMessage = `Critical Hit! ${hero1} does ${this.heroDamage} points damage.`
+    }
+    else if ((attackChance) >= 16)  {
+      //hit 
+      this.heroHit = true;
+      this.heroDamage = die1_10()/10 * hero1.ap;
+      this.heroMessage = `Hit for ${this.heroDamage} points damage.`
+    }
+    else if (attackChance < 15) {
+      //miss
+      this.heroMessage = `${hero1} missed.`
+    }
+    else {
+      console.log("error");
+    } 
+  };
+  
   npcAttack() {
     const roll = die1_6();
     const attackChance = roll + npc.dx;
+    
     if (roll = 6) {
       //critical hit!
+      this.npcCriticalHit = true;
+      this.npcDamage = npc.ap * 1.5;
+      this.npcMessage = `Critical Hit! ${npc} does ${this.npcDamage} points damage.`
     }
     else if ((attackChance) >= 13)  {
-      const damage = (die1_6()/6)* npc.ap; 
-      return `hit! ${damage} points damage`
-    } 
-    else if (attackChance < 12) {
-      return "miss"
-    } else {
-      console.log ("error")
+      //hit 
+      this.npcHit = true;
+      this.npcDamage = (die1_6()/6)* npc.ap; 
+      this.npcMessage = `${npc} hit for ${this.npcDamage} points damage.`
     }
-  }
-}
-
-
+    else if (attackChance < 12) {
+      //miss
+      this.heroMessage = `${npc} missed.`
+    }
+    else {
+      console.log("error");
+    } 
+  };
+};
