@@ -1,7 +1,7 @@
 export function randomPotion(hero, randomN) { // Takes random number func as paramter to return a random potion from the potions object.
   let potions = {
     1: {
-      potion: ["health", (() => {
+      potion: ["swift", (() => {
         if (hero.role === 'rogue') {
           return 10;
         } else {
@@ -37,9 +37,9 @@ export function randomWeapon(hero, randomN) { // same as potions, for the weapon
     1: {
       weapon: ["dagger", (() => {
         if (hero.role === 'rogue') {
-          return 10;
+          return Math.floor(hero.level * 1.2 * 4);
         } else {
-          return 3;
+          return Math.floor(hero.level * 1.2 * 2);
         }
       })()]
     },
@@ -47,18 +47,18 @@ export function randomWeapon(hero, randomN) { // same as potions, for the weapon
       weapon:
         ["sword", (() => {
           if (hero.role === 'warrior') {
-            return 10;
+            return Math.floor(hero.level * 1.2 * 4);
           } else {
-            return 3;
+            return Math.floor(hero.level * 1.2 * 2);
           }
         })()]
     },
     3: {
       weapon: ["staff", (() => {
         if (hero.role === 'mage') {
-          return 10;
+          return Math.floor(hero.level * 1.2 * 4);
         } else {
-          return 3;
+          return Math.floor(hero.level * 1.2 * 2);
         }
       })()]
     }
