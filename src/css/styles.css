@@ -16,7 +16,10 @@ body {
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     
   }
 
@@ -34,7 +37,7 @@ body {
   }
 
   .create-character h1{
-    margin-bottom: 40px;
+    margin-bottom: px;
   }
 
   .classes {
@@ -44,8 +47,6 @@ body {
     text-align: center;
     
   }
-
-  
 
   .warrior img{
     margin-top: 20px;
@@ -81,4 +82,18 @@ body {
   
   .rogue:hover img {
     transform: scale(1.2);
+  }
+
+
+  .bottom-ui {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    margin-bottom: 30px;
+   color: aliceblue;
+  }
+
+  #warrior-img {
+    width: 100px;
+    height: auto;
   }

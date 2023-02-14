@@ -24,6 +24,7 @@ function handleRoleSelection() {
 function hideChooseChar() {
   const chooseCharDiv = document.querySelector("#choose-character-id");
   chooseCharDiv.setAttribute("class", "hidden");
+  document.querySelector("#bottom-div").removeAttribute("class", "hidden");
   let monster = createZombie();
   let hero = 0;
   callCombatFunc(hero, monster);
@@ -84,9 +85,10 @@ window.addEventListener("load", function () {
   });
   document.querySelector("#warrior-class").addEventListener("click", function (e) {
     e.preventDefault();
+    document.getElementById("#warrior-img").removeAttribute("class", "hidden");
     hideChooseChar();
     console.log("clicked-war");
-
+   
   });
   document.querySelector("#mage-class").addEventListener("click", function (e) {
     e.preventDefault();

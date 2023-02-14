@@ -6,13 +6,13 @@
 </head>
 
 <body>
-  <div class="choose-character hidden" id="choose-character-id">
+  <div class="choose-character" id="choose-character-id">
     <div id="hero-info">
-      <h1>choose-character Your Character</h1>
+      <h1>Choose Your Character</h1>
       <div class="classes">
         <div class="warrior" id="warrior-class">
           <h3>Warrior</h3>
-          <img src="../src/assets/gifs/warrior-idle.gif" alt="warrior">
+          <img src="../src/assets/gifs/warrior-idle.gif" alt="warrior" id="warrior-img">
           <p>AP: 8 <br>HP: 10<br> DX: 8</p>
         </div>
         <div class="mage" id="mage-class">
@@ -28,11 +28,31 @@
       </div>
     </div>
     
-    <div id="display-div">
+    <div id="choose-role">
 
     </div>
   </div>
-  <div id="choose-role"></div>
+
+  <div class="combat" id="combat-id ">
+    <div class="combat-buttons">
+      
+
+    </div>
+    
+  </div>
+  <div class="hidden" id="bottom-div">
+    <div class="bottom-ui">
+      <div class="hero">
+        <img src="../src/assets/gifs/warrior-idle.gif" alt="warrior" class="hidden" id="warrior-img">
+        <img src="../src/assets/gifs/wizard-idle.gif" alt="wizard" class="hidden" id="mage-img">
+        <img src="../src/assets/gifs/rogue-idle.gif" alt="rogue" class="hidden" id="rogue-img">
+      </div>
+
+      <h3>Health</h3>
+      <h3>Items</h3>
+    </div>
+
+  </div>
 </body>
 
 </html>
