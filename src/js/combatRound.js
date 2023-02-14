@@ -58,60 +58,65 @@ export class CombatRound {
     this.monsterMessage = "";
     return cRound;
   }
-  static die1_10() {
+  die1_10() {
     const roll1_10= Math.ceil(Math.random() * 10);
     return roll1_10;
   }
-  static die1_6() {
+  die1_6() {
     const roll1_6= Math.ceil(Math.random() * 6);
     return roll1_6;
   }
-  static heroAttack() {
-    const roll = CombatRound.die1_10();
-    const attackChance = roll + hero1.dx;
+  heroAttack() {
+    const roll = this.die1_10();
+    const attackChance = roll + this.dex;
     if (roll === 10) {
       //critical hit!
+      console.log("critical hit!");
       this.heroCriticalHit = true;
-      this.heroDamage = hero1.ap * 2;
-      this.heroMessage = `Critical Hit! ${hero1} does ${this.heroDamage} points damage.`
+      this.heroDamage = this.ap * 2;
+      this.heroMessage = `Critical Hit! ${this.role} does ${this.heroDamage} points damage.`;
     }
     else if ((attackChance) >= 16)  {
       //hit 
+      console.log("hit");
       this.heroHit = true;
-      this.heroDamage = CombatRound.die1_10()/10 * hero1.ap;
-      this.heroMessage = `Hit for ${this.heroDamage} points damage.`
+      this.heroDamage = this.die1_10()/10 * this.ap;
+      this.heroMessage = `${this.role} hit for ${this.heroDamage} points damage.`;
     }
     else if (attackChance < 15) {
       //miss
-      this.heroMessage = `${hero1} missed.`
+      this.heroMessage = `${this.role} missed.`;
+      console.log("miss");
     }
     else {
       console.log("error");
+      console.log(attackChance);
     } 
+    console.log(this.heroMessage);
   }
   
-  static monsterAttack() {
-    const roll = CombatRound.die1_6();
-    const attackChance = roll + monster.dx;
+  monsterAttack() {
+    const roll = this.die1_6();
+    const attackChance = roll + this.dex;
     
     if (roll === 6) {
       //critical hit!
       this.monsterCriticalHit = true;
-      this.monsterDamage = monster.ap * 1.5;
-      this.monsterMessage = `Critical Hit! ${monster} does ${this.monsterDamage} points damage.`
+      this.monsterDamage = this.ap * 1.5;
+      this.monsterMessage = `Critical Hit! ${this.monsterName} does ${this.monsterDamage} points damage.`;
     }
     else if ((attackChance) >= 13)  {
       //hit 
       this.monsterHit = true;
-      this.monsterDamage = (CombatRound.die1_6()/6)* monster.ap; 
-      this.monsterMessage = `${monster} hit for ${this.monsterDamage} points damage.`
+      this.monsterDamage = (this.die1_6()/6)* this.ap; 
+      this.monsterMessage = `${this.monsterName} hit for ${this.monsterDamage} points damage.`;
     }
     else if (attackChance < 12) {
       //miss
-      this.heroMessage = `${monster} missed.`
+      this.heroMessage = `${this.monsterName} missed.`;
     }
     else {
       console.log("error");
     } 
-  };
-};
+  }
+}
