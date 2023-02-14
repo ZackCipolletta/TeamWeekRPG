@@ -1,37 +1,59 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Shape Tracker</title>
 </head>
 
 <body>
-  <div id="hero-info">
-  <h1>Create Your Character</h1>
-  <br>
-  <h2>Warrior: Base HP: 10 Base AP: 10</h2>
-  <br>
-  <h2>Mage: Base HP: 7 Base AP: 13</h2>
-  <br>
-  <h2>Rogue: Base HP: 5 Base AP: 15</h2>
+    <h1 class="title">Dungeon Crawler</h1>
+  <div class="choose-character" id="choose-character-id">
+    <div id="hero-info">
+      <h1>Choose Your Character</h1>
+      <div class="classes">
+        <div class="warrior" id="warrior-class">
+          <h3>Warrior</h3>
+          <img src="../src/assets/gifs/warrior-idle.gif" alt="warrior" id="warrior-img">
+          <p>AP: 8 <br>HP: 10<br> DX: 8</p>
+        </div>
+        <div class="mage" id="mage-class">
+          <h3>Mage</h3>
+          <img src="../src/assets/gifs/wizard-idle.gif" alt="wizard">
+          <p>AP: 8 <br>HP: 10<br> DX: 8</p>
+        </div>
+        <div class="rogue" id="rogue-class">
+          <h3>Rogue</h3>
+          <img src="../src/assets/gifs/rogue-idle.gif" alt="rogue">
+          <p>AP: 8 <br>HP: 10<br> DX: 8</p>
+        </div>
+      </div>
+    </div>
+    
+    <div id="choose-role">
 
-  <form id="choose-role">
-    <select id="choose-role-value">
-      <option value="0">-- Choose Your Role --</option>
-      <option value="1">Warrior</option>
-      <option value="2">Mage</option>
-      <option value="3">Rogue</option>
-    </select>
-  <button id="create-character" type="submit">Create Your Character</button>
-</form><br><br>
-</div>
-<h2 id="log"></h2>
-<div id="fight"> <br><br>
-  <button id="fight-monster">Attack</button>
-  <button id="run-from-monster">Run</button>
-</div>
-<div id="display-div">
+    </div>
+  </div>
 
-</div>
+  <div class="combat" id="combat-id ">
+    <div class="combat-buttons">
+      
+
+    </div>
+    
+  </div>
+  <div class="hidden" id="bottom-div">
+    <div class="bottom-ui">
+      <div class="hero">
+        <img src="../src/assets/gifs/warrior-idle.gif" alt="warrior" class="hidden" id="warrior-img">
+        <img src="../src/assets/gifs/wizard-idle.gif" alt="wizard" class="hidden" id="mage-img">
+        <img src="../src/assets/gifs/rogue-idle.gif" alt="rogue" class="hidden" id="rogue-img">
+      </div>
+
+      <h3>Health</h3>
+      <h3>Items</h3>
+    </div>
+
+  </div>
 </body>
 
 </html>

@@ -1,3 +1,116 @@
+@font-face {
+  font-family: myFont;
+  src: url(../assets/fonts/backto1982.otf);
+}
+
+@font-face {
+    font-family: titleFont;
+    src: url(../assets/fonts/Blox2.ttf);
+}
+
+.hidden{
+  display: none;
+}
+
+body, html{
+  height: 100%;
+  image-rendering: pixelated;
+}
 body {
-    background-color: #1F51FF;
+    background-image: url(../assets/images/background.jpg);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+  }
+
+  .title {
+    font-family: titleFont;
+    margin-top: 100px;
+    font-size: 150px;
+    text-align: center;
+    color: rgb(173, 15, 15);
+  }
+
+  .choose-character {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: myFont;
+    color: rgb(5, 3, 3);
+    background-image: url(../assets/images/NicePng_old-scroll-png_8153991.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 30px;
+    margin-top: 0px;
+    padding: 200px;
+
+    border: solid red;
+  }
+
+  .create-character h1{
+    margin-bottom: px;
+  }
+
+  .classes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    
+  }
+
+  .warrior img{
+    margin-top: 20px;
+    margin-bottom: 30px;
+    width: 100px;
+    height: auto;
+    transition: 0.5s all ease-in-out;
+  }
+
+  .warrior:hover img {
+    transform: scale(1.2);
+  }
+
+  .mage img {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    width: 120px;
+    height: auto;
+    transition: 0.5s all ease-in-out;
+  }
+
+  .mage:hover img {
+    transform: scale(1.2);
+  }
+
+  .rogue img {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    width: 120px;
+    height: auto;
+    transition: 0.5s all ease-in-out;
+  }
+  
+  .rogue:hover img {
+    transform: scale(1.2);
+  }
+
+
+  .bottom-ui {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    margin-bottom: 30px;
+   color: aliceblue;
+  }
+
+  #warrior-img {
+    width: 100px;
+    height: auto;
   }

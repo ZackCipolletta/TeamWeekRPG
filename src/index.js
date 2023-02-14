@@ -1,9 +1,9 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import { Character, chooseCharacter, createMage, createRogue, createWarrior } from "./js/character.js";
-import { Monster, createZombie, createCthulu } from "./js/monster.js";
-import { heroVsMonster, levelUp, continueCombatFunc, nextMonsterFunc, checkGameState } from "./js/combat.js";
+import { createMage, createRogue, createWarrior } from "./js/character.js";
+import { createZombie, } from "./js/monster.js";
+import { heroVsMonster, levelUp, nextMonsterFunc } from "./js/combat.js";
 
 function handleRoleSelection() {
   let role = document.getElementById("choose-role-value").value;
@@ -15,19 +15,18 @@ function handleRoleSelection() {
   } else if (role === "3") {
     hero = createRogue();
   }
-  hideExplain(hero);
+  hideChooseChar();
 
   return hero;
 }
 
-function hideExplain(hero) {
-  let heroInfo = document.querySelector("#hero-info");
-  console.log(`<br><br>You have chosen: ${hero.role}`);
-  console.log(`Your total hp: ${hero.hp}`);
-  console.log(`Your total ap: ${hero.ap} <br>`);
-  heroInfo.setAttribute("class", "hidden");
-  document.getElementById("fight").removeAttribute("class")
+//hides choose your character div
+function hideChooseChar() {
+  const chooseCharDiv = document.querySelector("#choose-character-id");
+  chooseCharDiv.setAttribute("class", "hidden");
+  document.querySelector("#bottom-div").removeAttribute("class", "hidden");
   let monster = createZombie();
+  let hero = 0;
   callCombatFunc(hero, monster);
 }
 
@@ -76,22 +75,31 @@ function callingNewMonsterFunc(hero) {
   callCombatFunc(hero, monster);
 }
 
+
+
 //load and button logic
 window.addEventListener("load", function () {
   document.querySelector("#choose-role").addEventListener("submit", function (e) {
     e.preventDefault();
     handleRoleSelection();
   });
-});
+  document.querySelector("#warrior-class").addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("#warrior-img").removeAttribute("class", "hidden");
+    hideChooseChar();
+    console.log("clicked-war");
+   
+  });
+  document.querySelector("#mage-class").addEventListener("click", function (e) {
+    e.preventDefault();
+    hideChooseChar();
+    console.log("clicked-mage");
 
-(function () {
-  var old = console.log;
-  var logger = document.getElementById('log');
-  console.log = function (message) {
-    if (typeof message == 'object') {
-      logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
-    } else {
-      logger.innerHTML += message + '<br />';
-    }
-  };
-})();
+  });
+  document.querySelector("#rogue-class").addEventListener("click", function (e) {
+    e.preventDefault();
+    console.log("clicked");
+    hideChooseChar();
+
+  });
+});
