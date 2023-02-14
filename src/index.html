@@ -6,14 +6,14 @@
 </head>
 
 <body>
-    <h1 class="title">Dungeon Crawler</h1>
+  <h1 class="title">Dungeon Crawler</h1>
   <div class="choose-character" id="choose-character-id">
     <div id="hero-info">
       <h1>Choose Your Character</h1>
       <div class="classes">
         <div class="warrior" id="warrior-class">
           <h3>Warrior</h3>
-          <img src="../src/assets/gifs/warrior-idle.gif" alt="warrior" id="warrior-img">
+          <img src="../src/assets/gifs/warrior-idle.gif" alt="warrior">
           <p>AP: 8 <br>HP: 10<br> DX: 8</p>
         </div>
         <div class="mage" id="mage-class">
@@ -28,29 +28,59 @@
         </div>
       </div>
     </div>
-    
+
     <div id="choose-role">
 
     </div>
+
   </div>
-
-  <div class="combat" id="combat-id ">
-    <div class="combat-buttons">
-      
-
+  <div class="room">
+    <div class="monster">
+      <div class="monster-images">
+        <img src="../src/assets/gifs/slime.gif" alt="slime" class="hidden" id="slime-img">
+        <img src="../src/assets/gifs/zombie.gif" alt="zombie" class="hidden" id="zombie-img">
+        <img src="../src/assets/gifs/demon.gif" alt="demon" class="hidden" id="demon-img">
+        <img src="../src/assets/gifs/goblin.gif" alt="goblin" class="hidden" id="goblin-img">
+        <img src="../src/assets/gifs/troll.gif" alt="troll" class="hidden" id="troll-img">
+        <img src="../src/assets/gifs/vampire.gif" alt="vampire" class="hidden" id="vampire-img">
+        <img src="../src/assets/gifs/cthulu.gif" alt="cthulu" class="hidden" id="cthulu-img">
+      </div>
     </div>
-    
+  
+
+
+  <div class="items">
+    <div class="potion-images">
+      <img src="../src/assets/gifs/health-potion.gif" alt="health poiton" class="hidden" id="health-img">
+      <img src="../src/assets/gifs/magic-potion.gif" alt="magic potion" class="hidden" id="magic-img">
+      <img src="../src/assets/gifs/strength-potion.gif" alt="strength-potion" class="hidden" id="strength-img">
+    </div>
+    <div class="weapon-images">
+      <img src="../src/assets/gifs/wand.gif" alt="wand" class="hidden" id="wand-img">
+      <img src="../src/assets/images/dagger.png" alt="dagger" class="hidden" id="dagger-img">
+      <img src="../src/assets/gifs/sword.gif" alt="sword" class="hidden" id="sword-img">
+    </div>
   </div>
-  <div class="hidden" id="bottom-div">
+  </div>
+
+
+  <div class="bottom" id="bottom-div">
+    <div class="combat-buttons">
+      <button class="combat-button">Attack</button>
+      <button class="combat-button">Dodge</button>
+      <button class="combat-button">Run</button>
+    </div>
     <div class="bottom-ui">
       <div class="hero">
         <img src="../src/assets/gifs/warrior-idle.gif" alt="warrior" class="hidden" id="warrior-img">
         <img src="../src/assets/gifs/wizard-idle.gif" alt="wizard" class="hidden" id="mage-img">
         <img src="../src/assets/gifs/rogue-idle.gif" alt="rogue" class="hidden" id="rogue-img">
       </div>
-
-      <h3>Health</h3>
-      <h3>Items</h3>
+      <h3>Level: </h3>
+      <h3>Health: </h3>
+      <h3>AP:</h3>
+      <h3>DEX: </h3>
+      <h3>Items: </h3>
     </div>
 
   </div>

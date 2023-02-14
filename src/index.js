@@ -85,19 +85,22 @@ window.addEventListener("load", function () {
   });
   document.querySelector("#warrior-class").addEventListener("click", function (e) {
     e.preventDefault();
-    document.getElementById("#warrior-img").removeAttribute("class", "hidden");
+    document.querySelector("#warrior-img").removeAttribute("class", "hidden");
+    document.querySelector("#slime-img").removeAttribute("class", "hidden");
     hideChooseChar();
     console.log("clicked-war");
    
   });
   document.querySelector("#mage-class").addEventListener("click", function (e) {
     e.preventDefault();
+    document.querySelector("#mage-img").removeAttribute("class", "hidden");
     hideChooseChar();
     console.log("clicked-mage");
 
   });
   document.querySelector("#rogue-class").addEventListener("click", function (e) {
     e.preventDefault();
+    document.querySelector("#rogue-img").removeAttribute("class", "hidden");
     console.log("clicked");
     hideChooseChar();
 
