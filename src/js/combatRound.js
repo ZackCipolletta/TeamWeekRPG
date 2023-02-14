@@ -33,6 +33,8 @@ export class CombatRound {
     this.heroHit = heroHit;
     this.heroCriticalHit = heroCriticalHit;
     this.heroDamage = heroDamage;
+    this.heroCriticalDodge = false;
+    this.heroDodgeSucess = false;
     this.heroMessage = heroMessage;  
     this.monsterHit = monsterHit;
     this.monsterCriticalHit = monsterCriticalHit;
@@ -55,6 +57,8 @@ export class CombatRound {
     this.heroHit = false;
     this.heroCriticalHit = false;
     this.heroDamage = 0;
+    this.heroCriticalDodge = false;
+    this.heroDodgeSucess = false;
     this.heroMessage = "";  
     this.monsterHit = false;
     this.monsterCriticalHit = false;
@@ -134,6 +138,9 @@ export class CombatRound {
   monsterAttack() {
     const roll = this.die1_10();
     const attackChance = roll + this.heroDex;
+    if (this.heroCriticalDodge === true) {
+
+    }
     if (roll === 6) {
       //critical hit!
       this.monsterCriticalHit = true;
