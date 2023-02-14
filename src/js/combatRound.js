@@ -19,11 +19,13 @@ export class Character {
 
 //only what happens in the combat round
 export class CombatRound {
-  constructor(role, heroHp, heroAp, heroDex, monsterName, monsterHp, monsterAp, heroHit, heroCriticalHit, heroDamage, heroMessage, monsterHit, monsterCriticalHit, monsterDamage, monsterMessage) {
+  constructor(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, heroHit, heroCriticalHit, heroDamage, heroMessage, monsterHit, monsterCriticalHit, monsterDamage, monsterMessage) {
     this.role = role;
     this.heroHp = heroHp;
     this.heroAp = heroAp;
     this.heroDex = heroDex;
+    this.heroLevel = heroLevel;
+    this.heroExp = heroExp;
     this.monsterName = monsterName;
     this.monsterHp = monsterHp;
     this.monsterAp = monsterAp;
@@ -37,11 +39,13 @@ export class CombatRound {
     this.monsterDamage = monsterDamage;
     this.monsterMessage = monsterMessage;
   }
-  heroAndMonsterData(role, heroHp, heroAp, heroDex, monsterName, monsterHp, monsterAp){
+  heroAndMonsterData(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp){
     this.role = role;
     this.heroHp = heroHp;
     this.heroAp = heroAp;
     this.heroDex = heroDex;
+    this.heroLevel = heroLevel;
+    this.heroExp = heroExp;
     this.monsterName = monsterName;
     this.monsterHp = monsterHp;
     this.monsterAp = monsterAp;
@@ -102,26 +106,21 @@ export class CombatRound {
     const roll = this.die1_10();
     const dodgeChance = roll + this.heroDex;
     if (roll === 10) {
-      //critical hit!
-      console.log("Badass! you dodged successfully");
+      //critical dodge and hit!
       this.heroCriticalDodge = true;
       this.heroDamage = this.heroAp;
       this.heroHp ++;
       this.monsterHp = this.monsterHp - this.heroDamage;
-      this.heroMessage = `Badass! you dodged, recoverd 1 hp, and attacked for ${this.heroDamage} points damage`;
+      this.heroMessage = `Badass! you dodged, recoverd 1 hp, and hit ${this.monsterName} for ${this.heroDamage} points damage`;
     }
     else if ((dodgeChance) >= 16)  {
       //hit 
-      console.log("hit");
-      this.heroHit = true;
-      this.heroDamage = this.die1_10()/10 * this.heroAp;
-      this.monsterHp = this.monsterHp - this.heroDamage;
-      this.heroMessage = `${this.role} hit for ${this.heroDamage} points damage.`;
+      this.heroDodgeSuccess = true;
+      this.heroMessage = `${this.role} evaded ${this.monsterName} successfully, taking 0 damage.`;
     }
     else if (dodgeChance <= 15) {
       //miss
-      this.heroMessage = `${this.role} missed.`;
-      console.log("miss");
+      this.heroMessage = `${this.role} was too slow to dodge this time`;
     }
     else {
       console.log("error");
@@ -131,7 +130,7 @@ export class CombatRound {
     
     return this;
   }
-  }
+  
   monsterAttack() {
     const roll = this.die1_10();
     const attackChance = roll + this.heroDex;
