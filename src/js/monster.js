@@ -3,10 +3,11 @@ export class Monster {
     this.name = name;
     this.hp = hp;
     this.ap = ap;
+    this.xp = (hp + ap) / 4;
   }
 }
 export function createSlime() {
-  let slime = new Monster("slime", 5, 5);
+  let slime = new Monster("slime", 11, 1);
   return slime;
 }
 
@@ -24,6 +25,7 @@ export function createCthulu() {
   let owlBear = new Monster("Cthulu", 50, 15);
   return owlBear;
 }
+
 
 //   checkType() {
 //     if ((this.side1 > (this.side2 + this.side3)) || (this.side2 > (this.side1 + this.side3)) || (this.side3 > (this.side1 + this.side2))) {

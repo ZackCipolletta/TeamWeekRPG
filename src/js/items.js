@@ -32,15 +32,13 @@ export function randomPotion(hero, randomN) { // Takes random number func as par
 }
 
 
-export function randomWeapon(randomN) { // same as potions, for the weapons object.
+export function randomWeapon(hero, randomN) { // same as potions, for the weapons object.
   let weapons = {
     1: {
       weapon: ["dagger", (() => {
         if (hero.role === 'rogue') {
-          let attack = dagerFunc(hero);
-          return attack;
+          return 10;
         } else {
-          let attack = daggerFunc(hero);
           return 3;
         }
       })()]
