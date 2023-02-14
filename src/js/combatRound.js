@@ -114,6 +114,7 @@ export class CombatRound {
       this.heroHp ++;
       this.monsterHp = this.monsterHp - this.heroDamage;
       this.heroMessage = `Badass! you dodged, recoverd 1 hp, and hit ${this.monsterName} for ${this.heroDamage} points damage`;
+      
     }
     else if ((dodgeChance) >= 16)  {
       //hit 
@@ -137,15 +138,16 @@ export class CombatRound {
     const roll = this.die1_10();
     const attackChance = roll + this.heroDex;
     if (this.heroCriticalDodge === true) {
-      this.monsterMessage = this.heroMessage;
+      console.log(`${this.role}: ${this.heroHp}  ___ ${this.monsterName}: ${this.monsterHp}`);
       return this;
     }
     if (this.heroDodgeSuccess === true) {
-      this.monsterMessage = this.heroMessage;
+      console.log(this.heroMessage);
+      console.log(`${this.role}: ${this.heroHp}  ___ ${this.monsterName}: ${this.monsterHp}`);
       return this;
     }
     if (roll === 6) {
-      //critical hit!
+      //critical hit by monster!
       this.monsterCriticalHit = true;
       this.monsterDamage = this.monsterAp;
       this.heroHp = this.heroHp - this.monsterDamage;
@@ -166,10 +168,10 @@ export class CombatRound {
     else {
       console.log("error");
     } 
+    console.log (this.monsterMessage);
     if (this.monsterHp < 0) {
       console.log("YOU KILLED THE BADDIE!");
     }
-    console.log (this.monsterMessage);
     console.log(`${this.role}: ${this.heroHp}  ___ ${this.monsterName}: ${this.monsterHp}`);
   }
 
