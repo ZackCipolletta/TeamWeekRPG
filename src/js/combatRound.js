@@ -37,19 +37,16 @@ export class CombatRound {
     this.monsterDamage = monsterDamage;
     this.monsterMessage = monsterMessage;
   }
-  static heroAndMonsterData(role, hp, ap, dex, monsterName, monsterHp, monsterAp){
-    return {
-      role: role,
-      hp: hp,
-      ap: ap,
-      dex: dex,
-      monsterName: monsterName,
-      monsterHp: monsterHp,
-      monsterAp: monsterAp
-    };
+  heroAndMonsterData(role, hp, ap, dex, monsterName, monsterHp, monsterAp){
+    this.role = role;
+    this.hp = hp;
+    this.ap = ap;
+    this.dex = dex;
+    this.monsterName = monsterName;
+    this.monsterHp = monsterHp;
+    this.monsterAp = monsterAp;
   }
-  
-  static combatRoundInitialize() {
+  combatRoundInitialize() {
     let cRound = new CombatRound(false, false, 0, "", false, false, 0, "");
     this.heroHit = false;
     this.heroCriticalHit = false;
