@@ -1,19 +1,25 @@
 export class Character {
-  constructor(role, hp, ap, dex, level, hpCapacity) {
+  constructor(role, hp, ap, dex, level, hpCapacity, totalAttributes, items) {
     this.role = role;
     this.hp = hp;
     this.ap = ap;
     this.dex = dex;
     this.level = level;
     this.hpCapacity = hpCapacity;
+    this.totalAttributes = hpCapacity + ap + dex;
+    this.items = [];
   
+  }
+  createWarrior() {
+    let warrior = new Character("warrior", 10, 10, 10, 1, 10); 
+    return warrior;
   }
 }
 
-// export function createWarrior() {
-//   let warrior = new Character("warrior", 10, 10, 10, 1, 10);
-//   return warrior;
-// }
+export function createWarrior() {
+  let warrior = new Character("warrior", 10, 10, 10, 1, 10,);
+  return warrior;
+}
 
 // export function createMage() {
 //   let mage = new Character("mage", 8, 17, 5, 1, 7);

@@ -1,12 +1,16 @@
-//DO NOT LET THIS FILE OVERWRITE !!!
+//DO NOT USE, just for testing!!! jd
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import {Combat, Character, createWarrior} from "./combatTurn.js"
+import {CombatRound, Character} from "./src/js/combatRound.js";
 
-createWarrior();
-console.log ()
-
+//combat round
+function startCombatRound() {
+  CombatRound.combatRoundInitialize();
+  CombatRound.heroAndMonsterData("Warrior", 10, 10, 10, "Baddie", 6, 6);
+  //CombatRound.heroAttack();
+  console.log(this);
+}
 
 
 // import { createMage, createRogue, createWarrior } from "./js/character.js";
