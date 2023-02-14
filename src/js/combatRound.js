@@ -83,7 +83,7 @@ export class CombatRound {
       this.heroDamage = this.die1_10()/10 * this.ap;
       this.heroMessage = `${this.role} hit for ${this.heroDamage} points damage.`;
     }
-    else if (attackChance < 15) {
+    else if (attackChance <= 15) {
       //miss
       this.heroMessage = `${this.role} missed.`;
       console.log("miss");
@@ -98,25 +98,25 @@ export class CombatRound {
   monsterAttack() {
     const roll = this.die1_6();
     const attackChance = roll + this.dex;
-    
     if (roll === 6) {
       //critical hit!
       this.monsterCriticalHit = true;
-      this.monsterDamage = this.ap * 1.5;
+      this.monsterDamage = this.monsterAp;
       this.monsterMessage = `Critical Hit! ${this.monsterName} does ${this.monsterDamage} points damage.`;
     }
     else if ((attackChance) >= 13)  {
       //hit 
       this.monsterHit = true;
-      this.monsterDamage = (this.die1_6()/6)* this.ap; 
+      this.monsterDamage = Math.round((this.die1_6()/6)* this.monsterAp); 
       this.monsterMessage = `${this.monsterName} hit for ${this.monsterDamage} points damage.`;
     }
-    else if (attackChance < 12) {
+    else if (attackChance <= 12) {
       //miss
-      this.heroMessage = `${this.monsterName} missed.`;
+      this.monsterMessage = `${this.monsterName} missed.`;
     }
     else {
       console.log("error");
     } 
+    console.log (this.monsterMessage);
   }
 }
