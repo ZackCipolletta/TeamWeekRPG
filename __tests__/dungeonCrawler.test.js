@@ -1,6 +1,6 @@
 
 import {Combat} from "../src/js/combatTurn.js";
-import {Character} from "../src/js/combat.js";
+import {Character} from "../src/js/combatTurn.js";
 
 describe('Combat: should do some fighting', () => {
 });

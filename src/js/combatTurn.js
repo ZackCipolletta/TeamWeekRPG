@@ -10,11 +10,22 @@
 
 
 
-//temp hero 0:role 1:health 2:hp 3:ap 4:dx 
-let hero1 = {role:"warrior", health: 10, hp: 10, ap: 10, dx: 10};
-//temp npc
-let npc = {role:"zombie", health: 8, hp: 8, ap: 8, dx: 7};
+// //temp hero 0:role 1:health 2:hp 3:ap 4:dx 
+// let hero1 = {role:"warrior", health: 10, hp: 10, ap: 10, dx: 10};
+// //temp npc
+// let npc = {role:"zombie", health: 8, hp: 8, ap: 8, dx: 7};
 
+// from zach's "combat.js"
+export class Character {
+  constructor(role, hp, ap, dex, level, hpCapacity) {
+    this.role = role;
+    this.hp = hp;
+    this.ap = ap;
+    this.dex = dex;
+    this.level = level;
+    this.hpCapacity = hpCapacity;
+  }
+}
 
 export class Combat {
   constructor(heroHit, heroCriticalHit, heroDamage, heroMessage, npcHit, npcCriticalHit, npcDamage, npcMessage) {
