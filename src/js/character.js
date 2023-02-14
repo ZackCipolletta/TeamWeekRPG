@@ -4,9 +4,11 @@ export class Character {
     this.hp = hp;
     this.ap = ap;
     this.dex = dex;
+    this.xp = 0;
+    this.xpLimit = 20;
     this.level = level;
     this.hpCapacity = hpCapacity;
-    this.totalAtributes = hpCapacity + ap + dex
+    this.totalAtributes = hpCapacity + ap + dex;
     this.items = [];
   }
 }
