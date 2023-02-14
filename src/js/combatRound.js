@@ -41,7 +41,9 @@ export class CombatRound {
     this.monsterCriticalHit = monsterCriticalHit;
     this.monsterDamage = monsterDamage;
     this.monsterMessage = monsterMessage;
+    this.monsterAlive = true;
   }
+  //chage for increased leveling up effects
   heroAndMonsterData(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp){
     this.role = role;
     this.heroHp = heroHp;
@@ -66,7 +68,12 @@ export class CombatRound {
     this.monsterCriticalHit = false;
     this.monsterDamage = 0;
     this.monsterMessage = "";
+    this.monsterAlive = true;
     return cRound;
+  }
+  die1_100() {
+    const roll1_100= Math.ceil(Math.random() * 100);
+    return roll1_100;
   }
   die1_10() {
     const roll1_10= Math.ceil(Math.random() * 10);
@@ -116,7 +123,7 @@ export class CombatRound {
       this.heroHp ++;
       this.monsterHp = this.monsterHp - this.heroDamage;
       this.heroMessage = `Badass! you dodged, recoverd 1 hp, and hit ${this.monsterName} for ${this.heroDamage} points damage`;
-      
+      this.monsterCheckPulse();
     }
     else if ((dodgeChance) >= 16)  {
       //hit 
@@ -201,5 +208,31 @@ export class CombatRound {
       };
     }
     return this;
+  }
+  monsterCheckPulse() {
+    if (this.monsterHp > 1) {
+      this.monsterAlive = false;
+  
+    }
+  itemDropChance() {
+    let dropChance;
+    for (let i = 0; i < this.heroLevel; i ++){
+      dropChance = this.die1_10();
+      console.log("i =" + i);
+      console.log ("escapeChance: " + escapeChance);
+    
+      if (escapeChance === 6) {
+        this.heroRunSuccess = true;
+        this.heroMessage = `You ran away!  ${this.role} is a successful pussy!`
+        return this;
+      }
+      else if (escapeChance !== 6) {
+        this.heroMessage = `Take off those shwashbuckler boots and run you dork!  The ${this.monsterName} disn't let you get away!`
+        this.heroRunSuccess = false;
+      };
+    }
+    return this;
+    
+  };
   }
 }
