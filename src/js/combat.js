@@ -1,5 +1,6 @@
 
-import { createZombie, createOwlBear, createCthulu } from "./monster.js";
+import { Character, chooseCharacter } from "./character.js";
+import { Monster, createZombie, createOwlBear, createCthulu } from "./monster.js";
 
 let myMonster;
 export function heroVsMonster(heroCall, monsterCall) {
@@ -47,8 +48,6 @@ export function nextMonsterFunc(currentHero) {
   heroVsMonster(currentHero, myMonster);
   return myMonster;
 }
-
-
 
 // function checkHp(hero, monster) {
 //     console.log('hero stats:' + hero.hp + ". Monster stats: " + monster.hp );
