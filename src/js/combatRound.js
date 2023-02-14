@@ -1,14 +1,14 @@
 
 // from zach's "character.js" won't be needed here, just for testing------
 export class Character {
-  constructor(role, hp, ap, dex, level, hpCapacity) {
+  constructor(role, heroHp, heroAp, heroDex, level, hpCapacity) {
     this.role = role;
-    this.hp = hp;
-    this.ap = ap;
-    this.dex = dex;
+    this.heroHp = heroHp;
+    this.heroAp = heroAp;
+    this.heroDex = heroDex;
     this.level = level;
     this.hpCapacity = hpCapacity;
-    this.totalAttributes = hpCapacity + ap + dex;
+    this.totalAttributes = hpCapacity + heroAp + heroDex;
     this.items = [];
   }
   static createWarrior() {
@@ -19,11 +19,11 @@ export class Character {
 
 //only what happens in the combat round
 export class CombatRound {
-  constructor(role, hp, ap, dex, monsterName, monsterHp, monsterAp, heroHit, heroCriticalHit, heroDamage, heroMessage, monsterHit, monsterCriticalHit, monsterDamage, monsterMessage) {
+  constructor(role, heroHp, heroAp, heroDex, monsterName, monsterHp, monsterAp, heroHit, heroCriticalHit, heroDamage, heroMessage, monsterHit, monsterCriticalHit, monsterDamage, monsterMessage) {
     this.role = role;
-    this.hp = hp;
-    this.ap = ap;
-    this.dex = dex;
+    this.heroHp = heroHp;
+    this.heroAp = heroAp;
+    this.heroDex = heroDex;
     this.monsterName = monsterName;
     this.monsterHp = monsterHp;
     this.monsterAp = monsterAp;
@@ -37,11 +37,11 @@ export class CombatRound {
     this.monsterDamage = monsterDamage;
     this.monsterMessage = monsterMessage;
   }
-  heroAndMonsterData(role, hp, ap, dex, monsterName, monsterHp, monsterAp){
+  heroAndMonsterData(role, heroHp, heroAp, heroDex, monsterName, monsterHp, monsterAp){
     this.role = role;
-    this.hp = hp;
-    this.ap = ap;
-    this.dex = dex;
+    this.heroHp = heroHp;
+    this.heroAp = heroAp;
+    this.heroDex = heroDex;
     this.monsterName = monsterName;
     this.monsterHp = monsterHp;
     this.monsterAp = monsterAp;
@@ -68,19 +68,21 @@ export class CombatRound {
   }
   heroAttack() {
     const roll = this.die1_10();
-    const attackChance = roll + this.dex;
+    const attackChance = roll + this.heroDex;
     if (roll === 10) {
       //critical hit!
       console.log("critical hit!");
       this.heroCriticalHit = true;
-      this.heroDamage = this.ap * 2;
+      this.heroDamage = this.heroAp * 2;
+      this.monsterHp = this.monsterHp - this.heroDamage;
       this.heroMessage = `Critical Hit! ${this.role} does ${this.heroDamage} points damage.`;
     }
     else if ((attackChance) >= 16)  {
       //hit 
       console.log("hit");
       this.heroHit = true;
-      this.heroDamage = this.die1_10()/10 * this.ap;
+      this.heroDamage = this.die1_10()/10 * this.heroAp;
+      this.monsterHp = this.monsterHp - this.heroDamage;
       this.heroMessage = `${this.role} hit for ${this.heroDamage} points damage.`;
     }
     else if (attackChance <= 15) {
@@ -93,21 +95,59 @@ export class CombatRound {
       console.log(attackChance);
     } 
     console.log(this.heroMessage);
+    
+    return this;
   }
-  
+  heroDodge() {
+    const roll = this.die1_10();
+    const dodgeChance = roll + this.heroDex;
+    if (roll === 10) {
+      //critical hit!
+      console.log("Badass! you dodged successfully");
+      this.heroCriticalDodge = true;
+      this.heroDamage = this.heroAp;
+      this.heroHp ++;
+      this.monsterHp = this.monsterHp - this.heroDamage;
+      this.heroMessage = `Badass! you dodged, recoverd 1 hp, and attacked for ${this.heroDamage} points damage`;
+    }
+    else if ((dodgeChance) >= 16)  {
+      //hit 
+      console.log("hit");
+      this.heroHit = true;
+      this.heroDamage = this.die1_10()/10 * this.heroAp;
+      this.monsterHp = this.monsterHp - this.heroDamage;
+      this.heroMessage = `${this.role} hit for ${this.heroDamage} points damage.`;
+    }
+    else if (dodgeChance <= 15) {
+      //miss
+      this.heroMessage = `${this.role} missed.`;
+      console.log("miss");
+    }
+    else {
+      console.log("error");
+      console.log(dodgeChance);
+    } 
+    console.log(this.heroMessage);
+    
+    return this;
+  }
+  }
   monsterAttack() {
-    const roll = this.die1_6();
-    const attackChance = roll + this.dex;
+    const roll = this.die1_10();
+    const attackChance = roll + this.heroDex;
     if (roll === 6) {
       //critical hit!
       this.monsterCriticalHit = true;
       this.monsterDamage = this.monsterAp;
+      this.heroHp = this.heroHp - this.monsterDamage;
       this.monsterMessage = `Critical Hit! ${this.monsterName} does ${this.monsterDamage} points damage.`;
     }
+    //--------only using critical hit as hit by baddie for now
     else if ((attackChance) >= 13)  {
       //hit 
       this.monsterHit = true;
       this.monsterDamage = Math.round((this.die1_6()/6)* this.monsterAp); 
+      this.heroHp = this.heroHp - this.monsterDamage;
       this.monsterMessage = `${this.monsterName} hit for ${this.monsterDamage} points damage.`;
     }
     else if (attackChance <= 12) {
@@ -117,6 +157,11 @@ export class CombatRound {
     else {
       console.log("error");
     } 
+    if (this.monsterHp < 0) {
+      console.log("YOU KILLED THE BADDIE!");
+    }
     console.log (this.monsterMessage);
+    console.log(`${this.role}: ${this.heroHp}  ___ ${this.monsterName}: ${this.monsterHp}`);
   }
+
 }
