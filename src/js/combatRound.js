@@ -1,23 +1,23 @@
 
 // from zach's "character.js" won't be needed here, just for testing------
-export class Character {
-  constructor(role, heroHp, heroAp, heroDex, level, hpCapacity) {
-    this.role = role;
-    this.heroHp = heroHp;
-    this.heroAp = heroAp;
-    this.heroDex = heroDex;
-    this.level = level;
-    this.hpCapacity = hpCapacity;
-    this.totalAttributes = hpCapacity + heroAp + heroDex;
-    this.items = [];
-  }
-  static createWarrior() {
-    let warrior = new Character("warrior", 10, 10, 10, 1, 10); 
-    return warrior;
-  }
-}
+// export class Character {
+//   constructor(role, heroHp, heroAp, heroDex, level, hpCapacity) {
+//     this.role = role;
+//     this.heroHp = heroHp;
+//     this.heroAp = heroAp;
+//     this.heroDex = heroDex;
+//     this.level = level;
+//     this.hpCapacity = hpCapacity;
+//     this.totalAttributes = hpCapacity + heroAp + heroDex;
+//     this.items = [];
+//   }
+//   static createWarrior() {
+//     let warrior = new Character("warrior", 10, 10, 10, 1, 10); 
+//     return warrior;
+//   }
+// }
 
-//only what happens in the combat round
+//only what happens in a single combat round
 export class CombatRound {
   constructor(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, heroHit, heroCriticalHit, heroDamage, heroMessage, monsterHit, monsterCriticalHit, monsterDamage, monsterMessage) {
     this.role = role;
@@ -87,7 +87,6 @@ export class CombatRound {
     }
     else if ((attackChance) >= 16)  {
       //hit 
-      console.log("hit");
       this.heroHit = true;
       this.heroDamage = this.die1_10()/10 * this.heroAp;
       this.monsterHp = this.monsterHp - this.heroDamage;
@@ -96,7 +95,6 @@ export class CombatRound {
     else if (attackChance <= 15) {
       //miss
       this.heroMessage = `${this.role} missed.`;
-      console.log("miss");
     }
     else {
       console.log("error");
@@ -139,7 +137,12 @@ export class CombatRound {
     const roll = this.die1_10();
     const attackChance = roll + this.heroDex;
     if (this.heroCriticalDodge === true) {
-
+      this.monsterMessage = this.heroMessage;
+      return this;
+    }
+    if (this.heroDodgeSuccess === true) {
+      this.monsterMessage = this.heroMessage;
+      return this;
     }
     if (roll === 6) {
       //critical hit!
