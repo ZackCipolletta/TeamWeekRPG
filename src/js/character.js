@@ -5,7 +5,7 @@ export class Character {
     this.ap = ap;
     this.dex = dex;
     this.xp = 0;
-    this.xpLimit = 20;
+    this.xpLimit = 20 * level;
     this.level = level;
     this.hpCapacity = hpCapacity;
     this.totalAtributes = hpCapacity + ap + dex;
