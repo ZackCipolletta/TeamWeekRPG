@@ -15,70 +15,6 @@ function whatsInTheRoom(hero) {
   }
 }
 
-let weapons = {
-  1: {
-    weapon: ["dagger", (() => {
-      if (hero.role === 'rogue') {
-        let attack = dagerFunc(hero);
-        return attack;
-      } else {
-        let attack = daggerFunc(hero);
-        return 3;
-      }
-    })()]
-  },
-  2: {
-    weapon:
-      ["sword", (() => {
-        if (hero.role === 'warrior') {
-          return 10;
-        } else {
-          return 3;
-        }
-      })()]
-  },
-  3: {
-    weapon: ["staff", (() => {
-      if (hero.role === 'mage') {
-        return 10;
-      } else {
-        return 3;
-      }
-    })()]
-  }
-};
-
-
-let potions = {
-  1: {
-    potion: ["health", (() => {
-      if (hero.role === 'rogue') {
-        return 10;
-      } else {
-        return 3;
-      }
-    })()]
-  },
-  2: {
-    potion: ["strength", (() => {
-      if (hero.role === 'warrior') {
-        return 10;
-      } else {
-        return 3;
-      }
-    })()]
-  },
-  3: {
-    potion: ["magic", (() => {
-      if (hero.role === 'mage') {
-        return 10;
-      } else {
-        return 3;
-      }
-    })()]
-  }
-};
-
 function defineItems(hero, randomW, randomP, randomItem) { // needs 3 variables in order to generate and return a random item from the weapon and potion objects.  Third variable selects which item from the item array is returned after random potion and random weapon are generated.
   let items = {
     1: randomPotion(hero, randomP),
@@ -91,15 +27,6 @@ function defineItems(hero, randomW, randomP, randomItem) { // needs 3 variables 
 
 function randomNum(numOfVariables) { // RNG function used repeatedly.
   return Math.floor(Math.random() * numOfVariables) + 1;
-}
-
-function randomPotion(hero, randomN) { // Takes random number func as paramter to return a random potion from the potions object.
-  let potion = potions(hero)[randomN]
-  return potions[randomN];
-}
-
-function randomWeapon(randomN) { // same as potions, for the weapons object.
-  return weapons[randomN];
 }
 
 function getWeapon(hero, weapon) {  // used to equip a new weapon when a hero finds a weapon and wants to change out for current weapon.
