@@ -10,9 +10,9 @@ test('', () => {
   let round = new CombatRound;
   (function startCombatRound() {
     round.combatRoundInitialize();
-    round.heroAndMonsterData("Warrior", 10, 10, 10, 1, 0, "Baddie", 6, 6);
+    round.heroAndMonsterData("Warrior", 10, 10, 10, 2, 0, "Baddie", 6, 6);
     //CombatRound.heroAttack();
-    round.monsterAttack(round.heroDodge());
+    round.monsterAttack(round.heroRun());
   })();
   // let lester = Character.createWarrior();
 

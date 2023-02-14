@@ -29,12 +29,13 @@ export class CombatRound {
     this.monsterName = monsterName;
     this.monsterHp = monsterHp;
     this.monsterAp = monsterAp;
-    //
+    // these values populate with 
     this.heroHit = heroHit;
     this.heroCriticalHit = heroCriticalHit;
     this.heroDamage = heroDamage;
     this.heroCriticalDodge = false;
     this.heroDodgeSucess = false;
+    this.heroRunSuccess = null;
     this.heroMessage = heroMessage;  
     this.monsterHit = monsterHit;
     this.monsterCriticalHit = monsterCriticalHit;
@@ -59,6 +60,7 @@ export class CombatRound {
     this.heroDamage = 0;
     this.heroCriticalDodge = false;
     this.heroDodgeSucess = false;
+    this.heroRunSuccess = null;
     this.heroMessage = "";  
     this.monsterHit = false;
     this.monsterCriticalHit = false;
@@ -137,6 +139,13 @@ export class CombatRound {
   monsterAttack() {
     const roll = this.die1_10();
     const attackChance = roll + this.heroDex;
+    if (this.heroRunSuccess === true) {
+      console.log(this.heroMessage);
+      return this;
+    }
+    if (this.heroRunSuccess === false) {
+      console.log(this.heroMessage);
+    }
     if (this.heroCriticalDodge === true) {
       console.log(`${this.role}: ${this.heroHp}  ___ ${this.monsterName}: ${this.monsterHp}`);
       return this;
@@ -174,5 +183,23 @@ export class CombatRound {
     }
     console.log(`${this.role}: ${this.heroHp}  ___ ${this.monsterName}: ${this.monsterHp}`);
   }
-
+  heroRun() { 
+    let escapeChance;
+    for (let i = 0; i < this.heroLevel; i ++){
+      escapeChance = this.die1_6();
+      console.log("i =" + i);
+      console.log ("escapeChance: " + escapeChance);
+    
+      if (escapeChance === 6) {
+        this.heroRunSuccess = true;
+        this.heroMessage = `You ran away!  ${this.role} is a successful pussy!`
+        return this;
+      }
+      else if (escapeChance !== 6) {
+        this.heroMessage = `Take off those shwashbuckler boots and run you dork!  The ${this.monsterName} disn't let you get away!`
+        this.heroRunSuccess = false;
+      };
+    }
+    return this;
+  }
 }
