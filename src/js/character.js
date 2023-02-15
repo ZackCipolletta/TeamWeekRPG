@@ -57,3 +57,4 @@ export function chooseCharacter(type) {
     return createRogue();
   }
 }
+
