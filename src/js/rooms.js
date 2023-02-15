@@ -6,7 +6,6 @@ function whatsInTheRoom(hero) {
     return 'empty';
   } else if (Math.round(Math.random() * 4) + 1 === 4) {
     let item = defineItems(hero, heroLevelRandomNumber(hero), heroLevelRandomNumber(hero), randomNumFunc(1, 4)); // assiging to a variable makes it easier to pass into another function.
-    console.log(item[1]); // delete
     // pick up item? if yes, getWeapon(hero, weapon) or getItem(hero, item);
     return item;
   } else {

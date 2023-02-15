@@ -1,5 +1,5 @@
 export class Character {
-  constructor(role, hp, ap, dex, level, hpCapacity) {
+  constructor(role, hp, ap, dex, level, ) {
     this.role = role;
     this.hp = hp;
     this.ap = ap;
@@ -7,25 +7,28 @@ export class Character {
     this.xp = 0;
     this.level = level;
     this.xpLimit = 20;
-    this.hpCapacity = hpCapacity;
-    this.totalAtributes = hpCapacity + ap + dex;
+    this.hpCapacity = hp;
+    this.totalAtributes = this.hpCapacity + ap + dex;
     this.items = [];
   }
 
   levelUP() {
     if (this.role === 'mage') {
       this.level++;
-      this.hp = this.hp + 3;
+      this.hpCapacity += 3;
+      this.hp = this.hpCapacity;
       this.ap = this.ap + 5;
       this.dex = this.dex + 2;
     } else if (this.role === 'warrior') {
       this.level++;
-      this.hp = this.hp + 4;
+      this.hpCapacity += 4;
+      this.hp = this.hpCapacity;
       this.ap = this.ap + 3;
       this.dex = this.dex + 3;
     } else if (this.role === 'rogue') {
       this.level++;
-      this.hp = this.hp + 2;
+      this.hpCapacity += 2;
+      this.hp = this.hpCapacity;
       this.ap = this.ap + 4;
       this.dex = this.dex + 4;
     }
