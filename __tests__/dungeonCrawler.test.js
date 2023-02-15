@@ -11,17 +11,13 @@ test('', () => {
   (function startCombatRound() {
     round.combatRoundInitialize();
     round.heroAndMonsterData("Warrior", 10, 10, 10, 1, 0, "Baddie", 6, 6);
-    //CombatRound.heroAttack();
-    round.monsterAttack(round.heroAttack());
-    console.log(round);
-    console.log(`Hero hp: ${round.heroHp} Monster hp: ${round.monsterHp}`);
+    // //CombatRound.heroAttack();
+    // round.monsterAttack(round.heroAttack());
+    // console.log(round);
+    // console.log(`Hero hp: ${round.heroHp} Monster hp: ${round.monsterHp}`);
+    round.superRoll(8);
+
   })();
-  // let lester = Character.createWarrior();
 
-  // let theFight = Combat.combatRound();
-
-  // console.log (lester);
-  // console.log (theFight);
-  // expect(theFight).toEqual(true);
 });
 

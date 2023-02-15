@@ -1,23 +1,3 @@
-
-// from zach's "character.js" won't be needed here, just for testing------
-// export class Character {
-//   constructor(role, heroHp, heroAp, heroDex, level, hpCapacity) {
-//     this.role = role;
-//     this.heroHp = heroHp;
-//     this.heroAp = heroAp;
-//     this.heroDex = heroDex;
-//     this.level = level;
-//     this.hpCapacity = hpCapacity;
-//     this.totalAttributes = hpCapacity + heroAp + heroDex;
-//     this.items = [];
-//   }
-//   static createWarrior() {
-//     let warrior = new Character("warrior", 10, 10, 10, 1, 10); 
-//     return warrior;
-//   }
-// }
-
-//only what happens in a single combat round
 export class CombatRound {
   constructor(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, heroHit, heroCriticalHit, heroDamage, heroCriticalDodge, heroDodgeSuccess, heroRunSuccess, heroMessage, monsterHit, monsterCriticalHit, monsterDamage, monsterMessage, monsterAlive, itemDrop) {
     this.role = role;
@@ -73,21 +53,25 @@ export class CombatRound {
     this.itemDrop = null;
     return cRound;
   }
-  die1_100() {
-    const roll1_100= Math.ceil(Math.random() * 100);
-    return roll1_100;
+  d100() {
+    const roll1= Math.ceil(Math.random() * 100);
+    return roll1;
   }
-  die1_10() {
-    const roll1_10= Math.ceil(Math.random() * 10);
-    return roll1_10;
+  d20() {
+    const roll1= Math.ceil(Math.random() * 20);
+    return roll1;
   }
-  die1_6() {
-    const roll1_6= Math.ceil(Math.random() * 6);
-    return roll1_6;
+  d10() {
+    const roll1= Math.ceil(Math.random() * 10);
+    return roll1;
+  }
+  d6() {
+    const roll1= Math.ceil(Math.random() * 6);
+    return roll1;
   }
   heroAttack() {
     //changed hit chance math -jd
-    const roll = this.die1_10();
+    const roll = this.d10();
     const attackChance = roll + this.heroDex - 10;
     if (roll === 10) {
       //critical hit!
@@ -101,7 +85,7 @@ export class CombatRound {
     else if ((attackChance) >= 5)  {
       //hit 
       this.heroHit = true;
-      this.heroDamage = this.die1_10()/10 * this.heroAp;
+      this.heroDamage = this.d10()/10 * this.heroAp;
       this.monsterHp = this.monsterHp - this.heroDamage;
       this.heroMessage = `${this.role} hit for ${this.heroDamage} points damage.`;
       this.monsterCheckPulse();
@@ -119,7 +103,7 @@ export class CombatRound {
     return this;
   }
   heroDodge() {
-    const roll = this.die1_10();
+    const roll = this.d10();
     const dodgeChance = roll + this.heroDex;
     if (roll === 10) {
       //critical dodge and hit!
@@ -149,7 +133,7 @@ export class CombatRound {
   }
   
   monsterAttack() {
-    const roll = this.die1_10();
+    const roll = this.d10();
     const attackChance = roll + 10 - this.heroDex;
     if (this.monsterAlive === false) {
       return this;
@@ -180,7 +164,7 @@ export class CombatRound {
     else if (attackChance >= 8)  {
       //hit 
       this.monsterHit = true;
-      this.monsterDamage = Math.round((this.die1_6()/6)* this.monsterAp); 
+      this.monsterDamage = Math.round((this.d6()/6)* this.monsterAp); 
       this.heroHp = this.heroHp - this.monsterDamage;
       this.monsterMessage = `${this.monsterName} hit for ${this.monsterDamage} points damage.`;
     }
@@ -196,10 +180,10 @@ export class CombatRound {
   heroRun() { 
     let escapeChance;
     for (let i = 0; i < this.heroLevel; i ++){
-      escapeChance = this.die1_6();
+      escapeChance = this.d6();
       console.log("i =" + i);
       console.log ("escapeChance: " + escapeChance);
-    
+      
       if (escapeChance === 6) {
         this.heroRunSuccess = true;
         this.heroMessage = `Ran away!  ${this.role} is a real wuss!`
@@ -216,14 +200,14 @@ export class CombatRound {
     if (this.monsterHp < 1) {
       this.monsterAlive = false;
       this.itemDropChance();
-  
+      
     }
   }  
   // currently loop is not active, just 1 out of 10 chance for item at any level -jd
   itemDropChance() {
     let dropChance;
     for (let i = 0; i < 1; i ++){
-      dropChance = this.die1_10();
+      dropChance = this.d10();
       console.log("i =" + i);
       console.log ("dropChance: " + dropChance);
       if (dropChance === 10) {
@@ -237,4 +221,54 @@ export class CombatRound {
     return this;
     
   };
+  // 1 roll of die for extra critical chance or item 
+  loopD100(numRolls) {
+    let roll;
+    for (let i = 0; i < numRolls; i ++){
+      roll = this.d100();
+      console.log(roll);
+      if (roll === 100) {
+        console.log("SUCCESS");
+        return this;
+      }
+      
+    }
+  
+};
+loopD20(numRolls) {
+  let roll;
+  for (let i = 0; i < numRolls; i ++){
+    roll = this.d20();
+    console.log(roll);
+    if (roll === 20) {
+      console.log("SUCCESS");
+      return this;
+    }
+    
+  }
+};
+loopD10(numRolls) {
+  let roll;
+  for (let i = 0; i < numRolls; i ++){
+    roll = this.d10();
+    console.log(roll);
+    if (roll === 10) {
+      console.log("SUCCESS");
+      return this;
+    }
+    
+  }
+};
+loopD6(numRolls) {
+  let roll;
+  for (let i = 0; i < numRolls; i ++){
+    roll = this.d6();
+    console.log(roll);
+    if (roll === 6) {
+      console.log("SUCCESS");
+      return this;
+    }
+    
+  }
+};
 }
