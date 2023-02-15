@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { randomPotion } from "./items";
 
 function whatsInTheRoom(hero) {
@@ -21,14 +22,46 @@ function whatsInTheRoom(hero) {
     } // call combatFunction(hero, monster);
     return monster;
   }
+=======
+import { randomWeapon, randomPotion } from "./items";
+import { heroLevelRandomNumber, randomMonster } from "./monster.js";
+
+export function whatsInTheRoom(hero) {
+  let number = randomNumFunc(1, 5);
+  if (number === 5) {
+    console.log('empty'); // delete
+    return 'empty';
+  } else if (number === 4) {
+    return defineItems(hero, randomNumFunc(1, 3), randomNumFunc(1, 3), randomNumFunc(1, 3)); // assiging to a variable makes it easier to pass into another function.
+    // console.log(item[1]); // delete
+    // pick up item? if yes, getWeapon(hero, weapon) or getItem(hero, item);
+  } else {
+    let monster;
+    if (hero.level <= 3) {
+      monster = randomMonster(hero.level - 1, (randomNumFunc(0, 2))); // makes it easier to pass the monster object into other functions.
+    } else if (hero.level <= 6) {
+      monster = randomMonster(hero.level, (randomNumFunc(3, 5)));
+    } else if (hero.level <= 9) {
+      monster = randomMonster(hero.level, (randomNumFunc(6, 8)));
+    }
+    console.log(monster);
+    return monster;
+  } // call combatFunction(hero, monster);
+>>>>>>> stephen
 }
 
-function defineItems(hero, randomW, randomP, randomItem) { // needs 3 variables in order to generate and return a random item from the weapon and potion objects.  Third variable selects which item from the item array is returned after random potion and random weapon are generated.
+
+export function defineItems(hero, randomW, randomP, randomItem) { // needs 3 variables in order to generate and return a random item from the weapon and potion objects.  Third variable selects which item from the item array is returned after random potion and random weapon are generated.
   let items = {
     1: randomPotion(hero, randomP),
     2: randomWeapon(hero, randomW),
+<<<<<<< HEAD
     3: 'Health Potion',
     4: 'random thing2'
+=======
+    3: 'Health-Potion',
+    // 4: 'random thing2'
+>>>>>>> stephen
   };
   return items[randomItem];
 }

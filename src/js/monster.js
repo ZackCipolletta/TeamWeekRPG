@@ -1,5 +1,9 @@
 export class Monster {
   constructor(name, level, hp, ap) {
+<<<<<<< HEAD
+=======
+    this.type = 'monster';
+>>>>>>> stephen
     this.name = name;
     this.level = level;
     this.hp = hp + Math.floor(hp * level / 2);
@@ -20,8 +24,13 @@ export function randomMonster(level, randomNum) {
       return zombie;
     },
 
+<<<<<<< HEAD
     function createOwlBear() {
       let owlBear = new Monster("owlbear", level, 30, 4);
+=======
+    function createDragon() {
+      let owlBear = new Monster("dragon", level, 30, 4);
+>>>>>>> stephen
       return owlBear;
     },
 
@@ -53,6 +62,7 @@ export function randomMonster(level, randomNum) {
   return monsters[randomNum](level);
 }
 
+<<<<<<< HEAD
 function heroLevelRandomNumber(hero) { // use this to get a random number for when you want a number that is 1 +/- the current hero level.  Used for generating the level of an item, weapon or monster.
   if (hero.level = 1) {
     randomNum(2); // wil return a number 1 or 2
@@ -64,3 +74,17 @@ function heroLevelRandomNumber(hero) { // use this to get a random number for wh
 function randomNumFunc(lowerLimit, upperLimit) { // RNG function used repeatedly.
   return Math.floor(Math.random() * (upperLimit - lowerLimit + 1)) + lowerLimit;
 }
+=======
+export function heroLevelRandomNumber(hero) { // use this to get a random number for when you want a number that is 1 +/- the current hero level.  Used for generating the level of an item, weapon or monster.
+  if (hero.level = 1) {
+    return randomNumFunc(0, 2); // wil return a number 1 or 2
+  } else {
+    return randomNumFunc((hero.level - 1), (hero.level + 1)); // will return a number equal to hero level, one greater or one less than hero.level.
+  }
+}
+
+
+function randomNumFunc(lowerLimit, upperLimit) { // RNG function used repeatedly.
+  return Math.floor(Math.random() * (upperLimit - lowerLimit + 1)) + lowerLimit;
+}
+>>>>>>> stephen
