@@ -19,7 +19,7 @@
 
 //only what happens in a single combat round
 export class CombatRound {
-  constructor(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, heroHit, heroCriticalHit, heroDamage, heroMessage, monsterHit, monsterCriticalHit, monsterDamage, monsterMessage) {
+  constructor(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, heroHit, heroCriticalHit, heroDamage, heroCriticalDodge, heroDodgeSuccess, heroRunSuccess, heroMessage, monsterHit, monsterCriticalHit, monsterDamage, monsterMessage, monsterAlive, itemDrop) {
     this.role = role;
     this.heroHp = heroHp;
     this.heroAp = heroAp;
@@ -33,15 +33,16 @@ export class CombatRound {
     this.heroHit = heroHit;
     this.heroCriticalHit = heroCriticalHit;
     this.heroDamage = heroDamage;
-    this.heroCriticalDodge = false;
-    this.heroDodgeSucess = false;
-    this.heroRunSuccess = null;
+    this.heroCriticalDodge = heroCriticalDodge;
+    this.heroDodgeSuccess = heroDodgeSuccess;
+    this.heroRunSuccess = heroRunSuccess;
     this.heroMessage = heroMessage;  
     this.monsterHit = monsterHit;
     this.monsterCriticalHit = monsterCriticalHit;
     this.monsterDamage = monsterDamage;
     this.monsterMessage = monsterMessage;
-    this.monsterAlive = true;
+    this.monsterAlive = monsterAlive;
+    this.itemDrop = itemDrop;
   }
   //chage for increased leveling up effects
   heroAndMonsterData(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp){
@@ -56,19 +57,20 @@ export class CombatRound {
     this.monsterAp = monsterAp;
   }
   combatRoundInitialize() {
-    let cRound = new CombatRound(false, false, 0, "", false, false, 0, "");
-    this.heroHit = false;
-    this.heroCriticalHit = false;
+    let cRound = new CombatRound();
+    this.heroHit = null;
+    this.heroCriticalHit = null;
     this.heroDamage = 0;
-    this.heroCriticalDodge = false;
-    this.heroDodgeSucess = false;
+    this.heroCriticalDodge = null;
+    this.heroDodgeSuccess = null;
     this.heroRunSuccess = null;
-    this.heroMessage = "";  
-    this.monsterHit = false;
-    this.monsterCriticalHit = false;
+    this.heroMessage = null;  
+    this.monsterHit = null;
+    this.monsterCriticalHit = null;
     this.monsterDamage = 0;
-    this.monsterMessage = "";
+    this.monsterMessage = null;
     this.monsterAlive = true;
+    this.itemDrop = null;
     return cRound;
   }
   die1_100() {
@@ -93,6 +95,7 @@ export class CombatRound {
       this.heroDamage = this.heroAp * 2;
       this.monsterHp = this.monsterHp - this.heroDamage;
       this.heroMessage = `Critical Hit! ${this.role} does ${this.heroDamage} points damage.`;
+      this.monsterCheckPulse();
     }
     else if ((attackChance) >= 16)  {
       //hit 
@@ -100,6 +103,7 @@ export class CombatRound {
       this.heroDamage = this.die1_10()/10 * this.heroAp;
       this.monsterHp = this.monsterHp - this.heroDamage;
       this.heroMessage = `${this.role} hit for ${this.heroDamage} points damage.`;
+      this.monsterCheckPulse();
     }
     else if (attackChance <= 15) {
       //miss
@@ -146,6 +150,9 @@ export class CombatRound {
   monsterAttack() {
     const roll = this.die1_10();
     const attackChance = roll + this.heroDex;
+    if (this.monsterAlive === false) {
+      return this;
+    }
     if (this.heroRunSuccess === true) {
       console.log(this.heroMessage);
       return this;
@@ -184,10 +191,6 @@ export class CombatRound {
     else {
       console.log("error");
     } 
-    console.log (this.monsterMessage);
-    if (this.monsterHp < 0) {
-      console.log("YOU KILLED THE BADDIE!");
-    }
     console.log(`${this.role}: ${this.heroHp}  ___ ${this.monsterName}: ${this.monsterHp}`);
   }
   heroRun() { 
@@ -210,29 +213,28 @@ export class CombatRound {
     return this;
   }
   monsterCheckPulse() {
-    if (this.monsterHp > 1) {
+    if (this.monsterHp < 1) {
       this.monsterAlive = false;
+      this.itemDropChance();
   
     }
+  }  
+  // currently loop is not active, just 1 out of 10 chance for item at any level -jd
   itemDropChance() {
     let dropChance;
-    for (let i = 0; i < this.heroLevel; i ++){
+    for (let i = 0; i < 1; i ++){
       dropChance = this.die1_10();
       console.log("i =" + i);
-      console.log ("escapeChance: " + escapeChance);
-    
-      if (escapeChance === 6) {
-        this.heroRunSuccess = true;
-        this.heroMessage = `You ran away!  ${this.role} is a successful pussy!`
+      console.log ("dropChance: " + dropChance);
+      if (dropChance === 10) {
+        this.itemDrop = true;
         return this;
       }
-      else if (escapeChance !== 6) {
-        this.heroMessage = `Take off those shwashbuckler boots and run you dork!  The ${this.monsterName} disn't let you get away!`
-        this.heroRunSuccess = false;
+      else if (dropChance !== 10) {
+        this.itemDrop = false;
       };
     }
     return this;
     
   };
-  }
 }

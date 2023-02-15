@@ -12,7 +12,7 @@ test('', () => {
     round.combatRoundInitialize();
     round.heroAndMonsterData("Warrior", 10, 10, 10, 1, 0, "Baddie", 6, 6);
     //CombatRound.heroAttack();
-    round.monsterAttack(round.heroDodge());
+    round.monsterAttack(round.heroAttack());
     console.log(round);
   })();
   // let lester = Character.createWarrior();
