@@ -1,5 +1,3 @@
-
-
 import {createZombie, createOwlBear, createCthulu } from "./monster.js";
 
 let myMonster;
