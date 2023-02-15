@@ -1,29 +1,29 @@
 export function randomPotion(hero, randomN) { // Takes random number func as paramter to return a random potion from the potions object.
   let potions = {
     1: {
-      potion: ["health", (() => {
+      potion: ["swift", (() => {
         if (hero.role === 'rogue') {
-          return 10;
+          return (7 + (hero.level * 1.5));
         } else {
-          return 3;
+          return (2 + hero.level -1);
         }
       })()]
     },
     2: {
       potion: ["strength", (() => {
         if (hero.role === 'warrior') {
-          return 10;
+          return (7 + (hero.level * 1.5));
         } else {
-          return 3;
+          return (2 + hero.level -1);
         }
       })()]
     },
     3: {
       potion: ["magic", (() => {
         if (hero.role === 'mage') {
-          return 10;
+          return (7 + (hero.level * 1.5));
         } else {
-          return 3;
+          return (2 + hero.level -1);
         }
       })()]
     }
@@ -31,15 +31,14 @@ export function randomPotion(hero, randomN) { // Takes random number func as par
   return potions[randomN];
 }
 
-
 export function randomWeapon(hero, randomN) { // same as potions, for the weapons object.
   let weapons = {
     1: {
       weapon: ["dagger", (() => {
         if (hero.role === 'rogue') {
-          return 10;
+          return Math.floor(hero.level * 1.2 * 4);
         } else {
-          return 3;
+          return Math.floor(hero.level * 1.2 * 2);
         }
       })()]
     },
@@ -47,21 +46,26 @@ export function randomWeapon(hero, randomN) { // same as potions, for the weapon
       weapon:
         ["sword", (() => {
           if (hero.role === 'warrior') {
-            return 10;
+            return Math.floor(hero.level * 1.2 * 4);
           } else {
-            return 3;
+            return Math.floor(hero.level * 1.2 * 2);
           }
         })()]
     },
     3: {
       weapon: ["staff", (() => {
         if (hero.role === 'mage') {
-          return 10;
+          return Math.floor(hero.level * 1.2 * 4);
         } else {
-          return 3;
+          return Math.floor(hero.level * 1.2 * 2);
         }
       })()]
     }
   };
   return weapons[randomN];
 }
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+Privacy

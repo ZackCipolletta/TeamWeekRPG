@@ -120,13 +120,7 @@ body {
   justify-content: space-evenly;
   color: red;
   border: solid red;
-}
-.scroll {
-  border: solid rgb(191, 179, 179);
-}
-.enemy-stats {
-  display: flex;
-  justify-content: space-evenly;
+  font-family: UIfont;
 }
 
 .monster-images {
