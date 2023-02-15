@@ -127,7 +127,7 @@ export class CombatRound {
       this.heroDamage = this.heroAp;
       this.heroHp ++;
       this.monsterHp = this.monsterHp - this.heroDamage;
-      this.heroMessage = `Badass! you dodged, recoverd 1 hp, and hit ${this.monsterName} for ${this.heroDamage} points damage`;
+      this.heroMessage = `Badass! you dodged, recoverd 1 hp, and hit ${this.monsterName} for ${this.heroDamage} points damage!`;
       this.monsterCheckPulse();
     }
     else if ((dodgeChance) >= 16)  {
@@ -202,11 +202,11 @@ export class CombatRound {
     
       if (escapeChance === 6) {
         this.heroRunSuccess = true;
-        this.heroMessage = `You ran away!  ${this.role} is a successful pussy!`
+        this.heroMessage = `Ran away!  ${this.role} is a real wuss!`
         return this;
       }
       else if (escapeChance !== 6) {
-        this.heroMessage = `Take off those shwashbuckler boots and run you dork!  The ${this.monsterName} disn't let you get away!`
+        this.heroMessage = `Take off those swashbuckler boots and run you dork!  Too slow!`
         this.heroRunSuccess = false;
       };
     }

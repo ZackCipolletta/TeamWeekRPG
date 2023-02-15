@@ -2,7 +2,7 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import {CombatRound, Character} from "./src/js/combatRound.js";
+import {CombatRound, Character} from "./js/combatRound.js";
 
 //combat round
 function startCombatRound() {

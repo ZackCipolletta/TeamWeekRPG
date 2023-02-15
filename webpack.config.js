@@ -19,7 +19,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new Dotenv,
     new HtmlWebpackPlugin({
-      title: 'Shape Tracker',
+      title: 'Dungeon Crawler',
       template: './src/index.html',
       inject: 'body'
     })
