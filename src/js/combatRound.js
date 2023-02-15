@@ -70,8 +70,6 @@ export class CombatRound {
     return roll1;
   }
   heroAttack() {
-    //----rework started wed morning -jd
-    
     let beginningCriticalHit = false
     let criticalHitExtraRolls = false
     let beginningHit = false
@@ -80,7 +78,6 @@ export class CombatRound {
     criticalHitExtraRolls = this.loopD100(Math.max((this.heroDex -10), 0));
     beginningHit = this.loopD6(3);
     hitExtraRolls = this.loopD20(Math.max((this.heroDex -10), 0));
-    console.log(beginningCriticalHit, criticalHitExtraRolls, beginningHit, hitExtraRolls);
     
     if (beginningCriticalHit || criticalHitExtraRolls) {
       //critical hit!
@@ -104,17 +101,23 @@ export class CombatRound {
     }
     else {
       console.log("error");
-      console.log(beginningCriticalHit, criticalHitExtraRolls, beginningHit, hitExtraRolls);
     } 
     console.log(this.heroMessage);
     
     return this;
   }
-    
   heroDodge() {
-    const roll = this.d10();
-    const dodgeChance = roll + this.heroDex;
-    if (roll === 10) {
+    let beginningCriticalDodge = false
+    let criticalDodgeExtraRolls = false
+    let beginningDodge = false
+    let dodgeExtraRolls = false
+    beginningCriticalDodge = this.loopD20(1);
+    criticalDodgeExtraRolls = this.loopD100(Math.max((this.heroDex -10), 0));
+    beginningDodge = this.loopD6(3);
+    dodgeExtraRolls = this.loopD20(Math.max((this.heroDex -10), 0));
+
+    //
+    if (beginningCriticalDodge || criticalDodgeExtraRolls) {
       //critical dodge and hit!
       this.heroCriticalDodge = true;
       this.heroDamage = this.heroAp;
@@ -123,12 +126,11 @@ export class CombatRound {
       this.heroMessage = `Badass! you dodged, recoverd 1 hp, and hit ${this.monsterName} for ${this.heroDamage} points damage!`;
       this.monsterCheckPulse();
     }
-    else if ((dodgeChance) >= 16)  {
-      //hit 
+    else if (beginningDodge || dodgeExtraRolls)  {
       this.heroDodgeSuccess = true;
       this.heroMessage = `${this.role} evaded ${this.monsterName} successfully, taking 0 damage.`;
     }
-    else if (dodgeChance <= 15) {
+    else if (beginningCriticalDodge === false && (criticalDodgeExtraRolls === false || criticalDodgeExtraRolls === undefined) && beginningDodge === false && (dodgeExtraRolls === false || dodgeExtraRolls ===undefined)) {
       //miss
       this.heroMessage = `${this.role} was too slow to dodge this time`;
     }
@@ -234,8 +236,8 @@ export class CombatRound {
       }
       else return false;
     }
-};
-loopD20(numRolls) {
+  };
+  loopD20(numRolls) {
   let roll;
   for (let i = 0; i < numRolls; i ++){
     roll = this.d20();
@@ -245,8 +247,8 @@ loopD20(numRolls) {
     }
     else return false;
   }
-};
-loopD10(numRolls) {
+  };
+  loopD10(numRolls) {
   let roll;
   for (let i = 0; i < numRolls; i ++){
     roll = this.d10();
@@ -255,9 +257,9 @@ loopD10(numRolls) {
       return true;
     }
     else return false;
+    }
   }
-};
-loopD6(numRolls) {
+  loopD6(numRolls) {
   let roll;
   for (let i = 0; i < numRolls; i ++){
     roll = this.d6();
@@ -265,7 +267,8 @@ loopD6(numRolls) {
       console.log("SUCCESS");
       return true;
     }
-    else return false;
+    else return false
+    }
   }
-};
 }
+

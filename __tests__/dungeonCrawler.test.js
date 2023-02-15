@@ -12,8 +12,8 @@ test('', () => {
     round.combatRoundInitialize();
     round.heroAndMonsterData("Warrior", 10, 10, 10, 1, 0, "Baddie", 6, 6);
     //CombatRound.heroAttack();
-    round.monsterAttack(round.heroAttack());
-    console.log(round);
+    round.monsterAttack(round.heroDodge());
+    //console.log(round);
     console.log(`Hero hp: ${round.heroHp} Monster hp: ${round.monsterHp}`);
  
   })();
