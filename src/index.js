@@ -22,7 +22,6 @@ function handleCharSelection(role) {
   //populating the room with the first monster, empty, or item
   console.log(room);
   if (room.type === 'monster') {
-
     document.querySelector("#combat-buttons").removeAttribute("class", "hidden");
     document.querySelector("#enemy-info").removeAttribute("class", "hidden");
     let monster = document.getElementById(`${room.name}`);

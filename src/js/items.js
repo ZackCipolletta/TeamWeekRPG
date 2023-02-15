@@ -1,10 +1,7 @@
 export function randomPotion(hero, randomN) { // Takes random number func as paramter to return a random potion from the potions object.
   let potions = {
     1: {
-<<<<<<< HEAD
-=======
       type: "potion",
->>>>>>> stephen
       potion: ["swift", (() => {
         if (hero.role === 'rogue') {
           return (7 + (hero.level * 1.5));
