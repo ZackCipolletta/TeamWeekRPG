@@ -70,38 +70,47 @@ export class CombatRound {
     return roll1;
   }
   heroAttack() {
-    //changed hit chance math -jd
-    const roll = this.d10();
-    const attackChance = roll + this.heroDex - 10;
-    if (roll === 10) {
+    //----rework started wed morning -jd
+    
+    let beginningCriticalHit = false
+    let criticalHitExtraRolls = false
+    let beginningHit = false
+    let hitExtraRolls = false
+    beginningCriticalHit = this.loopD20(1);
+    criticalHitExtraRolls = this.loopD100(Math.max((this.heroDex -10), 0));
+    beginningHit = this.loopD6(3);
+    hitExtraRolls = this.loopD20(Math.max((this.heroDex -10), 0));
+    console.log(beginningCriticalHit, criticalHitExtraRolls, beginningHit, hitExtraRolls);
+    
+    if (beginningCriticalHit || criticalHitExtraRolls) {
       //critical hit!
-      console.log("critical hit!");
       this.heroCriticalHit = true;
       this.heroDamage = this.heroAp * 2;
       this.monsterHp = this.monsterHp - this.heroDamage;
       this.heroMessage = `Critical Hit! ${this.role} does ${this.heroDamage} points damage.`;
       this.monsterCheckPulse();
     }
-    else if ((attackChance) >= 5)  {
-      //hit 
+    else if (beginningHit || hitExtraRolls) {
+      //hit!
       this.heroHit = true;
       this.heroDamage = this.d10()/10 * this.heroAp;
       this.monsterHp = this.monsterHp - this.heroDamage;
       this.heroMessage = `${this.role} hit for ${this.heroDamage} points damage.`;
       this.monsterCheckPulse();
     }
-    else if (attackChance < 5) {
+    else if (beginningCriticalHit === false && (criticalHitExtraRolls === false || criticalHitExtraRolls === undefined) && beginningHit === false && (hitExtraRolls === false || hitExtraRolls === undefined)) {
       //miss
       this.heroMessage = `${this.role} missed.`;
     }
     else {
       console.log("error");
-      console.log(attackChance);
+      console.log(beginningCriticalHit, criticalHitExtraRolls, beginningHit, hitExtraRolls);
     } 
     console.log(this.heroMessage);
     
     return this;
   }
+    
   heroDodge() {
     const roll = this.d10();
     const dodgeChance = roll + this.heroDex;
@@ -125,7 +134,6 @@ export class CombatRound {
     }
     else {
       console.log("error");
-      console.log(dodgeChance);
     } 
     console.log(this.heroMessage);
     
@@ -181,9 +189,7 @@ export class CombatRound {
     let escapeChance;
     for (let i = 0; i < this.heroLevel; i ++){
       escapeChance = this.d6();
-      console.log("i =" + i);
       console.log ("escapeChance: " + escapeChance);
-      
       if (escapeChance === 6) {
         this.heroRunSuccess = true;
         this.heroMessage = `Ran away!  ${this.role} is a real wuss!`
@@ -200,7 +206,6 @@ export class CombatRound {
     if (this.monsterHp < 1) {
       this.monsterAlive = false;
       this.itemDropChance();
-      
     }
   }  
   // currently loop is not active, just 1 out of 10 chance for item at any level -jd
@@ -208,8 +213,6 @@ export class CombatRound {
     let dropChance;
     for (let i = 0; i < 1; i ++){
       dropChance = this.d10();
-      console.log("i =" + i);
-      console.log ("dropChance: " + dropChance);
       if (dropChance === 10) {
         this.itemDrop = true;
         return this;
@@ -219,56 +222,50 @@ export class CombatRound {
       };
     }
     return this;
-    
   };
   // 1 roll of die for extra critical chance or item 
   loopD100(numRolls) {
     let roll;
     for (let i = 0; i < numRolls; i ++){
       roll = this.d100();
-      console.log(roll);
       if (roll === 100) {
         console.log("SUCCESS");
-        return this;
+        return true;
       }
-      
+      else return false;
     }
-  
 };
 loopD20(numRolls) {
   let roll;
   for (let i = 0; i < numRolls; i ++){
     roll = this.d20();
-    console.log(roll);
     if (roll === 20) {
       console.log("SUCCESS");
-      return this;
+      return true;
     }
-    
+    else return false;
   }
 };
 loopD10(numRolls) {
   let roll;
   for (let i = 0; i < numRolls; i ++){
     roll = this.d10();
-    console.log(roll);
     if (roll === 10) {
       console.log("SUCCESS");
-      return this;
+      return true;
     }
-    
+    else return false;
   }
 };
 loopD6(numRolls) {
   let roll;
   for (let i = 0; i < numRolls; i ++){
     roll = this.d6();
-    console.log(roll);
     if (roll === 6) {
       console.log("SUCCESS");
-      return this;
+      return true;
     }
-    
+    else return false;
   }
 };
 }
