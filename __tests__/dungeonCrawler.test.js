@@ -14,6 +14,7 @@ test('', () => {
     //CombatRound.heroAttack();
     round.monsterAttack(round.heroAttack());
     console.log(round);
+    console.log(`Hero hp: ${round.heroHp} Monster hp: ${round.monsterHp}`);
   })();
   // let lester = Character.createWarrior();
 
