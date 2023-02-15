@@ -1,5 +1,5 @@
 export class CombatRound {
-  constructor(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, heroHit, heroCriticalHit, heroDamage, heroCriticalDodge, heroDodgeSuccess, heroRunSuccess, heroMessage, monsterHit, monsterCriticalHit, monsterDamage, monsterMessage, monsterAlive, itemDrop) {
+  constructor(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel, heroHit, heroCriticalHit, heroDamage, heroCriticalDodge, heroDodgeSuccess, heroRunSuccess, heroMessage, monsterHit, monsterCriticalHit, monsterDamage, monsterMessage, monsterAlive, itemDrop) {
     this.role = role;
     this.heroHp = heroHp;
     this.heroAp = heroAp;
@@ -9,6 +9,7 @@ export class CombatRound {
     this.monsterName = monsterName;
     this.monsterHp = monsterHp;
     this.monsterAp = monsterAp;
+    this.monsterLevel = monsterLevel;
     // these values populate with 
     this.heroHit = heroHit;
     this.heroCriticalHit = heroCriticalHit;
@@ -25,7 +26,7 @@ export class CombatRound {
     this.itemDrop = itemDrop;
   }
   //chage for increased leveling up effects
-  heroAndMonsterData(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp){
+  heroAndMonsterData(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel){
     this.role = role;
     this.heroHp = heroHp;
     this.heroAp = heroAp;
@@ -35,6 +36,7 @@ export class CombatRound {
     this.monsterName = monsterName;
     this.monsterHp = monsterHp;
     this.monsterAp = monsterAp;
+    this.monsterLevel = monsterLevel;
   }
   combatRoundInitialize() {
     let cRound = new CombatRound();
@@ -142,6 +144,24 @@ export class CombatRound {
     return this;
   }
   
+  heroRun() { 
+    let escape = false;
+    const escapeRolls = 3+(this.heroLevel - this.monsterLevel)*3;
+    escape = this.loopD6(escapeRolls);
+    if (escape) {
+      this.heroRunSuccess = true;
+      this.heroMessage = `Ran away!  ${this.role} is a real wuss!`
+      return this;
+    }
+    else if (!escape) {
+      this.heroMessage = `Take off those swashbuckler boots and run you dork!  Too slow!`
+      this.heroRunSuccess = false;
+      return this;
+    }
+    else {
+      console.log("error")
+    }
+  }
   monsterAttack() {
     const roll = this.d10();
     const attackChance = roll + 10 - this.heroDex;
@@ -186,23 +206,6 @@ export class CombatRound {
       console.log("error");
     } 
     console.log(`${this.role}: ${this.heroHp}  ___ ${this.monsterName}: ${this.monsterHp}`);
-  }
-  heroRun() { 
-    let escapeChance;
-    for (let i = 0; i < this.heroLevel; i ++){
-      escapeChance = this.d6();
-      console.log ("escapeChance: " + escapeChance);
-      if (escapeChance === 6) {
-        this.heroRunSuccess = true;
-        this.heroMessage = `Ran away!  ${this.role} is a real wuss!`
-        return this;
-      }
-      else if (escapeChance !== 6) {
-        this.heroMessage = `Take off those swashbuckler boots and run you dork!  Too slow!`
-        this.heroRunSuccess = false;
-      };
-    }
-    return this;
   }
   monsterCheckPulse() {
     if (this.monsterHp < 1) {
