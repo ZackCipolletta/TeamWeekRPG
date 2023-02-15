@@ -12,6 +12,10 @@
     "rules": {
       "semi": 1,
       "indent": ["warn", 2],
-      "no-console": "warn"
+      "no-console": "warn",
+      "no-unused-vars": "warn",
+      "no-cond-assign": "warn",
+      "no-constant-condition": "warn",
+      "no-undef": "warn"
     }
   }
