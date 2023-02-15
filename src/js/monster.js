@@ -53,24 +53,10 @@ export function randomMonster(level, randomNum) {
   return monsters[randomNum](level);
 }
 
-//   checkType() {
-//     if ((this.side1 > (this.side2 + this.side3)) || (this.side2 > (this.side1 + this.side3)) || (this.side3 > (this.side1 + this.side2))) {
-//       return "not a triangle";
-//     } else if ((this.side1 !== this.side2) && ((this.side1 !== this.side3)) && ((this.side2 !== this.side3))) {
-//       return "scalene triangle";
-//     } else if ((this.side1 === this.side2) && (this.side1 === this.side3)) {
-//       return "equilateral triangle";
-//     } else {
-//       return "isosceles triangle";
-//     }
-//   }
-
 function heroLevelRandomNumber(hero) { // use this to get a random number for when you want a number that is 1 +/- the current hero level.  Used for generating the level of an item, weapon or monster.
   if (hero.level = 1) {
     randomNum(2); // wil return a number 1 or 2
-  } else if (hero.level = 2) {
-    randomNum(3); // return a random number from 1 to 3
-  } else if (hero.level >= 3) {
+  } else {
     randomNumFunc((hero.level - 1), (hero.level + 1)); // will return a number equal to hero level, one greater or one less than hero.level.
   }
 }

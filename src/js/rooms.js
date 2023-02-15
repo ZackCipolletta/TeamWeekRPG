@@ -1,24 +1,26 @@
 import { randomPotion } from "./items";
 
 function whatsInTheRoom(hero) {
-  if (randomNum(5) + 1 === 5) {
+  if (randomNumFunc(1, 5) ){
     console.log('empty'); // delete
     return 'empty';
   } else if (Math.round(Math.random() * 4) + 1 === 4) {
-    let item = defineItems(hero, randomNum(3), randomNum(3), randomNum(4)); // assiging to a variable makes it easier to pass into another function.
+    let item = defineItems(hero, heroLevelRandomNumber(hero), heroLevelRandomNumber(hero), randomNumFunc(1, 4)); // assiging to a variable makes it easier to pass into another function.
     console.log(item[1]); // delete
+    // pick up item? if yes, getWeapon(hero, weapon) or getItem(hero, item);
     return item;
   } else {
     let monster;
     if (hero.totalAtributes <= 30) {
       if (hero.level <= 3) {
-        monster = randomMonster(hero.level, (randomNum(3) - 1)); // makes it easier to pass the monster object into other functions.
+        monster = randomMonster(hero.level, (randomNumFunc(0, 2))); // makes it easier to pass the monster object into other functions.
       } else if (hero.level <= 6) {
         monster = randomMonster(hero.level, (randomNumFunc(3, 5)));
       } else if (hero.level <= 9) {
         monster = randomMonster(hero.level, (randomNumFunc(6, 8)));
       }
-    } return monster;
+    } // call combatFunction(hero, monster);
+    return monster;
   }
 }
 
@@ -37,10 +39,6 @@ function defineItems(hero, randomW, randomP, randomItem) { // needs 3 variables 
 //  } else if (item === 'potion') {
 // hero.ap = hero.ap + item.potion[1];
 // }  something like this.  A helper function which will be called when a potion is picked up and can be used as getWeapon is for weapons.  It will eval the potion and call another helper function to apply the appropriate attritube depending on each character calss.
-
-function randomNum(numOfVariables) { // RNG function used repeatedly.
-  return Math.floor(Math.random() * numOfVariables) + 1;
-}
 
 function randomNumFunc(lowerLimit, upperLimit) { // RNG function used repeatedly.
   return Math.floor(Math.random() * (upperLimit - lowerLimit + 1)) + lowerLimit;
