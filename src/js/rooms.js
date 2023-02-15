@@ -38,8 +38,6 @@ function defineItems(hero, randomW, randomP, randomItem) { // needs 3 variables 
 // hero.ap = hero.ap + item.potion[1];
 // }  something like this.  A helper function which will be called when a potion is picked up and can be used as getWeapon is for weapons.  It will eval the potion and call another helper function to apply the appropriate attritube depending on each character calss.
 
-
-
 function randomNum(numOfVariables) { // RNG function used repeatedly.
   return Math.floor(Math.random() * numOfVariables) + 1;
 }

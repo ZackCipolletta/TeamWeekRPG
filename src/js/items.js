@@ -31,7 +31,6 @@ export function randomPotion(hero, randomN) { // Takes random number func as par
   return potions[randomN];
 }
 
-
 export function randomWeapon(hero, randomN) { // same as potions, for the weapons object.
   let weapons = {
     1: {
