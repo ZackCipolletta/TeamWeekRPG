@@ -1,7 +1,8 @@
-import { randomPotion } from "./items";
+import { randomPotion, randomWeapon } from "./items.js";
+import { randomMonster, heroLevelRandomNumber } from "./monster.js";
 
 function whatsInTheRoom(hero) {
-  if (randomNumFunc(1, 5) ){
+  if (randomNumFunc(1, 5)) {
     console.log('empty'); // delete
     return 'empty';
   } else if (Math.round(Math.random() * 4) + 1 === 4) {
@@ -32,12 +33,13 @@ function defineItems(hero, randomW, randomP, randomItem) { // needs 3 variables 
   };
   return items[randomItem];
 }
-// create function to interact with items? Pick up item Y/N in UI, calls this function: getItem(hero, item) {
-//  if (item === 'Health Potion') {
-// hero.hp = hero.hp + x;
-//  } else if (item === 'potion') {
-// hero.ap = hero.ap + item.potion[1];
-// }  something like this.  A helper function which will be called when a potion is picked up and can be used as getWeapon is for weapons.  It will eval the potion and call another helper function to apply the appropriate attritube depending on each character calss.
+function getItem(hero, item) {
+  if (item === 'Health Potion') {
+    hero.hp = hero.hpCapacity;
+  } else if (item === 'potion') {
+    hero.ap = hero.ap + item.potion[1];
+  }
+}
 
 function randomNumFunc(lowerLimit, upperLimit) { // RNG function used repeatedly.
   return Math.floor(Math.random() * (upperLimit - lowerLimit + 1)) + lowerLimit;
