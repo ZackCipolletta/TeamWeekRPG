@@ -1,17 +1,18 @@
 export class Character {
   constructor(role, hp, ap, dex, level, ) {
     this.role = role;
-    this.hp = hp;
-    this.ap = ap;
-    this.dex = dex;
-    this.xp = 0;
-    this.level = level;
+    this.heroHp = hp;
+    this.heroAp = ap;
+    this.heroDex = dex;
+    this.heroExp = 0;
+    this.heroLevel = level;
     this.xpLimit = 20;
     this.hpCapacity = hp;
     this.totalAtributes = this.hpCapacity + ap + dex;
 
     this.items = [];
   }
+
 
   levelUP() {
     if (this.role === 'mage') {

@@ -1,10 +1,11 @@
+
 export class Monster {
   constructor(name, level, hp, ap) {
     this.type = 'monster';
-    this.name = name;
-    this.level = level;
-    this.hp = hp + Math.floor(hp * level / 2);
-    this.ap = ap + Math.floor(ap * level / 2);
+    this.monsterName = name;
+    this.monsterLevel = level;
+    this.monsterHp = hp + Math.floor(hp * level / 2);
+    this.monsterAp = ap + Math.floor(ap * level / 2);
     this.xp = Math.floor((hp + ap) / 3);
   }
 }

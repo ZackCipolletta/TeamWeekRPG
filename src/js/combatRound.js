@@ -1,3 +1,4 @@
+
 export class CombatRound {
   constructor(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel, heroHit, heroCriticalHit, heroDamage, heroCriticalDodge, heroDodgeSuccess, heroRunSuccess, heroMessage, monsterHit, monsterCriticalHit, monsterDamage, monsterMessage, monsterAlive, itemDrop) {
     this.role = role;
@@ -17,7 +18,7 @@ export class CombatRound {
     this.heroCriticalDodge = heroCriticalDodge;
     this.heroDodgeSuccess = heroDodgeSuccess;
     this.heroRunSuccess = heroRunSuccess;
-    this.heroMessage = heroMessage;  
+    this.heroMessage = heroMessage;
     this.monsterHit = monsterHit;
     this.monsterCriticalHit = monsterCriticalHit;
     this.monsterDamage = monsterDamage;
@@ -25,8 +26,9 @@ export class CombatRound {
     this.monsterAlive = monsterAlive;
     this.itemDrop = itemDrop;
   }
+
   //chage for increased leveling up effects
-  heroAndMonsterData(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel){
+  heroAndMonsterData(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
     this.role = role;
     this.heroHp = heroHp;
     this.heroAp = heroAp;
@@ -46,7 +48,7 @@ export class CombatRound {
     this.heroCriticalDodge = null;
     this.heroDodgeSuccess = null;
     this.heroRunSuccess = null;
-    this.heroMessage = null;  
+    this.heroMessage = null;
     this.monsterHit = null;
     this.monsterCriticalHit = null;
     this.monsterDamage = 0;
@@ -56,31 +58,31 @@ export class CombatRound {
     return cRound;
   }
   d100() {
-    const roll1= Math.ceil(Math.random() * 100);
+    const roll1 = Math.ceil(Math.random() * 100);
     return roll1;
   }
   d20() {
-    const roll1= Math.ceil(Math.random() * 20);
+    const roll1 = Math.ceil(Math.random() * 20);
     return roll1;
   }
   d10() {
-    const roll1= Math.ceil(Math.random() * 10);
+    const roll1 = Math.ceil(Math.random() * 10);
     return roll1;
   }
   d6() {
-    const roll1= Math.ceil(Math.random() * 6);
+    const roll1 = Math.ceil(Math.random() * 6);
     return roll1;
   }
   heroAttack() {
-    let beginningCriticalHit = false
-    let criticalHitExtraRolls = false
-    let beginningHit = false
-    let hitExtraRolls = false
+    let beginningCriticalHit = false;
+    let criticalHitExtraRolls = false;
+    let beginningHit = false;
+    let hitExtraRolls = false;
     beginningCriticalHit = this.loopD20(1);
-    criticalHitExtraRolls = this.loopD100(Math.max((this.heroDex -10), 0));
+    criticalHitExtraRolls = this.loopD100(Math.max((this.heroDex - 10), 0));
     beginningHit = this.loopD6(3);
-    hitExtraRolls = this.loopD20(Math.max((this.heroDex -10), 0));
-    
+    hitExtraRolls = this.loopD20(Math.max((this.heroDex - 10), 0));
+
     if (beginningCriticalHit || criticalHitExtraRolls) {
       //critical hit!
       this.heroCriticalHit = true;
@@ -92,7 +94,7 @@ export class CombatRound {
     else if (beginningHit || hitExtraRolls) {
       //hit!
       this.heroHit = true;
-      this.heroDamage = this.d10()/10 * this.heroAp;
+      this.heroDamage = this.d10() / 10 * this.heroAp;
       this.monsterHp = this.monsterHp - this.heroDamage;
       this.heroMessage = `${this.role} hit for ${this.heroDamage} points damage.`;
       this.monsterCheckPulse();
@@ -101,65 +103,52 @@ export class CombatRound {
       //miss
       this.heroMessage = `${this.role} missed.`;
     }
-    else {
-      console.log("error");
-    } 
-    console.log(this.heroMessage);
-    
     return this;
   }
   heroDodge() {
-    let beginningCriticalDodge = false
-    let criticalDodgeExtraRolls = false
-    let beginningDodge = false
-    let dodgeExtraRolls = false
+    let beginningCriticalDodge = false;
+    let criticalDodgeExtraRolls = false;
+    let beginningDodge = false;
+    let dodgeExtraRolls = false;
     beginningCriticalDodge = this.loopD20(1);
-    criticalDodgeExtraRolls = this.loopD100(Math.max((this.heroDex -10), 0));
+    criticalDodgeExtraRolls = this.loopD100(Math.max((this.heroDex - 10), 0));
     beginningDodge = this.loopD6(3);
-    dodgeExtraRolls = this.loopD20(Math.max((this.heroDex -10), 0));
+    dodgeExtraRolls = this.loopD20(Math.max((this.heroDex - 10), 0));
 
     //
     if (beginningCriticalDodge || criticalDodgeExtraRolls) {
       //critical dodge and hit!
       this.heroCriticalDodge = true;
       this.heroDamage = this.heroAp;
-      this.heroHp ++;
+      this.heroHp++;
       this.monsterHp = this.monsterHp - this.heroDamage;
       this.heroMessage = `Badass! you dodged, recoverd 1 hp, and hit ${this.monsterName} for ${this.heroDamage} points damage!`;
       this.monsterCheckPulse();
     }
-    else if (beginningDodge || dodgeExtraRolls)  {
+    else if (beginningDodge || dodgeExtraRolls) {
       this.heroDodgeSuccess = true;
       this.heroMessage = `${this.role} evaded ${this.monsterName} successfully, taking 0 damage.`;
     }
-    else if (beginningCriticalDodge === false && (criticalDodgeExtraRolls === false || criticalDodgeExtraRolls === undefined) && beginningDodge === false && (dodgeExtraRolls === false || dodgeExtraRolls ===undefined)) {
+    else if (beginningCriticalDodge === false && (criticalDodgeExtraRolls === false || criticalDodgeExtraRolls === undefined) && beginningDodge === false && (dodgeExtraRolls === false || dodgeExtraRolls === undefined)) {
       //miss
       this.heroMessage = `${this.role} was too slow to dodge this time`;
     }
-    else {
-      console.log("error");
-    } 
-    console.log(this.heroMessage);
-    
     return this;
   }
-  
-  heroRun() { 
+
+  heroRun() {
     let escape = false;
-    const escapeRolls = 3+(this.heroLevel - this.monsterLevel)*3;
+    const escapeRolls = 3 + (this.heroLevel - this.monsterLevel) * 3;
     escape = this.loopD6(escapeRolls);
     if (escape) {
       this.heroRunSuccess = true;
-      this.heroMessage = `Ran away!  ${this.role} is a real wuss!`
+      this.heroMessage = `Ran away!  ${this.role} is a real wuss!`;
       return this;
     }
     else if (!escape) {
-      this.heroMessage = `Take off those swashbuckler boots and run you dork!  Too slow!`
+      this.heroMessage = `Take off those swashbuckler boots and run you dork!  Too slow!`;
       this.heroRunSuccess = false;
       return this;
-    }
-    else {
-      console.log("error")
     }
   }
   monsterAttack() {
@@ -176,12 +165,9 @@ export class CombatRound {
       console.log(this.heroMessage);
     }
     if (this.heroCriticalDodge === true) {
-      console.log(`${this.role}: ${this.heroHp}  ___ ${this.monsterName}: ${this.monsterHp}`);
       return this;
     }
     if (this.heroDodgeSuccess === true) {
-      console.log(this.heroMessage);
-      console.log(`${this.role}: ${this.heroHp}  ___ ${this.monsterName}: ${this.monsterHp}`);
       return this;
     }
     if (roll === 10) {
@@ -191,10 +177,10 @@ export class CombatRound {
       this.heroHp = this.heroHp - this.monsterDamage;
       this.monsterMessage = `Critical Hit! ${this.monsterName} does ${this.monsterDamage} points damage.`;
     }
-    else if (attackChance >= 8)  {
+    else if (attackChance >= 8) {
       //hit 
       this.monsterHit = true;
-      this.monsterDamage = Math.round((this.d6()/6)* this.monsterAp); 
+      this.monsterDamage = Math.round((this.d6() / 6) * this.monsterAp);
       this.heroHp = this.heroHp - this.monsterDamage;
       this.monsterMessage = `${this.monsterName} hit for ${this.monsterDamage} points damage.`;
     }
@@ -202,21 +188,18 @@ export class CombatRound {
       //miss
       this.monsterMessage = `${this.monsterName} missed.`;
     }
-    else {
-      console.log("error");
-    } 
-    console.log(`${this.role}: ${this.heroHp}  ___ ${this.monsterName}: ${this.monsterHp}`);
+    
   }
   monsterCheckPulse() {
     if (this.monsterHp < 1) {
       this.monsterAlive = false;
       this.itemDropChance();
     }
-  }  
+  }
   // currently loop is not active, just 1 out of 10 chance for item at any level -jd
   itemDropChance() {
     let dropChance;
-    for (let i = 0; i < 1; i ++){
+    for (let i = 0; i < 1; i++) {
       dropChance = this.d10();
       if (dropChance === 10) {
         this.itemDrop = true;
@@ -224,54 +207,71 @@ export class CombatRound {
       }
       else if (dropChance !== 10) {
         this.itemDrop = false;
-      };
+      }
     }
     return this;
-  };
+  }
   // 1 roll of die for extra critical chance or item 
   loopD100(numRolls) {
     let roll;
-    for (let i = 0; i < numRolls; i ++){
+    for (let i = 0; i < numRolls; i++) {
       roll = this.d100();
       if (roll === 100) {
-        console.log("SUCCESS");
         return true;
       }
       else return false;
     }
-  };
-  loopD20(numRolls) {
-  let roll;
-  for (let i = 0; i < numRolls; i ++){
-    roll = this.d20();
-    if (roll === 20) {
-      console.log("SUCCESS");
-      return true;
-    }
-    else return false;
   }
-  };
-  loopD10(numRolls) {
-  let roll;
-  for (let i = 0; i < numRolls; i ++){
-    roll = this.d10();
-    if (roll === 10) {
-      console.log("SUCCESS");
-      return true;
+  loopD20(numRolls) {
+    let roll;
+    for (let i = 0; i < numRolls; i++) {
+      roll = this.d20();
+      if (roll === 20) {
+        return true;
+      }
+      else return false;
     }
-    else return false;
+  }
+  loopD10(numRolls) {
+    let roll;
+    for (let i = 0; i < numRolls; i++) {
+      roll = this.d10();
+      if (roll === 10) {
+        return true;
+      }
+      else return false;
     }
   }
   loopD6(numRolls) {
-  let roll;
-  for (let i = 0; i < numRolls; i ++){
-    roll = this.d6();
-    if (roll === 6) {
-      console.log("SUCCESS");
-      return true;
+    let roll;
+    for (let i = 0; i < numRolls; i++) {
+      roll = this.d6();
+      if (roll === 6) {
+        return true;
+      }
+      else return false;
     }
-    else return false
-    }
+  }
+  
+  startAttackRound(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
+    let round = new CombatRound;
+    round.combatRoundInitialize();
+    round.heroAndMonsterData(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel);
+    //CombatRound.heroAttack();
+    round.monsterAttack(round.heroAttack());
+  }
+  startDodgeRound(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
+    let round = new CombatRound;
+    round.combatRoundInitialize();
+    round.heroAndMonsterData(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel);
+    //CombatRound.heroAttack();
+    round.monsterAttack(round.heroDodge());
+  }startRunRound(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
+    let round = new CombatRound;
+    round.combatRoundInitialize();
+    round.heroAndMonsterData(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel);
+    //CombatRound.heroAttack();
+    round.monsterAttack(round.heroRun());
   }
 }
 

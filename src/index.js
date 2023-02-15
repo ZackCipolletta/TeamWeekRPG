@@ -4,13 +4,20 @@ import './css/styles.css';
 import { chooseCharacter } from "./js/character.js";
 import { whatsInTheRoom, defineItems } from './js/rooms.js';
 import { Monster } from './js/monster';
+import { CombatRound } from './js/combatRound';
+
 
 
 // import { heroVsMonster, levelUp, nextMonsterFunc } from "./js/combat.js";
 
 function handleCharSelection(role) {
-
   let hero = chooseCharacter(role);
+  handleEnterNewRoom(hero);
+}
+
+function handleEnterNewRoom(hero) {
+
+
   let room = whatsInTheRoom(hero);
   document.getElementById("hero-level").innerText = "Level: " + hero.level;
   document.getElementById("hero-health").innerText = "Health: " + hero.hp;
@@ -22,6 +29,7 @@ function handleCharSelection(role) {
   //populating the room with the first monster, empty, or item
   console.log(room);
   if (room.type === 'monster') {
+    firstCombat();
     document.querySelector("#combat-buttons").removeAttribute("class", "hidden");
     document.querySelector("#enemy-info").removeAttribute("class", "hidden");
     let monster = document.getElementById(`${room.name}`);
@@ -29,6 +37,7 @@ function handleCharSelection(role) {
     document.getElementById("enemy-name").innerText = 'Name: ' + room.name;
     document.getElementById("enemy-hp").innerText = 'HP: ' + room.hp;
     document.getElementById("enemy-ap").innerText = 'AP: ' + room.ap;
+
   } else if (room === "empty") {
     console.log(room);
     document.querySelector("#continue-button").removeAttribute("class", "hidden");
@@ -51,7 +60,9 @@ function handleCharSelection(role) {
     document.querySelector("#pick-up-button").removeAttribute("class", "hidden");
     document.querySelector("#continue-button").removeAttribute("class", "hidden");
   }
+  return hero;
 }
+
 // let monster = monster.name;
 
 
@@ -71,11 +82,15 @@ function hideChooseChar() {
 
 }
 
-// function callCombatFunc(hero, monster) {
-//   console.log(`You ${hero.role} have encountered ${monster.name} do you attack or run?`);
-//   // console.log(`attackOrRunFunc() is being called with the value ${monster.name} inside of callCombatFunc`);
-//   attackOrRunFunc(hero, monster);
-// }
+
+function firstCombat() {
+  let round = new CombatRound;
+  let hero = handleCharSelection();
+  round.startAttackRound(hero, monster);
+  round.startDodgeRound(hero, monster);
+  round.startRunRound(hero, monster);
+}
+
 
 // function attackOrRunFunc(hero, monster) {
 //   // console.log(`attackOrRunFunc() was just called with the value of ${monster.name}`)
@@ -118,25 +133,23 @@ function hideChooseChar() {
 
 //load and button logic
 window.addEventListener("load", function () {
-
+  //selecting character
   document.querySelector("#warrior-class").addEventListener("click", function (e) {
     e.preventDefault();
     document.querySelector("#warrior-img").removeAttribute("class", "hidden");
     let type = 1;
     hideChooseChar();
     handleCharSelection(type);
-
   });
+
   document.querySelector("#mage-class").addEventListener("click", function (e) {
     e.preventDefault();
     document.querySelector("#mage-img").removeAttribute("class", "hidden");
     hideChooseChar();
     let type = 2;
     handleCharSelection(type);
-
-
-
   });
+
   document.querySelector("#rogue-class").addEventListener("click", function (e) {
     e.preventDefault();
     document.querySelector("#rogue-img").removeAttribute("class", "hidden");
@@ -144,4 +157,26 @@ window.addEventListener("load", function () {
     let type = 3;
     handleCharSelection(type);
   });
+
+  //combat buttons
+  document.querySelector("#attack-button").addEventListener("click", function (e) {
+    console.log("clicked");
+
+  });
+  document.querySelector("#dodge-button").addEventListener("click", function (e) {
+    console.log("clicked");
+
+  });
+  document.querySelector("#run-button").addEventListener("click", function (e) {
+    console.log("clicked");
+
+  });
+
+  //entering a new room
+  document.querySelector("#continue-button").addEventListener("click", function (e) {
+    console.log("clicked");
+    handleEnterNewRoom();
+  });
+
+
 });
