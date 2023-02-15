@@ -36,13 +36,17 @@ body {
 
 }
 
+.room {
+  border: solid red;
+}
+
 .title {
   font-family: titleFont;
-  margin-top: 50px;
-  margin-bottom: 100px;
+  margin-top: 10px;
   font-size: 150px;
   text-align: center;
   color: rgb(173, 15, 15);
+  border: solid red;
 }
 
 .choose-character {
@@ -109,6 +113,20 @@ body {
 
 .rogue:hover img {
   transform: scale(1.2);
+}
+
+.enemy-info {
+  display: flex;
+  justify-content: space-evenly;
+  color: red;
+  border: solid red;
+}
+.scroll {
+  border: solid rgb(191, 179, 179);
+}
+.enemy-stats {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .monster-images {
