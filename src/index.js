@@ -11,38 +11,51 @@ import { Monster } from './js/monster';
 function handleCharSelection(role) {
 
   let hero = chooseCharacter(role);
-
   let room = whatsInTheRoom(hero);
-  console.log(room)
+  document.getElementById("hero-level").innerText = "Level: " + hero.level;
+  document.getElementById("hero-health").innerText = "Health: " + hero.hp;
+  document.getElementById("hero-ap").innerText = "AP: " + hero.ap;
+  document.getElementById("hero-dex").innerText = "DEX: " + hero.dex;
+  document.getElementById("hero-items").innerText = "Items: " + hero.items;
+
+
+  //populating the room with the first monster, empty, or item
+  console.log(room);
   if (room.type === 'monster') {
+
     document.querySelector("#combat-buttons").removeAttribute("class", "hidden");
+    document.querySelector("#enemy-info").removeAttribute("class", "hidden");
     let monster = document.getElementById(`${room.name}`);
     monster.removeAttribute("class", "hidden");
     document.getElementById("enemy-name").innerText = 'Name: ' + room.name;
     document.getElementById("enemy-hp").innerText = 'HP: ' + room.hp;
     document.getElementById("enemy-ap").innerText = 'AP: ' + room.ap;
   } else if (room === "empty") {
-    document.querySelector("#continue-button").removeAttribute("class", "hidden");
-    document.querySelector(".enemy-info").setAttribute("class", "hidden");
-  } else {
     console.log(room);
-    document.querySelector(".enemy-info").setAttribute("class", "hidden");
-    if (room.potion) {
-      console.log(room.potion[0])
-      let potion = document.getElementById(`${room.potion[0]}`);
-      potion.removeAttribute("class", "hidden");
-    } else if (room.weapon) {
-      console.log(room.weapon[0])
-      let weapon = document.getElementById(`${room.weapon[0]}`);
-      weapon.removeAttribute("class", "hidden");
-    }
-    
+    document.querySelector("#continue-button").removeAttribute("class", "hidden");
+  } else if (room.potion) {
+    console.log(room.potion[0]);
+    let potion = document.getElementById(`${room.potion[0]}`);
+    potion.removeAttribute("class", "hidden");
+    document.querySelector("#pick-up-button").removeAttribute("class", "hidden");
+    document.querySelector("#continue-button").removeAttribute("class", "hidden");
+  } else if (room.weapon) {
+    console.log(room.weapon[0]);
+    let weapon = document.getElementById(`${room.weapon[0]}`);
+    weapon.removeAttribute("class", "hidden");
+    document.querySelector("#pick-up-button").removeAttribute("class", "hidden");
+    document.querySelector("#continue-button").removeAttribute("class", "hidden");
+  } else if (room === 'Health-Potion') {
+    let healthpotion = document.getElementById("Health-Potion");
+    healthpotion.removeAttribute("class", "hidden");
+
     document.querySelector("#pick-up-button").removeAttribute("class", "hidden");
     document.querySelector("#continue-button").removeAttribute("class", "hidden");
   }
-  // let monster = monster.name;
-  
 }
+// let monster = monster.name;
+
+
 
 //hides choose your character div
 function hideChooseChar() {

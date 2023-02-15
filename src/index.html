@@ -30,7 +30,7 @@
     </div>
 
   </div>
-  <div class="enemy-info">
+  <div class="hidden" id="enemy-info">
     <h1 class="hidden" id="enemy-name">Name</h1>
     <h1 class="hidden" id="enemy-hp">HP</h1>
     <h1 class="hidden" id="enemy-ap">AP</h1>
@@ -53,14 +53,35 @@
 
     <div class="items">
       <div class="potion-images">
-        <img src="../src/assets/gifs/health-potion.gif" alt="health poiton" class="hidden" id="swift">
-        <img src="../src/assets/gifs/magic-potion.gif" alt="magic potion" class="hidden" id="magic">
-        <img src="../src/assets/gifs/strength-potion.gif" alt="strength-potion" class="hidden" id="strength">
+        <figure>
+          <img src="../src/assets/gifs/swift-potion.gif" alt="swift" class="hidden" id="swift">
+          <figcaption class="hidden" id="swift">Swift Potion</figcaption>
+        </figure>
+        <figure>
+          <img src="../src/assets/gifs/magic-potion.gif" alt="magic potion" class="hidden" id="magic">
+          <figcaption class="hidden" id="magic">Magic Potion</figcaption>
+        </figure>
+        <figure>
+          <img src="../src/assets/gifs/strength-potion.gif" alt="strength-potion" class="hidden" id="strength">
+          <figcaption class="hidden" id="strength">Strength Potion</figcaption>
+        </figure>
+        <img src="../src/assets/gifs/health-potion.gif" alt="health-potion" class="hidden" id="Health-Potion">
+        
       </div>
       <div class="weapon-images">
-        <img src="../src/assets/gifs/wand.gif" alt="wand" class="hidden" id="staff">
-        <img src="../src/assets/images/dagger.png" alt="dagger" class="hidden" id="dagger">
-        <img src="../src/assets/gifs/sword.gif" alt="sword" class="hidden" id="sword">
+        <figure>
+          <img src="../src/assets/gifs/wand.gif" alt="staff" class="hidden" id="staff">
+          <figcaption class="hidden" id="staff">A Staff useful for Mages</figcaption>
+        </figure>
+        <figure>
+          <img src="../src/assets/images/dagger.png" alt="dagger" class="hidden" id="dagger">
+          <figcaption class="hidden" id="dagger">A Dagger usefol for Rogues</figcaption>
+        </figure>
+        <figure>
+          <img src="../src/assets/gifs/sword.gif" alt="sword" class="hidden" id="sword">
+          <figcaption class="hidden" id="sword">A Sword useful for Warriors</figcaption>
+        </figure>
+        
       </div>
     </div>
   </div>
@@ -84,11 +105,11 @@
         <img src="../src/assets/gifs/wizard-idle.gif" alt="wizard" class="hidden" id="mage-img">
         <img src="../src/assets/gifs/rogue-idle.gif" alt="rogue" class="hidden" id="rogue-img">
       </div>
-      <h3>Level: </h3>
-      <h3>Health: </h3>
-      <h3>AP:</h3>
-      <h3>DEX: </h3>
-      <h3>Items: </h3>
+      <h3 id="hero-level">Level: </h3>
+      <h3 id="hero-health">Health: </h3>
+      <h3 id="hero-ap">AP:</h3>
+      <h3 id="hero-dex">DEX: </h3>
+      <h3 id="hero-items">Items: </h3>
     </div>
 
   </div>

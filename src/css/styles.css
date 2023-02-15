@@ -109,7 +109,7 @@ body {
   transform: scale(1.2);
 }
 
-.enemy-info {
+#enemy-info {
   display: flex;
   justify-content: space-evenly;
   color: red;
@@ -127,6 +127,11 @@ body {
 
 .weapon-images {
   text-align: center;
+}
+
+figcaption {
+  font-size: x-large;
+  color: #ffffff;
 }
 
 .combat-button {
@@ -250,8 +255,13 @@ body {
   height: auto;
 }
 
-#health {
-  width: 100px;
+#swift {
+  width: 200px;
+  height: auto;
+}
+
+#Health-Potion {
+  width: 200px;
   height: auto;
 }
 

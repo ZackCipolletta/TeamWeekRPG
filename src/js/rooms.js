@@ -2,7 +2,6 @@ import { randomWeapon, randomPotion } from "./items";
 import { heroLevelRandomNumber, randomMonster } from "./monster.js";
 
 export function whatsInTheRoom(hero) {
-  // let number = randomNumFunc(1, 5);
   let number = randomNumFunc(1, 5);
   if (number === 5) {
     console.log('empty'); // delete
@@ -30,7 +29,7 @@ export function defineItems(hero, randomW, randomP, randomItem) { // needs 3 var
   let items = {
     1: randomPotion(hero, randomP),
     2: randomWeapon(hero, randomW),
-    3: 'Health Potion',
+    3: 'Health-Potion',
     // 4: 'random thing2'
   };
   return items[randomItem];
