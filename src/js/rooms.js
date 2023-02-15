@@ -1,130 +1,52 @@
-export default class Room {
+import { randomPotion } from "./items";
 
-  whatsInTheRoom(hero) {
-    if (Math.round(Math.random() * 4) + 1 == 5) {
-      return 'empty';
-    } else if (Math.round(Math.random() * 4) + 1 == 4) {
-      return itemFunction();
-    } else {
-      if (hero.totalAtributes <= 30) {
-        let monster = createSlime();
-        fightOrRunFunc(monster);
+function whatsInTheRoom(hero) {
+  if (randomNumFunc(1, 5) ){
+    console.log('empty'); // delete
+    return 'empty';
+  } else if (Math.round(Math.random() * 4) + 1 === 4) {
+    let item = defineItems(hero, heroLevelRandomNumber(hero), heroLevelRandomNumber(hero), randomNumFunc(1, 4)); // assiging to a variable makes it easier to pass into another function.
+    console.log(item[1]); // delete
+    // pick up item? if yes, getWeapon(hero, weapon) or getItem(hero, item);
+    return item;
+  } else {
+    let monster;
+    if (hero.totalAtributes <= 30) {
+      if (hero.level <= 3) {
+        monster = randomMonster(hero.level, (randomNumFunc(0, 2))); // makes it easier to pass the monster object into other functions.
+      } else if (hero.level <= 6) {
+        monster = randomMonster(hero.level, (randomNumFunc(3, 5)));
+      } else if (hero.level <= 9) {
+        monster = randomMonster(hero.level, (randomNumFunc(6, 8)));
       }
-    }
+    } // call combatFunction(hero, monster);
+    return monster;
   }
 }
 
-function itemFunction(hero) {
-  let item = Math.round(Math.random() * 10);
-};
-
-let weapons = {
-  1: ["dagger", (() => {
-    if (hero.role === 'rogue') {
-      return 10;
-    } else {
-      return 3;
-    }
-  })()],
-  2: ["sword", (() => {
-    if (hero.role === 'warrior') {
-      return 10;
-    } else {
-      return 3;
-    }
-  })()],
-  3: ["staff", (() => {
-    if (hero.role === 'mage') {
-      return 10;
-    } else {
-      return 3;
-    }
-  })()]
-};
-
-let potions = {
-  1: ["health", (() => {
-    if (hero.role === 'rogue') {
-      return 10;
-    } else {
-      return 3;
-    }
-  })()],
-  2: ["strength", (() => {
-    if (hero.role === 'warrior') {
-      return 10;
-    } else {
-      return 3;
-    }
-  })()],
-  3: ["magic", (() => {
-    if (hero.role === 'mage') {
-      return 10;
-    } else {
-      return 3;
-    }
-  })()]
-};
-
-function defineItems(random) {
+function defineItems(hero, randomW, randomP, randomItem) { // needs 3 variables in order to generate and return a random item from the weapon and potion objects.  Third variable selects which item from the item array is returned after random potion and random weapon are generated.
   let items = {
-    1: "health potion",
-    2: "strength potion",
-    3: "empty boot",
-    4: "key",
-    5: "food",
-    weapon: randomWeapon(random),
-    // weapon: randomWeapon(Math.round(Math.random() * 2) + 1),
-    6: "luck potion"
+    1: randomPotion(hero, randomP),
+    2: randomWeapon(hero, randomW),
+    3: 'Health Potion',
+    4: 'random thing2'
   };
-  return items;
-  }
+  return items[randomItem];
+}
+// create function to interact with items? Pick up item Y/N in UI, calls this function: getItem(hero, item) {
+//  if (item === 'Health Potion') {
+// hero.hp = hero.hp + x;
+//  } else if (item === 'potion') {
+// hero.ap = hero.ap + item.potion[1];
+// }  something like this.  A helper function which will be called when a potion is picked up and can be used as getWeapon is for weapons.  It will eval the potion and call another helper function to apply the appropriate attritube depending on each character calss.
 
-function randomNum() {
-  return Math.floor(Math.random() * 3) + 1
-  }
+function randomNumFunc(lowerLimit, upperLimit) { // RNG function used repeatedly.
+  return Math.floor(Math.random() * (upperLimit - lowerLimit + 1)) + lowerLimit;
+}
 
-
-// function getItems(hero) {
-//   let items = defineItems(randomNum());
-//     hero.items.push(items['weapon'])
-// }
-  
-
-// items['weapon'];
-
-
-function randomWeapon(randomNum) {
-  // let randomWeapon = Math.floor(Math.random() * 2) + 1;
-  return weapons[randomNum];
-  }
-
-function getWeapon(hero, weapon) {
+function getWeapon(hero, weapon) {  // used to equip a new weapon when a hero finds a weapon and wants to change out for current weapon.
   hero.ap -= hero.weapon[1];
   delete hero.weapon;
   hero.weapon = weapon;
   hero.ap += hero.weapon[1];
 }
-
-
-// weapon1: ["dagger", (() => {
-//   if (hero.role === 'rogue') { // this should work.  Just check items['weapon'][1] and then + or - to equip or drop.
-//     return 10;
-//   } else {
-//     return 3;
-//   }
-// })()],
-// weapon2: ["sword", (() => {
-//   if (hero.role === 'warrior') { // this should work.  Just check items['weapon'][1] and then + or - to equip or drop.
-//     return 10;
-//   } else {
-//     return 3;
-//   }
-// })()],
-// weapon3: ["staff", (() => {
-//   if (hero.role === 'mage') { // this should work.  Just check items['weapon'][1] and then + or - to equip or drop.  To drop or replace a weapon run the method 'delete hero.weapon' then equip new weapon.
-//     return 10;
-//   } else {
-//     return 3;
-//   }
-// })()]

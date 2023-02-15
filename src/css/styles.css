@@ -3,79 +3,248 @@
   src: url(../assets/fonts/backto1982.otf);
 }
 
+@font-face {
+  font-family: titleFont;
+  src: url(../assets/fonts/Blox2.ttf);
+}
 
-body, html{
+@font-face {
+  font-family: UIfont;
+  src: url(../assets/fonts/dpcomic.ttf);
+}
+
+.hidden {
+  display: none;
+}
+
+body,
+html {
   height: 100%;
   image-rendering: pixelated;
 }
+
 body {
-    background-image: url(../assets/images/background.jpg);
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover
-    
-  }
+  background-image: url(../assets/images/background.jpg);
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-  .create-character {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: myFont;
-    color: whitesmoke;
-    background-color: rgb(63, 63, 63);
-    margin: 30px;
-    margin-top: 100px;
-    padding: 20px;
-    border-radius: 25px;
-  }
 
-  .create-character h1{
-    margin-bottom: 40px;
-  }
+}
 
-  .classes {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-align: center;
-    
-  }
+.title {
+  font-family: titleFont;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  font-size: 150px;
+  text-align: center;
+  color: rgb(173, 15, 15);
+}
 
-  
+.choose-character {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: myFont;
+  color: rgb(5, 3, 3);
+  background-image: url(../assets/images/NicePng_old-scroll-png_8153991.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  /* min-width: 2000px; */
+  margin: 30px;
+  margin-top: 0px;
+  padding: 200px;
 
-  .warrior img{
-    margin-top: 20px;
-    margin-bottom: 30px;
-    width: 100px;
-    height: auto;
-    transition: 0.5s all ease-in-out;
-  }
+  border: solid red;
+}
 
-  .warrior:hover img {
-    transform: scale(1.2);
-  }
+.create-character h1 {
+  margin-bottom: px;
+}
 
-  .mage img {
-    margin-top: 20px;
-    margin-bottom: 30px;
-    width: 120px;
-    height: auto;
-    transition: 0.5s all ease-in-out;
-  }
+.classes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
 
-  .mage:hover img {
-    transform: scale(1.2);
-  }
+}
 
-  .rogue img {
-    margin-top: 20px;
-    margin-bottom: 30px;
-    width: 120px;
-    height: auto;
-    transition: 0.5s all ease-in-out;
-  }
-  
-  .rogue:hover img {
-    transform: scale(1.2);
-  }
+.warrior img {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  width: 100px;
+  height: auto;
+  transition: 0.5s all ease-in-out;
+}
+
+.warrior:hover img {
+  transform: scale(1.2);
+}
+
+.mage img {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  width: 120px;
+  height: auto;
+  transition: 0.5s all ease-in-out;
+}
+
+.mage:hover img {
+  transform: scale(1.2);
+}
+
+.rogue img {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  width: 120px;
+  height: auto;
+  transition: 0.5s all ease-in-out;
+}
+
+.rogue:hover img {
+  transform: scale(1.2);
+}
+
+.monster-images {
+  text-align: center;
+}
+
+.potion-images {
+  text-align: center;
+}
+
+.weapon-images {
+  text-align: center;
+}
+.combat-buttons {
+  text-align: center;
+  padding: 10px;
+  border: solid red;
+}
+
+.combat-button {
+  width: 250px;
+  background: radial-gradient(circle, #8b0000, #8b0000);
+  letter-spacing: 2px;
+  border-radius: 2px;
+  font-family: UIfont;
+  color: #ffffff;
+  font-size: 25px;
+  font-weight: 400;
+  text-shadow: 0 1px 3px #000;
+
+  box-shadow: inset 0px 0px 5px 3px rgba(1,1,1,0.3);
+}
+
+.item-buttons {
+  text-align: center;
+  padding: 10px;
+  border: solid red;
+}
+.item-button {
+  width: 250px;
+  background: radial-gradient(circle, #8b0000, #8b0000);
+  letter-spacing: 2px;
+  border-radius: 2px;
+  font-family: UIfont;
+  color: #ffffff;
+  font-size: 25px;
+  font-weight: 400;
+  text-shadow: 0 1px 3px #000;
+
+  box-shadow: inset 0px 0px 5px 3px rgba(1,1,1,0.3);
+}
+
+.bottom-ui {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  flex-grow: 1;
+  margin-top: auto;
+  background-image: url(../assets/images/hannah-oates-brick-wall-wip.jpg);
+  padding-top: 20px;
+  color: rgb(255, 255, 255);
+}
+
+.bottom-ui h1, h3 {
+  font-family: UIfont;
+}
+
+
+/* setting sizes for gif assets */
+#warrior-img {
+  width: 100px;
+  height: auto;
+}
+
+#mage-img {
+  width: 120px;
+  height: auto;
+}
+
+#rogue-img {
+  width: 120px;
+  height: auto;
+}
+
+
+#slime-img {
+  width: 375px;
+  height: auto;
+}
+
+#demon-img {
+  width: 400px;
+  height: auto;
+}
+
+#goblin-img {
+  width: 300px;
+  height: auto;
+}
+
+#troll-img {
+  width: 500px;
+  height: auto;
+}
+
+#vampire-img {
+  width: 700px;
+  height: auto;
+}
+
+#cthulu-img {
+  width: 600px;
+  height: auto;
+}
+
+#strength-img {
+  width: 100px;
+  height: auto;
+}
+
+#magic-img {
+  width: 100px;
+  height: auto;
+}
+
+#health-img {
+  width: 100px;
+  height: auto;
+}
+
+#wand-img {
+  width: 200px;
+  height: auto;
+}
+
+#dagger-img {
+  width: 150px;
+  height: auto;
+}

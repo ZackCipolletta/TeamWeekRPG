@@ -1,38 +1,66 @@
 export class Monster {
-  constructor(name, hp, ap) {
+  constructor(name, level, hp, ap) {
     this.name = name;
-    this.hp = hp;
-    this.ap = ap;
+    this.level = level;
+    this.hp = hp + Math.floor(hp * level / 2);
+    this.ap = ap + Math.floor(ap * level / 2);
+    this.xp = Math.floor((hp + ap) / 3);
   }
 }
-export function createSlime() {
-  let slime = new Monster("slime", 5, 5);
-  return slime;
+
+export function randomMonster(level, randomNum) {
+  let monsters = [
+    function createSlime(level) {
+      let slime = new Monster("slime", level, 11, 1);
+      return slime;
+    },
+
+    function createZombie(level) {
+      let zombie = new Monster("zombie", level, 17, 3);
+      return zombie;
+    },
+
+    function createOwlBear() {
+      let owlBear = new Monster("owlbear", level, 30, 4);
+      return owlBear;
+    },
+
+    function createDemon() {
+      let demon = new Monster("demon", level, 19, 5);
+      return demon;
+    },
+
+    function createGoblin() {
+      let goblin = new Monster("goblin", level, 12, 4);
+      return goblin;
+    },
+
+    function createTroll() {
+      let troll = new Monster("troll", level, 40, 8);
+      return troll;
+    },
+
+    function createVampire() {
+      let vampire = new Monster("vampire", level, 14, 10);
+      return vampire;
+    },
+
+    function createCthulu() {
+      let Cthulu = new Monster("Cthulu", level, 100, 20);
+      return Cthulu;
+    }
+  ];
+  return monsters[randomNum](level);
 }
 
-export function createZombie() {
-  let zombie = new Monster("zombie", 17, 3);
-  return zombie;
+function heroLevelRandomNumber(hero) { // use this to get a random number for when you want a number that is 1 +/- the current hero level.  Used for generating the level of an item, weapon or monster.
+  if (hero.level = 1) {
+    randomNum(2); // wil return a number 1 or 2
+  } else {
+    randomNumFunc((hero.level - 1), (hero.level + 1)); // will return a number equal to hero level, one greater or one less than hero.level.
+  }
 }
 
-export function createOwlBear() {
-  let owlBear = new Monster("owlbear", 30, 8);
-  return owlBear;
+function randomNumFunc(lowerLimit, upperLimit) { // RNG function used repeatedly.
+  return Math.floor(Math.random() * (upperLimit - lowerLimit + 1)) + lowerLimit;
 }
-
-export function createCthulu() {
-  let owlBear = new Monster("Cthulu", 50, 15);
-  return owlBear;
-}
-
-//   checkType() {
-//     if ((this.side1 > (this.side2 + this.side3)) || (this.side2 > (this.side1 + this.side3)) || (this.side3 > (this.side1 + this.side2))) {
-//       return "not a triangle";
-//     } else if ((this.side1 !== this.side2) && ((this.side1 !== this.side3)) && ((this.side2 !== this.side3))) {
-//       return "scalene triangle";
-//     } else if ((this.side1 === this.side2) && (this.side1 === this.side3)) {
-//       return "equilateral triangle";
-//     } else {
-//       return "isosceles triangle";
-//     }
-//   }
