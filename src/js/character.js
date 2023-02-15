@@ -5,11 +5,30 @@ export class Character {
     this.ap = ap;
     this.dex = dex;
     this.xp = 0;
-    this.xpLimit = 20 * level;
     this.level = level;
+    this.xpLimit = 20;
     this.hpCapacity = hpCapacity;
     this.totalAtributes = hpCapacity + ap + dex;
     this.items = [];
+  }
+
+  levelUP() {
+    if (this.role === 'mage') {
+      this.level++;
+      this.hp = this.hp + 3;
+      this.ap = this.ap + 5;
+      this.dex = this.dex + 2;
+    } else if (this.role === 'warrior') {
+      this.level++;
+      this.hp = this.hp + 4;
+      this.ap = this.ap + 3;
+      this.dex = this.dex + 3;
+    } else if (this.role === 'rogue') {
+      this.level++;
+      this.hp = this.hp + 2;
+      this.ap = this.ap + 4;
+      this.dex = this.dex + 4;
+    }
   }
 }
 
@@ -30,12 +49,11 @@ export function createRogue() {
 
 export function chooseCharacter(type) {
   /* istanbul ignore else */
-  if (type ===1) {
+  if (type === 1) {
     return createWarrior();
   } else if (type === 2) {
     return createMage();
-  } else if (type === 3) { 
+  } else if (type === 3) {
     return createRogue();
   }
 }
-
