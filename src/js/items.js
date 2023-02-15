@@ -1,6 +1,7 @@
 export function randomPotion(hero, randomN) { // Takes random number func as paramter to return a random potion from the potions object.
   let potions = {
     1: {
+      type: "potion",
       potion: ["swift", (() => {
         if (hero.role === 'rogue') {
           return (7 + (hero.level * 1.5));
@@ -10,6 +11,7 @@ export function randomPotion(hero, randomN) { // Takes random number func as par
       })()]
     },
     2: {
+      type: "potion",
       potion: ["strength", (() => {
         if (hero.role === 'warrior') {
           return (7 + (hero.level * 1.5));
@@ -19,6 +21,7 @@ export function randomPotion(hero, randomN) { // Takes random number func as par
       })()]
     },
     3: {
+      type: "potion",
       potion: ["magic", (() => {
         if (hero.role === 'mage') {
           return (7 + (hero.level * 1.5));
@@ -34,6 +37,7 @@ export function randomPotion(hero, randomN) { // Takes random number func as par
 export function randomWeapon(hero, randomN) { // same as potions, for the weapons object.
   let weapons = {
     1: {
+      type: "weapon",
       weapon: ["dagger", (() => {
         if (hero.role === 'rogue') {
           return Math.floor(hero.level * 1.2 * 4);
@@ -43,6 +47,7 @@ export function randomWeapon(hero, randomN) { // same as potions, for the weapon
       })()]
     },
     2: {
+      type: "weapon",
       weapon:
         ["sword", (() => {
           if (hero.role === 'warrior') {
@@ -53,6 +58,7 @@ export function randomWeapon(hero, randomN) { // same as potions, for the weapon
         })()]
     },
     3: {
+      type: "weapon",
       weapon: ["staff", (() => {
         if (hero.role === 'mage') {
           return Math.floor(hero.level * 1.2 * 4);
@@ -64,8 +70,3 @@ export function randomWeapon(hero, randomN) { // same as potions, for the weapon
   };
   return weapons[randomN];
 }
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-Terms
-Privacy

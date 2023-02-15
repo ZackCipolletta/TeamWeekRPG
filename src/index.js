@@ -1,13 +1,47 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import { chooseCharacter, createWarrior } from "./js/character.js";
+import { chooseCharacter } from "./js/character.js";
+import { whatsInTheRoom, defineItems } from './js/rooms.js';
+import { Monster } from './js/monster';
+
+
 // import { heroVsMonster, levelUp, nextMonsterFunc } from "./js/combat.js";
 
-function handleRoleSelection(role) {
+function handleCharSelection(role) {
 
-  chooseCharacter(role);
+  let hero = chooseCharacter(role);
 
+  let room = whatsInTheRoom(hero);
+  console.log(room)
+  if (room.type === 'monster') {
+    document.querySelector("#combat-buttons").removeAttribute("class", "hidden");
+    let monster = document.getElementById(`${room.name}`);
+    monster.removeAttribute("class", "hidden");
+    document.getElementById("enemy-name").innerText = 'Name: ' + room.name;
+    document.getElementById("enemy-hp").innerText = 'HP: ' + room.hp;
+    document.getElementById("enemy-ap").innerText = 'AP: ' + room.ap;
+  } else if (room === "empty") {
+    document.querySelector("#continue-button").removeAttribute("class", "hidden");
+    document.querySelector(".enemy-info").setAttribute("class", "hidden");
+  } else {
+    console.log(room);
+    document.querySelector(".enemy-info").setAttribute("class", "hidden");
+    if (room.potion) {
+      console.log(room.potion[0])
+      let potion = document.getElementById(`${room.potion[0]}`);
+      potion.removeAttribute("class", "hidden");
+    } else if (room.weapon) {
+      console.log(room.weapon[0])
+      let weapon = document.getElementById(`${room.weapon[0]}`);
+      weapon.removeAttribute("class", "hidden");
+    }
+    
+    document.querySelector("#pick-up-button").removeAttribute("class", "hidden");
+    document.querySelector("#continue-button").removeAttribute("class", "hidden");
+  }
+  // let monster = monster.name;
+  
 }
 
 //hides choose your character div
@@ -72,20 +106,21 @@ function hideChooseChar() {
 
 //load and button logic
 window.addEventListener("load", function () {
-  
+
   document.querySelector("#warrior-class").addEventListener("click", function (e) {
     e.preventDefault();
     document.querySelector("#warrior-img").removeAttribute("class", "hidden");
-    let type= 1;
+    let type = 1;
     hideChooseChar();
-    handleRoleSelection(type);
+    handleCharSelection(type);
 
   });
   document.querySelector("#mage-class").addEventListener("click", function (e) {
     e.preventDefault();
     document.querySelector("#mage-img").removeAttribute("class", "hidden");
     hideChooseChar();
-    handleRoleSelection();
+    let type = 2;
+    handleCharSelection(type);
 
 
 
@@ -94,6 +129,7 @@ window.addEventListener("load", function () {
     e.preventDefault();
     document.querySelector("#rogue-img").removeAttribute("class", "hidden");
     hideChooseChar();
-    handleRoleSelection();
+    let type = 3;
+    handleCharSelection(type);
   });
 });

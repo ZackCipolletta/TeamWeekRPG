@@ -36,17 +36,13 @@ body {
 
 }
 
-.room {
-  border: solid red;
-}
-
 .title {
   font-family: titleFont;
   margin-top: 10px;
   font-size: 150px;
   text-align: center;
   color: rgb(173, 15, 15);
-  border: solid red;
+
 }
 
 .choose-character {
@@ -63,8 +59,6 @@ body {
   margin: 30px;
   margin-top: 0px;
   padding: 200px;
-
-  border: solid red;
 }
 
 .create-character h1 {
@@ -119,7 +113,7 @@ body {
   display: flex;
   justify-content: space-evenly;
   color: red;
-  border: solid red;
+
   font-family: UIfont;
 }
 
@@ -133,11 +127,6 @@ body {
 
 .weapon-images {
   text-align: center;
-}
-.combat-buttons {
-  text-align: center;
-  padding: 10px;
-  border: solid red;
 }
 
 .combat-button {
@@ -154,12 +143,11 @@ body {
   box-shadow: inset 0px 0px 5px 3px rgba(1,1,1,0.3);
 }
 
-.item-buttons {
+.buttons {
   text-align: center;
-  padding: 10px;
-  border: solid red;
 }
-.item-button {
+
+#pick-up-button{
   width: 250px;
   background: radial-gradient(circle, #8b0000, #8b0000);
   letter-spacing: 2px;
@@ -169,10 +157,21 @@ body {
   font-size: 25px;
   font-weight: 400;
   text-shadow: 0 1px 3px #000;
-
   box-shadow: inset 0px 0px 5px 3px rgba(1,1,1,0.3);
 }
 
+#continue-button {
+  width: 250px;
+  background: radial-gradient(circle, #8b0000, #8b0000);
+  letter-spacing: 2px;
+  border-radius: 2px;
+  font-family: UIfont;
+  color: #ffffff;
+  font-size: 25px;
+  font-weight: 400;
+  text-shadow: 0 1px 3px #000;
+  box-shadow: inset 0px 0px 5px 3px rgba(1,1,1,0.3);
+}
 .bottom-ui {
   display: flex;
   justify-content: space-around;
@@ -206,57 +205,62 @@ body {
 }
 
 
-#slime-img {
+#slime {
   width: 375px;
   height: auto;
 }
 
-#demon-img {
+#demon {
   width: 400px;
   height: auto;
 }
 
-#goblin-img {
+#goblin {
   width: 300px;
   height: auto;
 }
 
-#troll-img {
+#troll {
   width: 500px;
   height: auto;
 }
 
-#vampire-img {
+#vampire {
   width: 700px;
   height: auto;
 }
 
-#cthulu-img {
+#dragon {
   width: 600px;
   height: auto;
 }
 
-#strength-img {
+#cthulu {
+  width: 550px;
+  height: auto;
+}
+
+#strength {
   width: 100px;
   height: auto;
 }
 
-#magic-img {
+#magic {
   width: 100px;
   height: auto;
 }
 
-#health-img {
+#health {
   width: 100px;
   height: auto;
 }
 
-#wand-img {
+#wand {
   width: 200px;
   height: auto;
 }
 
-#dagger-img {
+#dagger {
   width: 150px;
   height: auto;
 }
