@@ -84,13 +84,20 @@ function handleEnterNewRoom(hero) {
         document.querySelector("#pick-up-button").removeAttribute("class", "hidden");
         document.querySelector("#continue-button").removeAttribute("class", "hidden");
 
-        // if(room.weapon[0] === "sword") {
-        //     let pickup = document.querySelector("#pick-up-button");
-        //     pickup.setAttribute("data-value", room.weapon[1]);
-        //     pickup.setAttribute("data-type", room[0]);
-        //     console.log(room.weapon[0])
-        // }
-
+        if(room.weapon[0] === "sword") {
+            let pickup = document.querySelector("#pick-up-button");
+            pickup.setAttribute("data-value", room.weapon[1]);
+            pickup.setAttribute("data-type", room.weapon[0]);
+            console.log(room.weapon[0])
+        } else if (room.weapon[0] === "staff"){
+            let pickup = document.querySelector("#pick-up-button");
+            pickup.setAttribute("data-value", room.weapon[1]);
+            pickup.setAttribute("data-type", room.weapon[0]);
+        } else if (room.weapon[0] === "dagger") {
+            let pickup = document.querySelector("#pick-up-button");
+            pickup.setAttribute("data-value", room.weapon[1]);
+            pickup.setAttribute("data-type", room.weapon[0]);
+        }
         //conditional if room has a health potion
     } else if (room === 'Health-Potion') {
         let healthpotion = document.getElementById("Health-Potion");
@@ -176,12 +183,20 @@ window.addEventListener("load", function () {
 
         case "Health-Potion":
             hero.heroHp += parseFloat(pickup.getAttribute("data-value"));
-            break
-
+            break;
         case "swift":
             hero.heroDex += parseFloat(pickup.getAttribute("data-value"));
-            break
+            break;
         case "strength":
+            hero.heroAp += parseFloat(pickup.getAttribute("data-value"));
+            break;
+        case "sword":
+            hero.heroAp += parseFloat(pickup.getAttribute("data-value"));
+            break;
+        case "staff":
+            hero.heroAp += parseFloat(pickup.getAttribute("data-value"));
+            break;
+        case "dagger":
             hero.heroAp += parseFloat(pickup.getAttribute("data-value"));
         } 
         console.log(hero.heroAp)
