@@ -1,49 +1,46 @@
-# CHECK JOHN BRANCH
+# Dungeon Crawler
 
-(Application Name)
+#### An RPG. Almost as good as the book.
 
-#### (Brief Description of Application)
-
-#### By Zachary Cipolletta
+#### By Zachary Cipolletta, Stephan Zook, James Provance, John Diggins
 
 ## Technologies Used
 
-* _List all_
-* _the major technologies_
-* _you used in your project_
-* _here_
 * CSS
 * HTML
 * JavaScript
-* Node.js
 * Jest
 * Webpack
 * npm
 
 ## Description
+  Get sweet powerups, get weapons, kill monsters, dodge monsters, run from monsters, try to survive till the next level!  If you play right, you can defeat Cthulu!
 
 ## Setup/Installation Requirements
 
-* _This is a great place_
-* _to list setup instructions_
-* _in a simple_
-* _easy-to-understand_
-* _format_
-* If using an API remember to add instructions for creating a .env file and adding it to your .gitignore + instructions for getting and setting up an API key
-* Include all steps for getting a key — from the link to sign up for an account to any steps to getting an API key to the name of the API key variables that should be added to the .env file. Including accurate instructions for getting and setting up an API key
+Rename name "TEMPLATE" in package.json to reflect new project
+Installing all packages with $ npm install.
+Building the project using webpack with $ npm run build
+Starting a development server with $ npm run start
+Linting JS files in the src folder with $ npm run lint
+Running tests with Jest using $ npm run test
 
 * Clone repository to your desktop
 * Navigate to the top level of the directory
 * Install all packages with $ npm install.
-* Build the project using webpack with $ npm run build
-* If you wish to lint JS files in the src folder, run $ npm run lint
-* All business logic should be tested and pass Jest using $ npm run test
-* Start a development server with $ npm run start
+* Build and start the project using webpack with $ npm run start
+* Play in your browser!
+
 
 ## Known Bugs
 
-* _Any known issues_
-* _should go here_
+There are likely still some UI things that need to be tweaked, but playing in the console at least works. 
+
+There will probably be "ghost" messages left behind that will need to be set back to null or something, but should be a minor issue.
+
+
+Most of the odds stuff in the combatRound.js can be tweaked easily by adding a die roll as level increases, etc, etc.  This could go on continually until playability is the best it can be. 
+
 
 ## License
 MIT
