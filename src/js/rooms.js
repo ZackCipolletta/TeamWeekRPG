@@ -2,8 +2,7 @@ import { randomWeapon, randomPotion } from "./items";
 import { heroLevelRandomNumber, randomMonster } from "./monster.js";
 
 export function whatsInTheRoom(hero) {
-  // let number = randomNumFunc(1, 5);
-    let number = 4;
+  let number = randomNumFunc(1, 5);
   if (number === 5) {
     console.log('empty'); // delete
     return 'empty';
