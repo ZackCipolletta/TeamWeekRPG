@@ -6,7 +6,7 @@ export function randomPotion(hero, randomN) { // Takes random number func as par
         if (hero.role === 'rogue') {
           return (7 + (hero.heroLevel * 1.5));
         } else {
-          return (2 + hero.heroLevel -1);
+          return (2 + hero.heroLevel - 1);
         }
       })()]
     },
@@ -16,7 +16,7 @@ export function randomPotion(hero, randomN) { // Takes random number func as par
         if (hero.role === 'warrior') {
           return (7 + (hero.heroLevel * 1.5));
         } else {
-          return (2 + hero.heroLevel -1);
+          return (2 + hero.heroLevel - 1);
         }
       })()]
     },
@@ -26,7 +26,7 @@ export function randomPotion(hero, randomN) { // Takes random number func as par
         if (hero.role === 'mage') {
           return (7 + (hero.heroLevel * 1.5));
         } else {
-          return (2 + hero.heroLevel -1);
+          return (2 + hero.heroLevel - 1);
         }
       })()]
     }

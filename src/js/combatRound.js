@@ -69,7 +69,7 @@ export class CombatRound {
     this.monsterAp = monsterAp;
     this.monsterLevel = monsterLevel;
   }
-  
+
   d100() {
     const roll1 = Math.ceil(Math.random() * 100);
     return roll1;
@@ -201,7 +201,7 @@ export class CombatRound {
       //miss
       this.monsterMessage = `${this.monsterName} missed.`;
     }
-    
+
   }
   monsterCheckPulse() {
     if (this.monsterHp < 1) {
@@ -265,12 +265,12 @@ export class CombatRound {
       else return false;
     }
   }
-  
+
   static startAttackRound(hero, monster) {
-    
-    round.heroAttack(hero)
-    round.monsterAttack()
-  
+
+    round.heroAttack(hero);
+    round.monsterAttack();
+
   }
   static startDodgeRound(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
     let round = new CombatRound;
