@@ -129,10 +129,6 @@ body {
   text-align: center;
 }
 
-figcaption {
-  font-size: x-large;
-  color: #ffffff;
-}
 
 #combat-buttons button {
   width: 250px;
@@ -179,6 +175,11 @@ figcaption {
 }
 
 #hero-message {
+  font-family: UIfont;
+  color: rgb(255, 255, 255);
+}
+
+#monster-message {
   font-family: UIfont;
   color: rgb(255, 255, 255);
 }

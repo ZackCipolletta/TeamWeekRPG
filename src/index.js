@@ -21,6 +21,7 @@ function hideMonsterUI(room) {
 function displayCombatInfo(combatInitialized) {
   document.querySelector("#enemy-hp").innerText = "HP:" + combatInitialized.monsterHp;
   document.querySelector("#hero-message").innerText = combatInitialized.heroMessage;
+  document.querySelector("#monster-message").innerText = combatInitialized.monsterMessage;
   document.querySelector("#hero-health").innerText = "Health: " + combatInitialized.heroHp;
   document.querySelector("#hero-ap").innerText = "AP: " + combatInitialized.heroAp;
   document.querySelector("#hero-xp").innerText = "XP: " + combatInitialized.heroExp;
