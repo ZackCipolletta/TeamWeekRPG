@@ -17,7 +17,7 @@ export function whatsInTheRoom(hero) {
       monster = randomMonster(hero.heroLevel - 1, (randomNumFunc(0, 2))); // makes it easier to pass the monster object into other functions.
     } else if (hero.heroLevel <= 6) {
       monster = randomMonster(hero.heroLevel, (randomNumFunc(3, 5)));
-    } else if (hero.heroLevel <= 9) {
+    } else if (hero.heroLevel >= 9) {
       monster = randomMonster(hero.heroLevel, (randomNumFunc(6, 8)));
     }
     console.log(monster);

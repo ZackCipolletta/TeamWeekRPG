@@ -8,7 +8,7 @@ import { CombatRound } from './js/combatRound';
 
 // import { heroVsMonster, levelUp, nextMonsterFunc } from "./js/combat.js";
 let hero;
-
+//Utility Functions
 function hideMonsterUI(room) {
   document.getElementById("attack-button").setAttribute("class", "hidden");
   document.getElementById("dodge-button").setAttribute("class", "hidden");
@@ -16,9 +16,14 @@ function hideMonsterUI(room) {
   const continueButton = document.getElementById("continue-button");
   continueButton.removeAttribute("class", "hidden");
   document.getElementById(`${room.monsterName}`).setAttribute("class", "hidden");
-  
-  
-  console.log("reached here");
+}
+
+function displayCombatInfo(combatInitialized) {
+  document.querySelector("#enemy-hp").innerText = "HP:" + combatInitialized.monsterHp;
+  document.querySelector("#hero-message").innerText = combatInitialized.heroMessage;
+  document.querySelector("#hero-health").innerText = "Health: " + combatInitialized.heroHp;
+  document.querySelector("#hero-ap").innerText = "AP: " + combatInitialized.heroAp;
+  document.querySelector("#hero-xp").innerText = "XP: " + combatInitialized.heroExp;
 }
 function handleCharSelection(role) {
   hero = chooseCharacter(role);
@@ -54,7 +59,7 @@ function handleEnterNewRoom(hero) {
   } else if (room === "empty") {
     console.log(room);
     document.querySelector("#continue-button").removeAttribute("class", "hidden");
-    
+
     //conditional if room contains a potion
   } else if (room.potion) {
 
@@ -163,30 +168,30 @@ async function chooseAction(hero, room) {
     button1.onclick = () => {
       resolve('attack-button was clicked');
       combatInitialized.monsterAttack(combatInitialized.heroAttack());
-      document.querySelector("#enemy-hp").innerText = "HP:" + combatInitialized.monsterHp;
-      document.querySelector("#hero-message").innerText = combatInitialized.heroMessage;
-      document.querySelector("#hero-health").innerText = "Health: " + combatInitialized.heroHp;
-      document.querySelector("#hero-ap").innerText = "AP: " + combatInitialized.heroAp;
-      document.querySelector("#hero-xp").innerText = "XP: " + combatInitialized.heroExp;
+      displayCombatInfo(combatInitialized);
       if (combatInitialized.monsterAlive === false) {
         hideMonsterUI(room);
         deadMonsterCombatOver(combatInitialized);
       }
     };
-    button2.addEventListener('click', () => {
+    button2.onclick = () => {
       resolve('dodge-button was clicked');
       combatInitialized.monsterAttack(combatInitialized.heroDodge());
+      displayCombatInfo(combatInitialized);
       if (combatInitialized.monsterAlive === false) {
         deadMonsterCombatOver(combatInitialized);
       }
-    });
-    button3.addEventListener('click', () => {
-      if (combatInitialized.monsterAlive === false) {
-        deadMonsterCombatOver(combatInitialized);
-      }
+    };
+    button3.onclick = () => {
       resolve('run-button was clicked');
       combatInitialized.monsterAttack(combatInitialized.heroRun());
-    });
+      displayCombatInfo(combatInitialized);
+      if (combatInitialized.heroRunSuccess === true) {
+        hideMonsterUI(room);
+        
+      }
+
+    };
   });
 }
 
@@ -291,7 +296,7 @@ window.addEventListener("load", function () {
     const continueButton = document.getElementById("continue-button");
     continueButton.setAttribute("class", "hidden");
     handleEnterNewRoom(hero);
-    
+
     // document.getElementById("contine-button").removeAttribute("class", "hidden");
   });
 
