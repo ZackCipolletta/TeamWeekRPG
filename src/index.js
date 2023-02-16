@@ -1,7 +1,7 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import { chooseCharacter } from "./js/character.js";
+import { Character, chooseCharacter } from "./js/character.js";
 import { whatsInTheRoom, defineItems } from './js/rooms.js';
 import { Monster, randomMonster } from './js/monster';
 import { CombatRound } from './js/combatRound';
@@ -24,6 +24,8 @@ function displayCombatInfo(combatInitialized) {
   document.querySelector("#hero-health").innerText = "Health: " + combatInitialized.heroHp;
   document.querySelector("#hero-ap").innerText = "AP: " + combatInitialized.heroAp;
   document.querySelector("#hero-xp").innerText = "XP: " + combatInitialized.heroExp;
+  document.querySelector("#hero-dex").innerText = "DEX: " + combatInitialized.heroDex;
+  document.querySelector("#hero-level").innerText = "Level: " + combatInitialized.heroLevel;
 }
 function handleCharSelection(role) {
   hero = chooseCharacter(role);
@@ -34,7 +36,6 @@ function handleCharSelection(role) {
   document.getElementById("hero-health").innerText = "Health: " + hero.heroHp;
   document.getElementById("hero-ap").innerText = "AP: " + hero.heroAp;
   document.getElementById("hero-dex").innerText = "DEX: " + hero.heroDex;
-  document.getElementById("hero-items").innerText = "Items: " + hero.items;
 
 
   handleEnterNewRoom(hero);
@@ -170,6 +171,10 @@ async function chooseAction(hero, room) {
       combatInitialized.monsterAttack(combatInitialized.heroAttack());
       displayCombatInfo(combatInitialized);
       if (combatInitialized.monsterAlive === false) {
+        hero.heroExp = hero.heroExp + room.xp;
+        if (hero.heroExp >= hero.xpLimit) {
+          hero.levelUP();
+        }
         hideMonsterUI(room);
         deadMonsterCombatOver(combatInitialized);
       }
@@ -188,7 +193,7 @@ async function chooseAction(hero, room) {
       displayCombatInfo(combatInitialized);
       if (combatInitialized.heroRunSuccess === true) {
         hideMonsterUI(room);
-        
+
       }
 
     };
