@@ -56,24 +56,6 @@ export class CombatRound {
     console.log(this);
   }
 
-
-
-  d100() {
-    const roll1 = Math.ceil(Math.random() * 100);
-    return roll1;
-  }
-  d20() {
-    const roll1 = Math.ceil(Math.random() * 20);
-    return roll1;
-  }
-  d10() {
-    const roll1 = Math.ceil(Math.random() * 10);
-    return roll1;
-  }
-  d6() {
-    const roll1 = Math.ceil(Math.random() * 6);
-    return roll1;
-  }
   heroAttack() {
     console.log("attack!");
     let beginningCriticalHit = false;
@@ -84,7 +66,7 @@ export class CombatRound {
     criticalHitExtraRolls = this.loopD100(Math.max((this.heroDex - 10), 0));
     beginningHit = this.loopD6(3);
     hitExtraRolls = this.loopD20(Math.max((this.heroDex - 10), 0));
-
+    console.log(beginningHit);
     if (beginningCriticalHit || criticalHitExtraRolls) {
       //critical hit!
       this.heroCriticalHit = true;
@@ -224,46 +206,73 @@ export class CombatRound {
     }
     return this;
   }
-  // 1 roll of die for extra critical chance or item 
-  loopD100(numRolls) {
-    let roll;
-    for (let i = 0; i < numRolls; i++) {
-      roll = this.d100();
-      if (roll === 100) {
-        return true;
-      }
-      else return false;
-    }
-  }
-  loopD20(numRolls) {
-    let roll;
-    for (let i = 0; i < numRolls; i++) {
-      roll = this.d20();
-      if (roll === 20) {
-        return true;
-      }
-      else return false;
-    }
-  }
-  loopD10(numRolls) {
-    let roll;
-    for (let i = 0; i < numRolls; i++) {
-      roll = this.d10();
-      if (roll === 10) {
-        return true;
-      }
-      else return false;
-    }
-  }
+ 
+
   loopD6(numRolls) {
-    let roll;
+    let count = 0;
     for (let i = 0; i < numRolls; i++) {
-      roll = this.d6();
-      if (roll === 6) {
-        return true;
+      if (this.d6() === 6) {
+        count++;
+        if (count >= 1) {
+          return true;
+        }
       }
-      else return false;
     }
+    return false;
+  }
+
+  loopD10(numRolls) {
+    let count = 0;
+    for (let i = 0; i < numRolls; i++) {
+      if (this.d10() === 10) {
+        count++;
+        if (count >= 1) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  loopD20(numRolls) {
+    let count = 0;
+    for (let i = 0; i < numRolls; i++) {
+      if (this.d20() === 20) {
+        count++;
+        if (count >= 1) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  loopD100(numRolls) {
+    let count = 0;
+    for (let i = 0; i < numRolls; i++) {
+      if (this.d100() === 100) {
+        count++;
+        if (count >= 1) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  d100() {
+    const roll1 = Math.ceil(Math.random() * 100);
+    return roll1;
+  }
+  d20() {
+    const roll1 = Math.ceil(Math.random() * 20);
+    return roll1;
+  }
+  d10() {
+    const roll1 = Math.ceil(Math.random() * 10);
+    return roll1;
+  }
+  d6() {
+    const roll1 = Math.ceil(Math.random() * 6);
+    return roll1;
   }
 }
 
