@@ -27,7 +27,7 @@ export class CombatRound {
     this.itemDrop = itemDrop;
   }
 
-  combatRoundStart(hero, monster) {
+  combatRoundPopulate(hero, monster) {
     this.role = hero.role;
     this.heroHp = hero.heroHp;
     this.heroAp = hero.heroAp;
@@ -52,6 +52,8 @@ export class CombatRound {
     this.monsterMessage = null;
     this.monsterAlive = true;
     this.itemDrop = null;
+    console.log ("populated");
+    console.log(this);
   }
 
 
@@ -86,6 +88,7 @@ export class CombatRound {
     return roll1;
   }
   heroAttack() {
+    console.log("attack!");
     let beginningCriticalHit = false;
     let criticalHitExtraRolls = false;
     let beginningHit = false;
@@ -114,10 +117,13 @@ export class CombatRound {
     else if (beginningCriticalHit === false && (criticalHitExtraRolls === false || criticalHitExtraRolls === undefined) && beginningHit === false && (hitExtraRolls === false || hitExtraRolls === undefined)) {
       //miss
       this.heroMessage = `${this.role} missed.`;
+      
     }
+    console.log(this.heroMessage);
     return this;
   }
   heroDodge() {
+    console.log("dodge");
     let beginningCriticalDodge = false;
     let criticalDodgeExtraRolls = false;
     let beginningDodge = false;
@@ -145,25 +151,30 @@ export class CombatRound {
       //miss
       this.heroMessage = `${this.role} was too slow to dodge this time`;
     }
+    console.log(this.heroMessage);
     return this;
   }
 
   heroRun() {
+    console.log("run");
     let escape = false;
     const escapeRolls = 3 + (this.heroLevel - this.monsterLevel) * 3;
     escape = this.loopD6(escapeRolls);
     if (escape) {
       this.heroRunSuccess = true;
       this.heroMessage = `Ran away!  ${this.role} is a real wuss!`;
+      console.log(this.heroMessage);
       return this;
     }
     else if (!escape) {
       this.heroMessage = `Take off those swashbuckler boots and run you dork!  Too slow!`;
       this.heroRunSuccess = false;
+      console.log(this.heroMessage);
       return this;
     }
   }
   monsterAttack() {
+    console.log("monsterAttack");
     const roll = this.d10();
     const attackChance = roll + 10 - this.heroDex;
     if (this.monsterAlive === false) {
@@ -200,12 +211,14 @@ export class CombatRound {
       //miss
       this.monsterMessage = `${this.monsterName} missed.`;
     }
-    
+    console.log(this.monsterMessage);
+    return this;
   }
   monsterCheckPulse() {
     if (this.monsterHp < 1) {
       this.monsterAlive = false;
       this.itemDropChance();
+      console.log('YOU KILLED THE MONSTER!')
     }
   }
   // currently loop is not active, just 1 out of 10 chance for item at any level -jd
@@ -263,28 +276,6 @@ export class CombatRound {
       }
       else return false;
     }
-  }
-  
-  static startAttackRound(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
-    let round = new CombatRound;
-    round.combatRoundInitialize();
-    round.heroAndMonsterData(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel);
-    //CombatRound.heroAttack();
-    round.monsterAttack(round.heroAttack());
-  }
-  static startDodgeRound(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
-    let round = new CombatRound;
-    round.combatRoundInitialize();
-    round.heroAndMonsterData(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel);
-    //CombatRound.heroAttack();
-    round.monsterAttack(round.heroDodge());
-  }
-  static startRunRound(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
-    let round = new CombatRound;
-    round.combatRoundInitialize();
-    round.heroAndMonsterData(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel);
-    //CombatRound.heroAttack();
-    round.monsterAttack(round.heroRun());
   }
 }
 
