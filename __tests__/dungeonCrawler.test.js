@@ -9,7 +9,7 @@ test('', () => {
   //combat round
   let round = new CombatRound;
   (function startCombatRound() {
-    round.combatRoundInitialize();
+    round.combatRoundStart();
     round.heroAndMonsterData("Warrior", 10, 10, 10, 1, 0, "Baddie", 6, 6, 1);
     //CombatRound.heroAttack();
     round.monsterAttack(round.heroAttack());
