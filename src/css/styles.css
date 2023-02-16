@@ -134,7 +134,7 @@ figcaption {
   color: #ffffff;
 }
 
-.combat-button {
+#combat-buttons button {
   width: 250px;
   background: radial-gradient(circle, #8b0000, #8b0000);
   letter-spacing: 2px;

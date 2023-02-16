@@ -8,6 +8,18 @@ import { CombatRound } from './js/combatRound';
 
 // import { heroVsMonster, levelUp, nextMonsterFunc } from "./js/combat.js";
 let hero;
+
+function hideMonsterUI(room) {
+  document.getElementById("attack-button").setAttribute("class", "hidden");
+  document.getElementById("dodge-button").setAttribute("class", "hidden");
+  document.getElementById("run-button").setAttribute("class", "hidden");
+  const continueButton = document.getElementById("continue-button");
+  continueButton.removeAttribute("class", "hidden");
+  document.getElementById(`${room.monsterName}`).setAttribute("class", "hidden");
+  
+  
+  console.log("reached here");
+}
 function handleCharSelection(role) {
   hero = chooseCharacter(role);
 
@@ -40,7 +52,7 @@ function handleEnterNewRoom(hero) {
   } else if (room === "empty") {
     console.log(room);
     document.querySelector("#continue-button").removeAttribute("class", "hidden");
-
+    
     //conditional if room contains a potion
   } else if (room.potion) {
 
@@ -139,7 +151,9 @@ function initializeCombat(hero, room) {
 async function chooseAction(hero, room) {
   let combatInitialized = initializeCombat(hero, room);
   return new Promise((resolve, reject) => {
-
+    document.getElementById("attack-button").removeAttribute("class", "hidden");
+    document.getElementById("dodge-button").removeAttribute("class", "hidden");
+    document.getElementById("run-button").removeAttribute("class", "hidden");
     const button1 = document.getElementById('attack-button');
     const button2 = document.getElementById('dodge-button');
     const button3 = document.getElementById('run-button');
@@ -148,6 +162,7 @@ async function chooseAction(hero, room) {
       resolve('attack-button was clicked');
       combatInitialized.monsterAttack(combatInitialized.heroAttack());
       if (combatInitialized.monsterAlive === false) {
+        hideMonsterUI(room);
         deadMonsterCombatOver(combatInitialized);
       }
     });
@@ -173,10 +188,6 @@ function deadMonsterCombatOver(afterActionReport) {
   console.log("KILLED MONSTER: After Action Report: " + afterActionReport);
   console.log("immortal hero:" + afterActionReport.heroHp);
   console.log("undead monster:" + afterActionReport.monster.Hp);
-  document.getElementById("attack-button").setAttribute("class", "hidden");
-  document.getElementById("dodge-button").setAttribute("class", "hidden");
-  document.getElementById("run-button").setAttribute("class", "hidden");
-  document.getElementById("continue-button").removetAttribute("class", "hidden");
 }
 
 //load and button logic
@@ -270,7 +281,11 @@ window.addEventListener("load", function () {
 
   document.querySelector("#continue-button").addEventListener("click", function () {
     console.log("clicked");
+    const continueButton = document.getElementById("continue-button");
+    continueButton.setAttribute("class", "hidden");
     handleEnterNewRoom(hero);
+    
+    // document.getElementById("contine-button").removeAttribute("class", "hidden");
   });
 
 
