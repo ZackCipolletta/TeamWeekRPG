@@ -158,14 +158,14 @@ async function chooseAction(hero, room) {
     const button2 = document.getElementById('dodge-button');
     const button3 = document.getElementById('run-button');
 
-    button1.addEventListener('click', () => {
+    button1.onclick = () => {
       resolve('attack-button was clicked');
       combatInitialized.monsterAttack(combatInitialized.heroAttack());
       if (combatInitialized.monsterAlive === false) {
         hideMonsterUI(room);
         deadMonsterCombatOver(combatInitialized);
       }
-    });
+    };
     button2.addEventListener('click', () => {
       resolve('dodge-button was clicked');
       combatInitialized.monsterAttack(combatInitialized.heroDodge());
