@@ -2,8 +2,8 @@ import { randomWeapon, randomPotion } from "./items";
 import { heroLevelRandomNumber, randomMonster } from "./monster.js";
 
 export function whatsInTheRoom(hero) {
-  // let number = randomNumFunc(1, 5);
-    let number = 4;
+  let number = randomNumFunc(1, 5);
+  // let number = 3
   if (number === 5) {
     console.log('empty'); // delete
     return 'empty';
@@ -17,7 +17,7 @@ export function whatsInTheRoom(hero) {
       monster = randomMonster(hero.heroLevel - 1, (randomNumFunc(0, 2))); // makes it easier to pass the monster object into other functions.
     } else if (hero.heroLevel <= 6) {
       monster = randomMonster(hero.heroLevel, (randomNumFunc(3, 5)));
-    } else if (hero.heroLevel <= 9) {
+    } else if (hero.heroLevel >= 9) {
       monster = randomMonster(hero.heroLevel, (randomNumFunc(6, 8)));
     }
     console.log(monster);

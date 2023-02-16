@@ -55,7 +55,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  /* min-width: 2000px; */
+  min-width: 1700px;
   margin: 30px;
   margin-top: 0px;
   padding: 200px;
@@ -129,12 +129,8 @@ body {
   text-align: center;
 }
 
-figcaption {
-  font-size: x-large;
-  color: #ffffff;
-}
 
-.combat-button {
+#combat-buttons button {
   width: 250px;
   background: radial-gradient(circle, #8b0000, #8b0000);
   letter-spacing: 2px;
@@ -177,6 +173,17 @@ figcaption {
   text-shadow: 0 1px 3px #000;
   box-shadow: inset 0px 0px 5px 3px rgba(1,1,1,0.3);
 }
+
+#hero-message {
+  font-family: UIfont;
+  color: rgb(255, 255, 255);
+}
+
+#monster-message {
+  font-family: UIfont;
+  color: rgb(255, 255, 255);
+}
+
 .bottom-ui {
   display: flex;
   justify-content: space-around;

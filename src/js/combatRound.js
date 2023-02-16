@@ -27,7 +27,7 @@ export class CombatRound {
     this.itemDrop = itemDrop;
   }
 
-  combatRoundStart(hero, monster) {
+  combatRoundPopulate(hero, monster) {
     this.role = hero.role;
     this.heroHp = hero.heroHp;
     this.heroAp = hero.heroAp;
@@ -52,41 +52,12 @@ export class CombatRound {
     this.monsterMessage = null;
     this.monsterAlive = true;
     this.itemDrop = null;
+    console.log ("populated");
+    console.log(this);
   }
 
-
-
-  //chage for increased leveling up effects
-  heroAndMonsterData(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
-    this.role = role;
-    this.heroHp = heroHp;
-    this.heroAp = heroAp;
-    this.heroDex = heroDex;
-    this.heroLevel = heroLevel;
-    this.heroExp = heroExp;
-    this.monsterName = monsterName;
-    this.monsterHp = monsterHp;
-    this.monsterAp = monsterAp;
-    this.monsterLevel = monsterLevel;
-  }
-
-  d100() {
-    const roll1 = Math.ceil(Math.random() * 100);
-    return roll1;
-  }
-  d20() {
-    const roll1 = Math.ceil(Math.random() * 20);
-    return roll1;
-  }
-  d10() {
-    const roll1 = Math.ceil(Math.random() * 10);
-    return roll1;
-  }
-  d6() {
-    const roll1 = Math.ceil(Math.random() * 6);
-    return roll1;
-  }
   heroAttack() {
+    console.log("attack!");
     let beginningCriticalHit = false;
     let criticalHitExtraRolls = false;
     let beginningHit = false;
@@ -95,7 +66,7 @@ export class CombatRound {
     criticalHitExtraRolls = this.loopD100(Math.max((this.heroDex - 10), 0));
     beginningHit = this.loopD6(3);
     hitExtraRolls = this.loopD20(Math.max((this.heroDex - 10), 0));
-
+    console.log(beginningHit);
     if (beginningCriticalHit || criticalHitExtraRolls) {
       //critical hit!
       this.heroCriticalHit = true;
@@ -107,7 +78,7 @@ export class CombatRound {
     else if (beginningHit || hitExtraRolls) {
       //hit!
       this.heroHit = true;
-      this.heroDamage = this.d10() / 10 * this.heroAp;
+      this.heroDamage = Math.round(this.d10() / 10 * this.heroAp);
       this.monsterHp = this.monsterHp - this.heroDamage;
       this.heroMessage = `${this.role} hit for ${this.heroDamage} points damage.`;
       this.monsterCheckPulse();
@@ -115,10 +86,13 @@ export class CombatRound {
     else if (beginningCriticalHit === false && (criticalHitExtraRolls === false || criticalHitExtraRolls === undefined) && beginningHit === false && (hitExtraRolls === false || hitExtraRolls === undefined)) {
       //miss
       this.heroMessage = `${this.role} missed.`;
+      
     }
+    console.log(this.heroMessage);
     return this;
   }
   heroDodge() {
+    console.log("dodge");
     let beginningCriticalDodge = false;
     let criticalDodgeExtraRolls = false;
     let beginningDodge = false;
@@ -146,25 +120,30 @@ export class CombatRound {
       //miss
       this.heroMessage = `${this.role} was too slow to dodge this time`;
     }
+    console.log(this.heroMessage);
     return this;
   }
 
   heroRun() {
+    console.log("run");
     let escape = false;
     const escapeRolls = 3 + (this.heroLevel - this.monsterLevel) * 3;
     escape = this.loopD6(escapeRolls);
     if (escape) {
       this.heroRunSuccess = true;
       this.heroMessage = `Ran away!  ${this.role} is a real wuss!`;
+      console.log(this.heroMessage);
       return this;
     }
     else if (!escape) {
       this.heroMessage = `Take off those swashbuckler boots and run you dork!  Too slow!`;
       this.heroRunSuccess = false;
+      console.log(this.heroMessage);
       return this;
     }
   }
   monsterAttack() {
+    console.log("monsterAttack");
     const roll = this.d10();
     const attackChance = roll + 10 - this.heroDex;
     if (this.monsterAlive === false) {
@@ -201,12 +180,15 @@ export class CombatRound {
       //miss
       this.monsterMessage = `${this.monsterName} missed.`;
     }
+    console.log(this.monsterMessage);
+    return this;
 
   }
   monsterCheckPulse() {
     if (this.monsterHp < 1) {
       this.monsterAlive = false;
       this.itemDropChance();
+      console.log('YOU KILLED THE MONSTER!')
     }
   }
   // currently loop is not active, just 1 out of 10 chance for item at any level -jd
@@ -224,67 +206,73 @@ export class CombatRound {
     }
     return this;
   }
-  // 1 roll of die for extra critical chance or item 
-  loopD100(numRolls) {
-    let roll;
-    for (let i = 0; i < numRolls; i++) {
-      roll = this.d100();
-      if (roll === 100) {
-        return true;
-      }
-      else return false;
-    }
-  }
-  loopD20(numRolls) {
-    let roll;
-    for (let i = 0; i < numRolls; i++) {
-      roll = this.d20();
-      if (roll === 20) {
-        return true;
-      }
-      else return false;
-    }
-  }
-  loopD10(numRolls) {
-    let roll;
-    for (let i = 0; i < numRolls; i++) {
-      roll = this.d10();
-      if (roll === 10) {
-        return true;
-      }
-      else return false;
-    }
-  }
+ 
+
   loopD6(numRolls) {
-    let roll;
+    let count = 0;
     for (let i = 0; i < numRolls; i++) {
-      roll = this.d6();
-      if (roll === 6) {
-        return true;
+      if (this.d6() === 6) {
+        count++;
+        if (count >= 1) {
+          return true;
+        }
       }
-      else return false;
     }
+    return false;
   }
 
-  static startAttackRound(hero, monster) {
-
-    round.heroAttack(hero);
-    round.monsterAttack();
-
+  loopD10(numRolls) {
+    let count = 0;
+    for (let i = 0; i < numRolls; i++) {
+      if (this.d10() === 10) {
+        count++;
+        if (count >= 1) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
-  static startDodgeRound(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
-    let round = new CombatRound;
-    round.combatRoundInitialize();
-    round.heroAndMonsterData(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel);
-    //CombatRound.heroAttack();
-    round.monsterAttack(round.heroDodge());
+
+  loopD20(numRolls) {
+    let count = 0;
+    for (let i = 0; i < numRolls; i++) {
+      if (this.d20() === 20) {
+        count++;
+        if (count >= 1) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
-  static startRunRound(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
-    let round = new CombatRound;
-    round.combatRoundInitialize();
-    round.heroAndMonsterData(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel);
-    //CombatRound.heroAttack();
-    round.monsterAttack(round.heroRun());
+  loopD100(numRolls) {
+    let count = 0;
+    for (let i = 0; i < numRolls; i++) {
+      if (this.d100() === 100) {
+        count++;
+        if (count >= 1) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  d100() {
+    const roll1 = Math.ceil(Math.random() * 100);
+    return roll1;
+  }
+  d20() {
+    const roll1 = Math.ceil(Math.random() * 20);
+    return roll1;
+  }
+  d10() {
+    const roll1 = Math.ceil(Math.random() * 10);
+    return roll1;
+  }
+  d6() {
+    const roll1 = Math.ceil(Math.random() * 6);
+    return roll1;
   }
 }
 

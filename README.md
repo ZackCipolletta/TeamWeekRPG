@@ -1,6 +1,6 @@
 # Dungeon Crawler
 
-#### An RPG. Almost as good as the book.
+(Application Name)
 
 #### By Zachary Cipolletta, Stephan Zook, James Provance, John Diggins
 
