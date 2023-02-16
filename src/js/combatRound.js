@@ -55,20 +55,19 @@ export class CombatRound {
   }
 
 
-
-  //chage for increased leveling up effects
-  heroAndMonsterData(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
-    this.role = role;
-    this.heroHp = heroHp;
-    this.heroAp = heroAp;
-    this.heroDex = heroDex;
-    this.heroLevel = heroLevel;
-    this.heroExp = heroExp;
-    this.monsterName = monsterName;
-    this.monsterHp = monsterHp;
-    this.monsterAp = monsterAp;
-    this.monsterLevel = monsterLevel;
-  }
+//probably delete---jd
+  // heroAndMonsterData(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
+  //   this.role = role;
+  //   this.heroHp = heroHp;
+  //   this.heroAp = heroAp;
+  //   this.heroDex = heroDex;
+  //   this.heroLevel = heroLevel;
+  //   this.heroExp = heroExp;
+  //   this.monsterName = monsterName;
+  //   this.monsterHp = monsterHp;
+  //   this.monsterAp = monsterAp;
+  //   this.monsterLevel = monsterLevel;
+  // }
   
   d100() {
     const roll1 = Math.ceil(Math.random() * 100);
