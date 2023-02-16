@@ -5,10 +5,9 @@ import { chooseCharacter } from "./js/character.js";
 import { whatsInTheRoom, defineItems } from './js/rooms.js';
 import { Monster } from './js/monster';
 import { CombatRound } from './js/combatRound';
-import { heroVsMonster, levelUp, nextMonsterFunc } from "./js/combat.js";
 
+// import { heroVsMonster, levelUp, nextMonsterFunc } from "./js/combat.js";
 let hero;
-
 function handleCharSelection(role) {
   hero = chooseCharacter(role);
 
@@ -37,11 +36,7 @@ function handleEnterNewRoom(hero) {
     document.getElementById("enemy-ap").innerText = 'AP: ' + room.monsterAp;
     console.log(hero);
     console.log(room);
-    const round = new CombatRound();
-    round.combatRoundStart(hero, room);
-    console.log(round);
-
-    //conditional if room is empty
+    chooseAction(hero, room);
   } else if (room === "empty") {
     console.log(room);
     document.querySelector("#continue-button").removeAttribute("class", "hidden");
@@ -120,7 +115,6 @@ function handleEnterNewRoom(hero) {
   return room;
 }
 
-
 //hides choose your character div
 function hideChooseChar() {
 
@@ -135,10 +129,55 @@ function hideChooseChar() {
   document.getElementById("enemy-ap").removeAttribute("class", "hidden");
 }
 
+//initialize combat -jd
+function initializeCombat(hero, room) {
+  let round = new CombatRound();
+  round.combatRoundPopulate(hero, room);
+  return round;
+}
+//choose action -jd
+async function chooseAction(hero, room) {
+  let combatInitialized = initializeCombat(hero, room);
+  return new Promise((resolve, reject) => {
 
+    const button1 = document.getElementById('attack-button');
+    const button2 = document.getElementById('dodge-button');
+    const button3 = document.getElementById('run-button');
 
+    button1.addEventListener('click', () => {
+      resolve('attack-button was clicked');
+      combatInitialized.monsterAttack(combatInitialized.heroAttack());
+      if (combatInitialized.monsterAlive === false) {
+        deadMonsterCombatOver(combatInitialized);
+      }
+    });
+    button2.addEventListener('click', () => {
+      resolve('dodge-button was clicked');
+      combatInitialized.monsterAttack(combatInitialized.heroDodge());
+      if (combatInitialized.monsterAlive === false) {
+        deadMonsterCombatOver(combatInitialized);
+      }
+    });
+    button3.addEventListener('click', () => {
+      if (combatInitialized.monsterAlive === false) {
+        deadMonsterCombatOver(combatInitialized);
+      }
+      resolve('run-button was clicked');
+      combatInitialized.monsterAttack(combatInitialized.heroRun());
+    });
+  });
+}
 
-
+//probably remove button visibility in this function
+function deadMonsterCombatOver(afterActionReport) {
+  console.log("KILLED MONSTER: After Action Report: " + afterActionReport);
+  console.log("immortal hero:" + afterActionReport.heroHp);
+  console.log("undead monster:" + afterActionReport.monster.Hp);
+  document.getElementById("attack-button").setAttribute("class", "hidden");
+  document.getElementById("dodge-button").setAttribute("class", "hidden");
+  document.getElementById("run-button").setAttribute("class", "hidden");
+  document.getElementById("continue-button").removetAttribute("class", "hidden");
+}
 
 //load and button logic
 window.addEventListener("load", function () {
@@ -166,22 +205,6 @@ window.addEventListener("load", function () {
     let type = 3;
     handleCharSelection(type);
   });
-
-  //combat buttons
-  document.querySelector("#attack-button").addEventListener("click", function (e) {
-    round.heroAttack();
-    console.log("clicked");
-
-  });
-  document.querySelector("#dodge-button").addEventListener("click", function (e) {
-    console.log("clicked");
-
-  });
-  document.querySelector("#run-button").addEventListener("click", function (e) {
-    console.log("clicked");
-
-  });
-  // pick up an item
   document.querySelector("#pick-up-button").addEventListener("click", function (e) {
     console.log("clicked");
     let pickup = document.querySelector("#pick-up-button");
@@ -245,8 +268,7 @@ window.addEventListener("load", function () {
 
   });
 
-  //entering a new room
-  document.querySelector("#continue-button").addEventListener("click", function (e) {
+  document.querySelector("#continue-button").addEventListener("click", function () {
     console.log("clicked");
     handleEnterNewRoom(hero);
   });
