@@ -266,12 +266,11 @@ export class CombatRound {
     }
   }
   
-  static startAttackRound(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
-    let round = new CombatRound;
-    round.combatRoundInitialize();
-    round.heroAndMonsterData(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel);
-    //CombatRound.heroAttack();
-    round.monsterAttack(round.heroAttack());
+  static startAttackRound(hero, monster) {
+    
+    round.heroAttack(hero)
+    round.monsterAttack()
+  
   }
   static startDodgeRound(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
     let round = new CombatRound;

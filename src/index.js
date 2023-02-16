@@ -23,7 +23,8 @@ function handleCharSelection(role) {
 
 function handleEnterNewRoom(hero) {
   let room = whatsInTheRoom(hero);
-  console.log(room.monsterName);
+//   console.log(room.monsterName);
+  //conditional for if room is a monster
   if (room.type === 'monster') {
     document.querySelector("#combat-buttons").removeAttribute("class", "hidden");
     document.querySelector("#enemy-info").removeAttribute("class", "hidden");
@@ -37,23 +38,46 @@ function handleEnterNewRoom(hero) {
     const round = new CombatRound();
     round.combatRoundStart(hero, room);
     console.log(round);
+
+
+    //conditional if room is empty
   } else if (room === "empty") {
     console.log(room);
     document.querySelector("#continue-button").removeAttribute("class", "hidden");
+
+    //conditional if room contains a potion
   } else if (room.potion) {
     console.log(room.potion[0]);
     let potion = document.getElementById(`${room.potion[0]}`);
+    let potionDescription = document.getElementById(`${room.potion[0]}1`);
     potion.removeAttribute("class", "hidden");
+    potionDescription.removeAttribute("class", "hidden");
     document.querySelector("#pick-up-button").removeAttribute("class", "hidden");
     document.querySelector("#continue-button").removeAttribute("class", "hidden");
+    console.log(room.potion)
+    // function pickupItem() {
+    //     if (room.potion === "magic") {
+    //         hero.heroAp += room.potion[1];
+    //     } else if (room.potion === "swift"){
+    //         hero.heroAp += room.potion[1];
+    //     } 
+    // }
+
+
+    //conditional if room has a weapon
   } else if (room.weapon) {
     console.log(room.weapon[0]);
     let weapon = document.getElementById(`${room.weapon[0]}`);
     weapon.removeAttribute("class", "hidden");
+    let weaponDescription = document.getElementById(`${room.weapon[0]}1`);
+    weaponDescription.removeAttribute("class", "hidden");
     document.querySelector("#pick-up-button").removeAttribute("class", "hidden");
     document.querySelector("#continue-button").removeAttribute("class", "hidden");
+    //conditional if room has a health potion
   } else if (room === 'Health-Potion') {
     let healthpotion = document.getElementById("Health-Potion");
+    let potionDescription = document.getElementById("Health-Potion1");
+    potionDescription.removeAttribute("class", "hidden");
     healthpotion.removeAttribute("class", "hidden");
 
     document.querySelector("#pick-up-button").removeAttribute("class", "hidden");
@@ -122,6 +146,11 @@ window.addEventListener("load", function () {
   document.querySelector("#run-button").addEventListener("click", function (e) {
     console.log("clicked");
 
+  });
+ // pick up an item
+  document.querySelector("#pick-up-button").addEventListener("click", function (e) {
+    console.log("clicked");
+    handleEnterNewRoom();
   });
 
   //entering a new room

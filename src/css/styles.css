@@ -192,6 +192,23 @@ figcaption {
   font-family: UIfont;
 }
 
+/* setting item descriptions */
+
+.weapon-images p {
+    font-family: UIfont;
+    font-size: 50px;
+    color: #ffffff;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+}
+
+.potion-images p {
+    font-family: UIfont;
+    font-size: 50px;
+    color: #ffffff;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
 
 /* setting sizes for gif assets */
 #warrior-img {
@@ -265,7 +282,7 @@ figcaption {
   height: auto;
 }
 
-#wand {
+#staff {
   width: 200px;
   height: auto;
 }
