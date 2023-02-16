@@ -1,21 +1,3 @@
-# notes for Thursday morning:
-Totally fine if you guys want to start from where we left off yesterday if I'm not in early, but we have this version for backup if needed:
-
-I might come in a little late as I was working on this late into the night. I'm tired.  It's messy but Combat works fine and output to console should mostly make sense. Pick the WARRIOR for now, that's what I was testing with, shouldn't matter but I had better luck with him? I don't know.  
-
-updating the scores on the DOM from -combatInitialized- (thats the object that the continuing action changes until the monster dies) as combat is going on should be one of the things that still needs to be done.
-
-There will probably be "ghost" messages left behind that will need to be set back to null or something, but should be a minor issue. Probably will just reset the whole CombatRound object after death or run away. 
-
-onLoad doesn't need to be used for all of it as the buttons wont be clicked too fast.  Stuff might not be in the right place in index but whatever for now.
-
-Hero is immortal for now so we can test.  Monster is too basically if you want to keep killing it for testing.  
-
-AfterActionReport (end combat object) could be used for an end screen after monster killed, or not.  But that's where combat buttons should be told to disappear. 
-
-most of the odds stuff in the combatRound.js I can tweak fairly quickly.  I should be in by 10am at the latest. 
-
-
 # (Application Name)
 
 #### (Brief Description of Application)
