@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import { chooseCharacter } from "./js/character.js";
 import { whatsInTheRoom, defineItems } from './js/rooms.js';
-import { Monster } from './js/monster';
+import { Monster, randomMonster } from './js/monster';
 import { CombatRound } from './js/combatRound';
 
 // import { heroVsMonster, levelUp, nextMonsterFunc } from "./js/combat.js";
@@ -25,6 +25,7 @@ function handleCharSelection(role) {
 
   //setting intial hero attributes
   document.getElementById("hero-level").innerText = "Level: " + hero.heroLevel;
+  document.getElementById("hero-xp").innerText = "XP: " + hero.heroExp;
   document.getElementById("hero-health").innerText = "Health: " + hero.heroHp;
   document.getElementById("hero-ap").innerText = "AP: " + hero.heroAp;
   document.getElementById("hero-dex").innerText = "DEX: " + hero.heroDex;
@@ -46,6 +47,7 @@ function handleEnterNewRoom(hero) {
     document.getElementById("enemy-name").innerText = 'Name: ' + room.monsterName;
     document.getElementById("enemy-hp").innerText = 'HP: ' + room.monsterHp;
     document.getElementById("enemy-ap").innerText = 'AP: ' + room.monsterAp;
+
     console.log(hero);
     console.log(room);
     chooseAction(hero, room);
@@ -161,6 +163,11 @@ async function chooseAction(hero, room) {
     button1.onclick = () => {
       resolve('attack-button was clicked');
       combatInitialized.monsterAttack(combatInitialized.heroAttack());
+      document.querySelector("#enemy-hp").innerText = "HP:" + combatInitialized.monsterHp;
+      document.querySelector("#hero-message").innerText = combatInitialized.heroMessage;
+      document.querySelector("#hero-health").innerText = "Health: " + combatInitialized.heroHp;
+      document.querySelector("#hero-ap").innerText = "AP: " + combatInitialized.heroAp;
+      document.querySelector("#hero-xp").innerText = "XP: " + combatInitialized.heroExp;
       if (combatInitialized.monsterAlive === false) {
         hideMonsterUI(room);
         deadMonsterCombatOver(combatInitialized);
