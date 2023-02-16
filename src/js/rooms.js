@@ -12,12 +12,12 @@ export function whatsInTheRoom(hero) {
     // pick up item? if yes, getWeapon(hero, weapon) or getItem(hero, item);
   } else {
     let monster;
-    if (hero.level <= 3) {
-      monster = randomMonster(hero.level - 1, (randomNumFunc(0, 2))); // makes it easier to pass the monster object into other functions.
-    } else if (hero.level <= 6) {
-      monster = randomMonster(hero.level, (randomNumFunc(3, 5)));
-    } else if (hero.level <= 9) {
-      monster = randomMonster(hero.level, (randomNumFunc(6, 8)));
+    if (hero.heroLevel <= 3) {
+      monster = randomMonster(hero.heroLevel - 1, (randomNumFunc(0, 2))); // makes it easier to pass the monster object into other functions.
+    } else if (hero.heroLevel <= 6) {
+      monster = randomMonster(hero.heroLevel, (randomNumFunc(3, 5)));
+    } else if (hero.heroLevel <= 9) {
+      monster = randomMonster(hero.heroLevel, (randomNumFunc(6, 8)));
     }
     console.log(monster);
     return monster;
@@ -37,7 +37,7 @@ export function defineItems(hero, randomW, randomP, randomItem) { // needs 3 var
 //  if (item === 'Health Potion') {
 // hero.hp = hero.hp + x;
 //  } else if (item === 'potion') {
-// hero.ap = hero.ap + item.potion[1];
+// hero.heroAp = hero.heroAp + item.potion[1];
 // }  something like this.  A helper function which will be called when a potion is picked up and can be used as getWeapon is for weapons.  It will eval the potion and call another helper function to apply the appropriate attritube depending on each character calss.
 
 function randomNumFunc(lowerLimit, upperLimit) { // RNG function used repeatedly.
@@ -45,8 +45,8 @@ function randomNumFunc(lowerLimit, upperLimit) { // RNG function used repeatedly
 }
 
 function getWeapon(hero, weapon) {  // used to equip a new weapon when a hero finds a weapon and wants to change out for current weapon.
-  hero.ap -= hero.weapon[1];
+  hero.heroAp -= hero.weapon[1];
   delete hero.weapon;
   hero.weapon = weapon;
-  hero.ap += hero.weapon[1];
+  hero.heroAp += hero.weapon[1];
 }

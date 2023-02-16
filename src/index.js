@@ -12,32 +12,31 @@ import { CombatRound } from './js/combatRound';
 
 function handleCharSelection(role) {
   let hero = chooseCharacter(role);
+  document.getElementById("hero-level").innerText = "Level: " + hero.heroLevel;
+  document.getElementById("hero-health").innerText = "Health: " + hero.heroHp;
+  document.getElementById("hero-ap").innerText = "AP: " + hero.heroAp;
+  document.getElementById("hero-dex").innerText = "DEX: " + hero.heroDex;
+  document.getElementById("hero-items").innerText = "Items: " + hero.items;
+
   handleEnterNewRoom(hero);
 }
 
 function handleEnterNewRoom(hero) {
-
-
   let room = whatsInTheRoom(hero);
-  document.getElementById("hero-level").innerText = "Level: " + hero.level;
-  document.getElementById("hero-health").innerText = "Health: " + hero.hp;
-  document.getElementById("hero-ap").innerText = "AP: " + hero.ap;
-  document.getElementById("hero-dex").innerText = "DEX: " + hero.dex;
-  document.getElementById("hero-items").innerText = "Items: " + hero.items;
-
-
-  //populating the room with the first monster, empty, or item
-  console.log(room);
+  console.log(room.monsterName);
   if (room.type === 'monster') {
-    firstCombat();
     document.querySelector("#combat-buttons").removeAttribute("class", "hidden");
     document.querySelector("#enemy-info").removeAttribute("class", "hidden");
-    let monster = document.getElementById(`${room.name}`);
+    let monster = document.getElementById(`${room.monsterName}`);
     monster.removeAttribute("class", "hidden");
-    document.getElementById("enemy-name").innerText = 'Name: ' + room.name;
-    document.getElementById("enemy-hp").innerText = 'HP: ' + room.hp;
-    document.getElementById("enemy-ap").innerText = 'AP: ' + room.ap;
-
+    document.getElementById("enemy-name").innerText = 'Name: ' + room.monsterName;
+    document.getElementById("enemy-hp").innerText = 'HP: ' + room.monsterHp;
+    document.getElementById("enemy-ap").innerText = 'AP: ' + room.monsterAp;
+    console.log(hero);
+    console.log(room);
+    const round = new CombatRound();
+    round.combatRoundStart(hero, room);
+    console.log(round);
   } else if (room === "empty") {
     console.log(room);
     document.querySelector("#continue-button").removeAttribute("class", "hidden");
@@ -63,9 +62,6 @@ function handleEnterNewRoom(hero) {
   return hero;
 }
 
-// let monster = monster.name;
-
-
 
 //hides choose your character div
 function hideChooseChar() {
@@ -79,55 +75,10 @@ function hideChooseChar() {
   document.getElementById("enemy-name").removeAttribute("class", "hidden");
   document.getElementById("enemy-hp").removeAttribute("class", "hidden");
   document.getElementById("enemy-ap").removeAttribute("class", "hidden");
-
 }
 
 
-function firstCombat() {
-  let round = new CombatRound;
-  let hero = handleCharSelection();
-  round.startAttackRound(hero, monster);
-  round.startDodgeRound(hero, monster);
-  round.startRunRound(hero, monster);
-}
 
-
-// function attackOrRunFunc(hero, monster) {
-//   // console.log(`attackOrRunFunc() was just called with the value of ${monster.name}`)
-//   document.querySelector("#fight-monster").addEventListener("click", function (e) {
-//     e.preventDefault();
-//     document.querySelector("#fight-monster").removeEventListener("click", this);
-//     attackHanlder(hero, monster);
-//   });
-
-//   document.querySelector("#run-from-monster").addEventListener("click", function (e) {
-//     e.preventDefault();
-//     runAwayFunc(hero, monster);
-//   });
-//   function runAwayFunc() {
-//     console.log(`Your ${hero.role} ran away from the ${monster.name}`);
-//   }
-// }
-
-// function attackHanlder(hero, monster) {
-//   // console.log(`attackHanlder() was just called with a value of ${hero.role} for hero @ level ${hero.level} and the monster is ${monster.name}`)
-//   if (monster.hp - hero.ap <= 0) {
-//     levelUp(hero);
-//     console.log(`You defeated the ${monster.name}!  Your ${hero.role} has leveled up.  Current HP:${hero.hp} current AP:${hero.ap}.  Your level is ${hero.level}`);
-
-//     callingNewMonsterFunc(hero);
-//     // console.log(`callingNewMonsterFunc`)
-//   } else {
-//     heroVsMonster(hero, monster);
-//     console.log(`After the attack your ${hero.role}'s hp is: ${hero.hp}.  The ${monster.name}'s hp is: ${monster.hp}`);
-//   }
-// }
-
-// function callingNewMonsterFunc(hero) {
-//   let monster = nextMonsterFunc(hero);
-//   // console.log(`the new monster is: ${monster.name}`);
-//   callCombatFunc(hero, monster);
-// }
 
 
 
@@ -160,6 +111,7 @@ window.addEventListener("load", function () {
 
   //combat buttons
   document.querySelector("#attack-button").addEventListener("click", function (e) {
+    round.heroAttack();
     console.log("clicked");
 
   });

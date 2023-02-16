@@ -16,24 +16,24 @@ export class Character {
 
   levelUP() {
     if (this.role === 'mage') {
-      this.level++;
+      this.heroLevel++;
       this.hpCapacity += 3;
-      this.hp = this.hpCapacity;
+      this.heroHp = this.hpCapacity;
 
-      this.ap = this.ap + 5;
-      this.dex = this.dex + 2;
+      this.heroAp = this.heroAp + 5;
+      this.heroDex = this.heroDex + 2;
     } else if (this.role === 'warrior') {
-      this.level++;
+      this.heroLevel++;
       this.hpCapacity += 4;
-      this.hp = this.hpCapacity;
-      this.ap = this.ap + 3;
-      this.dex = this.dex + 3;
+      this.heroHp = this.hpCapacity;
+      this.heroAp = this.heroAp + 3;
+      this.heroDex = this.heroDex + 3;
     } else if (this.role === 'rogue') {
-      this.level++;
+      this.heroLevel++;
       this.hpCapacity += 2;
-      this.hp = this.hpCapacity;
-      this.ap = this.ap + 4;
-      this.dex = this.dex + 4;
+      this.heroHp = this.hpCapacity;
+      this.heroAp = this.heroAp + 4;
+      this.heroDex = this.heroDex + 4;
     }
   }
 }

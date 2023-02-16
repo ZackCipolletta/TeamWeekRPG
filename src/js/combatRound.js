@@ -27,21 +27,18 @@ export class CombatRound {
     this.itemDrop = itemDrop;
   }
 
-  //chage for increased leveling up effects
-  heroAndMonsterData(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
-    this.role = role;
-    this.heroHp = heroHp;
-    this.heroAp = heroAp;
-    this.heroDex = heroDex;
-    this.heroLevel = heroLevel;
-    this.heroExp = heroExp;
-    this.monsterName = monsterName;
-    this.monsterHp = monsterHp;
-    this.monsterAp = monsterAp;
-    this.monsterLevel = monsterLevel;
-  }
-  combatRoundInitialize() {
-    let cRound = new CombatRound();
+  combatRoundStart(hero, monster) {
+    this.role = hero.role;
+    this.heroHp = hero.heroHp;
+    this.heroAp = hero.heroAp;
+    this.heroDex = hero.heroDex;
+    this.heroLevel = hero.heroLevel;
+    this.heroExp = hero.heroExp;
+    this.monsterName = monster.monsterName;
+    this.monsterHp = monster.monsterHp;
+    this.monsterAp = monster.monsterAp;
+    this.monsterLevel = monster.monsterLevel;
+    // these values populate
     this.heroHit = null;
     this.heroCriticalHit = null;
     this.heroDamage = 0;
@@ -55,8 +52,24 @@ export class CombatRound {
     this.monsterMessage = null;
     this.monsterAlive = true;
     this.itemDrop = null;
-    return cRound;
   }
+
+
+
+  //chage for increased leveling up effects
+  heroAndMonsterData(role, heroHp, heroAp, heroDex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
+    this.role = role;
+    this.heroHp = heroHp;
+    this.heroAp = heroAp;
+    this.heroDex = heroDex;
+    this.heroLevel = heroLevel;
+    this.heroExp = heroExp;
+    this.monsterName = monsterName;
+    this.monsterHp = monsterHp;
+    this.monsterAp = monsterAp;
+    this.monsterLevel = monsterLevel;
+  }
+  
   d100() {
     const roll1 = Math.ceil(Math.random() * 100);
     return roll1;
@@ -253,20 +266,21 @@ export class CombatRound {
     }
   }
   
-  startAttackRound(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
+  static startAttackRound(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
     let round = new CombatRound;
     round.combatRoundInitialize();
     round.heroAndMonsterData(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel);
     //CombatRound.heroAttack();
     round.monsterAttack(round.heroAttack());
   }
-  startDodgeRound(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
+  static startDodgeRound(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
     let round = new CombatRound;
     round.combatRoundInitialize();
     round.heroAndMonsterData(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel);
     //CombatRound.heroAttack();
     round.monsterAttack(round.heroDodge());
-  }startRunRound(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
+  }
+  static startRunRound(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel) {
     let round = new CombatRound;
     round.combatRoundInitialize();
     round.heroAndMonsterData(role, herohp, heroap, herodex, heroLevel, heroExp, monsterName, monsterHp, monsterAp, monsterLevel);

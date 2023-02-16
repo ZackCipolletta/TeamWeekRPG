@@ -56,10 +56,10 @@ export function randomMonster(level, randomNum) {
 }
 
 export function heroLevelRandomNumber(hero) { // use this to get a random number for when you want a number that is 1 +/- the current hero level.  Used for generating the level of an item, weapon or monster.
-  if (hero.level = 1) {
+  if (hero.heroLevel = 1) {
     return randomNumFunc(0, 2); // wil return a number 1 or 2
   } else {
-    return randomNumFunc((hero.level - 1), (hero.level + 1)); // will return a number equal to hero level, one greater or one less than hero.level.
+    return randomNumFunc((hero.heroLevel - 1), (hero.heroLevel + 1)); // will return a number equal to hero level, one greater or one less than hero.level.
   }
 }
 
