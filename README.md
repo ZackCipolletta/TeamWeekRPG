@@ -12,7 +12,7 @@
 * npm
 
 ## Description
-  Get sweet powerups, get weapons, kill monsters, dodge monsters, run from monsters, try to survive till the next level!  If you play right, you can defeat Cthulu!
+Get sweet powerups, get weapons, kill monsters, dodge monsters, run from monsters, try to survive till the next level!  If you play right, you can defeat Cthulu!
 
 ## Setup/Installation Requirements
 
@@ -42,3 +42,5 @@ Most of the odd stuff in the combatRound.js can be tweaked easily by adding a di
 
 ## License
 MIT
+
+Copyright (c) 2/16/2023 Zachary Cipolletta, Stephan Zook, James Provance, John Diggins
