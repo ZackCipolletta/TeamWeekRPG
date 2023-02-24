@@ -16,18 +16,14 @@ Get sweet powerups, get weapons, kill monsters, dodge monsters, run from monster
 
 ## Setup/Installation Requirements
 
-Rename name "TEMPLATE" in package.json to reflect new project
-Installing all packages with $ npm install.
-Building the project using webpack with $ npm run build
-Starting a development server with $ npm run start
-Linting JS files in the src folder with $ npm run lint
-Running tests with Jest using $ npm run test
-
 * Clone repository to your desktop
 * Navigate to the top level of the directory
 * Install all packages with $ npm install.
 * Build and start the project using webpack with $ npm run start
 * Play in your browser!
+
+* Lint JS files in the src folder with $ npm run lint
+* Run tests with Jest using $ npm run test
 
 
 ## Known Bugs
