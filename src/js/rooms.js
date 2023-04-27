@@ -8,7 +8,7 @@ export function whatsInTheRoom(hero) {
     console.log('empty'); // delete
     return 'empty';
   } else if (number === 4) {
-    return defineItems(hero, randomNumFunc(1, 3), randomNumFunc(1, 3), randomNumFunc(1, 3)); // assiging to a variable makes it easier to pass into another function.
+    return defineItems(hero, randomNumFunc(1, 3), randomNumFunc(1, 3), randomNumFunc(1, 3)); // assigning to a variable makes it easier to pass into another function.
     // console.log(item[1]); // delete
     // pick up item? if yes, getWeapon(hero, weapon) or getItem(hero, item);
   } else {
